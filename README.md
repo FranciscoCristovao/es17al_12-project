@@ -1,4 +1,4 @@
-# Adventure Builder
+﻿# Adventure Builder
 
 To run tests execute: mvn clean install
 
@@ -17,3 +17,5 @@ To run tests execute: mvn clean install
 81888 - Pedro Caldeira - pedromiguelcc@tecnico.ulisboa.pt - PedroCaldeira
 
 81726 - José Mota - zemariamota@hotmail.com - zemota1
+
+81478 - Joana Godinho - joana.mg0@hotmail.com - joanaGodinho
