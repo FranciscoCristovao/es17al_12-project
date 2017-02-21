@@ -19,3 +19,5 @@ To run tests execute: mvn clean install
 81726 - José Mota - zemariamota@hotmail.com - zemota1
 
 81478 - Joana Godinho - joana.mg0@hotmail.com - joanaGodinho
+
+80777 - João Raposo - raposo.7777777@hotmail.com - JoaoAfonsoRaposo
