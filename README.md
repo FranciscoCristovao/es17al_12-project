@@ -13,3 +13,5 @@ To run tests execute: mvn clean install
 81505 - Francisco Cristóvão - francisco.m.cristovao@gmail.com - FranciscoCristovao
 
 81888 - Pedro Caldeira - pedromiguelcc@tecnico.ulisboa.pt - PedroCaldeira
+
+81726 - José Mota - zemariamota@hotmail.com - zemota1
