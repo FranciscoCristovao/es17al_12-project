@@ -21,6 +21,11 @@ public class BankConstructorTest {
 		Assert.assertEquals(1, Bank.banks.size());
 		Assert.assertEquals(0, bank.getNumberOfAccounts());
 		Assert.assertEquals(0, bank.getNumberOfClients());
+		Assert.assertNotNull(bank.getName());
+		Assert.assertNotNull(bank.getCode());
+		Assert.assertNotEquals(bank.getName(), "");
+		Assert.assertNotEquals(bank.getCode(), "");
+		Assert.assertEquals(bank.getCode().length(), 4);
 	}
 
 	@After
