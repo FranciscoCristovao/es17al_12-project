@@ -1,4 +1,4 @@
-﻿# Adventure Builder
+# Adventure Builder
 
 To run tests execute: mvn clean install
 
@@ -10,7 +10,7 @@ To run tests execute: mvn clean install
 
 80996 - João Silvestre - joao.p.silvestre@tecnico.ulisboa.pt - JoaoSilvestre95
 
-81505 - Francisco Cristóvão - francisco.m.cristovao@gmail.com - FranciscoCristovao
+81505 - Francisco Cristóvão - francisco.m.cristovao@gmail.com - FranciscoCristovao - Bank e Broker
 
 81105 - Sofia Aparicio - sofia.aparicio@tecnico.ulisboa.pt - SofiaAparicio
 
