@@ -19,16 +19,24 @@ public class Bank {
 	private final List<Operation> log = new ArrayList<>();
 
 	public Bank(String name, String code) {
-		checkCode(code);
 
+		checkName(name);
+		checkCode(code);
+		
 		this.name = name;
 		this.code = code;
 
 		Bank.banks.add(this);
 	}
+	
+	private void checkName(String name) {
+		if (name == null || name.equals("")) {
+			throw new BankException();
+		}
+	}
 
 	private void checkCode(String code) {
-		if (code.length() != Bank.CODE_SIZE) {
+		if (code == null || code.length() != Bank.CODE_SIZE || code.equals("")) {
 			throw new BankException();
 		}
 	}
