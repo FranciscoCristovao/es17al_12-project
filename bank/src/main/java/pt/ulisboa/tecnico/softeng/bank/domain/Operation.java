@@ -18,19 +18,24 @@ class Operation {
 	private final LocalDateTime time;
 
 	Operation(Type type, Account account, int value) {
-		if(type == null || account == null || value == null || value <0){
+
+		//checkArguments();
+		
+		this.reference = account.getBank().getCode() + Integer.toString(++Operation.counter);
+		this.type = type;
+		this.account = account;
+		this.value = value;
+		this.time = LocalDateTime.now();
+	
+		account.getBank().addLog(this);
+
+	}
+	
+	/*private void checkArguments(){
+		if(type == null || account == null || value <= 0){
 			throw new BankException();
 		}
-		else{
-			this.reference = account.getBank().getCode() + Integer.toString(++Operation.counter);
-			this.type = type;
-			this.account = account;
-			this.value = value;
-			this.time = LocalDateTime.now();
-	
-			account.getBank().addLog(this);
-		}
-	}
+	}*/
 	
 
 	String getReference() {

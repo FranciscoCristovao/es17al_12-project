@@ -22,6 +22,7 @@ public class Bank {
 
 		checkName(name);
 		checkCode(code);
+		//falta argumentos brancos e codigo unico
 		
 		this.name = name;
 		this.code = code;

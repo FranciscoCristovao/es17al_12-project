@@ -11,6 +11,8 @@ public class Account {
 	private int balance;
 
 	public Account(Bank bank, Client client) {
+
+		
 		this.bank = bank;
 		this.IBAN = bank.getCode() + Integer.toString(++Account.counter);
 		this.client = client;
@@ -18,6 +20,7 @@ public class Account {
 
 		bank.addAccount(this);
 	}
+	
 
 	Bank getBank() {
 		return this.bank;
