@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
+
 public class ActivityOfferConstructorMethodTest {
 	private Activity activity;
 
@@ -13,6 +15,14 @@ public class ActivityOfferConstructorMethodTest {
 	public void setUp() {
 		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure");
 		this.activity = new Activity(provider, "Bush Walking", 18, 80, 25);
+	}
+	
+	@Test(expected=ActivityException.class)
+	public void activityOfferDatesCoherence(){
+		LocalDate begin = new LocalDate(2016, 12, 21);
+		LocalDate end = new LocalDate(2016, 12, 19);
+
+		ActivityOffer offer = new ActivityOffer(this.activity, begin, end);		
 	}
 
 	@Test
