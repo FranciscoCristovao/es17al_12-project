@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class BookingConflictMethodTest {
 	Booking booking;
-
+	
 	@Before
 	public void setUp() {
 		Hotel hotel = new Hotel("XPTO123", "Londres");
@@ -33,7 +33,42 @@ public class BookingConflictMethodTest {
 
 		Assert.assertFalse(this.booking.conflict(arrival, departure));
 	}
+	@Test
+	public void ConflictInside(){
+		LocalDate arrival = new LocalDate(2016, 12, 20);
+		LocalDate departure = new LocalDate(2016, 12, 23);
 
+		Assert.assertTrue(this.booking.conflict(arrival, departure));
+	}
+	@Test
+	public void ConflictOutside(){
+		LocalDate arrival = new LocalDate(2016, 12, 18);
+		LocalDate departure = new LocalDate(2016, 12, 25);
+
+		Assert.assertTrue(this.booking.conflict(arrival, departure));
+	}
+	@Test 
+	public void ConflictOverlapBefore(){
+		LocalDate arrival = new LocalDate(2016, 12, 18);
+		LocalDate departure = new LocalDate(2016, 12, 20);
+
+		Assert.assertTrue(this.booking.conflict(arrival, departure));
+	}
+	@Test
+	public void ConflictOverlapAfter(){
+		LocalDate arrival = new LocalDate(2016, 12, 20);
+		LocalDate departure = new LocalDate(2016, 12, 25);
+
+		Assert.assertTrue(this.booking.conflict(arrival, departure));
+	}
+	
+	@Test
+	public void ConflictExactOverlap(){
+		LocalDate arrival = new LocalDate(2016, 12, 19);
+		LocalDate departure = new LocalDate(2016, 12, 24);
+
+		Assert.assertTrue(this.booking.conflict(arrival, departure));
+	}
 	@After
 	public void tearDown() {
 		Hotel.hotels.clear();
