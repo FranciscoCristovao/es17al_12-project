@@ -23,6 +23,9 @@ public class Room {
 
 	public Room(Hotel hotel, String number, Type type) {
 		this.hotel = hotel;
+		if(!number.matches("[0-9]+")) { //alterado
+			throw new HotelException();
+		}
 		this.number = number;
 		this.type = type;
 
