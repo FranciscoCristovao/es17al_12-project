@@ -11,13 +11,14 @@ public class ActivityProvider {
 	public static Set<ActivityProvider> providers = new HashSet<>();
 
 	static final int CODE_SIZE = 6;
-
+	static final int NAME_SIZE = 6;
 	private final String name;
 	private final String code;
 	private final Set<Activity> activities = new HashSet<>();
 
 	public ActivityProvider(String code, String name) {
 		checkCode(code);
+		checkName(name);
 
 		this.code = code;
 		this.name = name;
@@ -25,8 +26,22 @@ public class ActivityProvider {
 		ActivityProvider.providers.add(this);
 	}
 
+	private void checkName(String name) {
+		if (name == null || name.isEmpty())
+			throw new ActivityException();
+		
+		for (ActivityProvider provider: providers){
+			if (provider.getName().equals(name))
+				throw new ActivityException();		
+		}
+	}
+
 	private void checkCode(String code) {
-		if (code.length() != ActivityProvider.CODE_SIZE) {
+		for (ActivityProvider provider: providers){
+			if (provider.getCode().equals(code))
+				throw new ActivityException();		
+		}
+		if (code== null || code.length() != ActivityProvider.CODE_SIZE) {
 			throw new ActivityException();
 		}
 	}
