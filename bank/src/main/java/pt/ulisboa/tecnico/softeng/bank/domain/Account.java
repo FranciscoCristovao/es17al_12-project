@@ -11,28 +11,30 @@ public class Account {
 	private int balance;
 
 	public Account(Bank bank, Client client) {
-
-		/*checkArguments();
-		checkClient();*/
 		
+		checkBank(bank);
+		checkClient(bank,client);
 		this.bank = bank;
 		this.IBAN = bank.getCode() + Integer.toString(++Account.counter);
 		this.client = client;
 		this.balance = 0;
-
+		
 		bank.addAccount(this);
+		
+		
 	}
 	
-	/*private void checkArguments(){
-		if(bank == null || client == null){
+	private void checkBank(Bank bank){
+		if(bank == null){
 			throw new BankException();
 		}
 	}
-	private void checkClient(){
-		if(!bank.hasClient(client)){
+	private void checkClient(Bank bank, Client client){
+		if(!bank.hasClient(client) || client == null ){  /*nao ha nulls que sejam clientes...*/
 			throw new BankException();
 		}
-	}*/
+	}
+	
 	private void checkAmount(int amount){
 		if(amount <= 0){
 			throw new BankException();
