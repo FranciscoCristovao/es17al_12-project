@@ -26,8 +26,14 @@ public class Bank {
 		
 		this.name = name;
 		this.code = code;
-
+		
+		for(Bank b : Bank.banks){
+			if((b.getCode()).equals(code)){
+				throw new BankException();
+			}
+		}
 		Bank.banks.add(this);
+		
 	}
 	
 	private void checkName(String name) {
