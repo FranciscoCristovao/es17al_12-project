@@ -41,6 +41,9 @@ public class ActivityOffer {
 	}
 	
 	private void checkDate(LocalDate begin, LocalDate end){
+		if(begin==null || end==null){
+			throw new ActivityException();
+		}
 		if(begin.isAfter(end)){
 			throw new ActivityException();
 		}
