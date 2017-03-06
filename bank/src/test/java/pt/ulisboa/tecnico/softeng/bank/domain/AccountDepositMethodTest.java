@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+
 public class AccountDepositMethodTest {
 	private Bank bank;
 	private Account account;
@@ -16,6 +18,15 @@ public class AccountDepositMethodTest {
 		this.account = new Account(this.bank, client);
 	}
 
+	@Test(expected = BankException.class)
+	public void accountDepositCantBeNegative(){
+		this.bank = new Bank("Money", "BK01");
+		Client client = new Client(this.bank, "António");
+		this.account = new Account(this.bank, client);
+		this.account.deposit(-1);
+	}
+	
+	
 	@Test
 	public void success() {
 		String reference = this.account.deposit(50);
