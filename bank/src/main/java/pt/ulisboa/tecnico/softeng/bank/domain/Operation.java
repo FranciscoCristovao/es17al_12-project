@@ -19,7 +19,7 @@ class Operation {
 
 	Operation(Type type, Account account, int value) {
 
-		//checkArguments();
+		checkArguments(type, account, value);
 		
 		this.reference = account.getBank().getCode() + Integer.toString(++Operation.counter);
 		this.type = type;
@@ -31,11 +31,11 @@ class Operation {
 
 	}
 	
-	/*private void checkArguments(){
+	private void checkArguments(Type type, Account account, int value){
 		if(type == null || account == null || value <= 0){
 			throw new BankException();
 		}
-	}*/
+	}
 	
 
 	String getReference() {
