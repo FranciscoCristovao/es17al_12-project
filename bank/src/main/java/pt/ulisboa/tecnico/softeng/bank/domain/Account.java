@@ -35,11 +35,18 @@ public class Account {
 		}
 	}
 	
-	private void checkAmount(int amount){
+	private void checkAmountDeposit(int amount){
 		if(amount <= 0){
 			throw new BankException();
 		}
 	}
+	
+	private void checkAmountWithdraw(int amount){
+		if(amount > this.balance || amount <= 0){
+			throw new BankException();
+		}
+	}
+	
 	
 	Bank getBank() {
 		return this.bank;
@@ -58,7 +65,7 @@ public class Account {
 	}
 
 	public String deposit(int amount) {
-		checkAmount(amount);
+		checkAmountDeposit(amount);
 		this.balance = this.balance + amount;
 
 		Operation operation = new Operation(Operation.Type.DEPOSIT, this, amount);
@@ -66,9 +73,8 @@ public class Account {
 	}
 
 	public String withdraw(int amount) {
-		if (amount > this.balance) {
-			throw new BankException();
-		}
+		
+		checkAmountWithdraw(amount);
 
 		this.balance = this.balance - amount;
 
