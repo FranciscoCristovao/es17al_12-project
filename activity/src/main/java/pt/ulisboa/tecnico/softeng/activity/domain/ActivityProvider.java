@@ -27,7 +27,7 @@ public class ActivityProvider {
 	}
 
 	private void checkName(String name) {
-		if (name == null || name.isEmpty())
+		if (name == null || name.trim().isEmpty())
 			throw new ActivityException();
 		
 		for (ActivityProvider provider: providers){
@@ -37,11 +37,12 @@ public class ActivityProvider {
 	}
 
 	private void checkCode(String code) {
+		
 		for (ActivityProvider provider: providers){
 			if (provider.getCode().equals(code))
 				throw new ActivityException();		
 		}
-		if (code== null || code.length() != ActivityProvider.CODE_SIZE) {
+		if (code== null || code.trim().length() != ActivityProvider.CODE_SIZE) {
 			throw new ActivityException();
 		}
 	}
