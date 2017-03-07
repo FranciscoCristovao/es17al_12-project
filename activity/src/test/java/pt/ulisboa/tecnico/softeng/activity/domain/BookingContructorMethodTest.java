@@ -32,11 +32,28 @@ public class BookingContructorMethodTest {
 	}
 	
 	@Test(expected=ActivityException.class)
+	public void BookingProviderNull(){
+		ActivityProvider activity_provider = new ActivityProvider("XtremX", "ExtremeAdventure");
+		Activity activity = new Activity(activity_provider, "Bush Walking", 18, 80, 25);
+		LocalDate begin = new LocalDate(2016, 12, 19);
+		LocalDate end = new LocalDate(2016, 12, 21);
+		ActivityOffer offer = new ActivityOffer(activity, begin, end);
+		new Booking(null, offer);
+	}
+	
+	@Test(expected=ActivityException.class)
+	public void BookingOfferNull(){
+		ActivityProvider activity_provider = new ActivityProvider("XtremX", "ExtremeAdventure");		
+		new Booking(activity_provider, null);
+	}
+	
+	
+	@Test(expected=ActivityException.class)
 	public void tooManyBookings(){
 		while(this.offer.hasVacancy())
 			new Booking(this.provider, this.offer);
 		new Booking(this.provider, this.offer);
-	}
+	}	
 
 	@After
 	public void tearDown() {
