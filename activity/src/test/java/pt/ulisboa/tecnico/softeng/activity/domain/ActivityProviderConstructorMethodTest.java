@@ -38,7 +38,20 @@ public class ActivityProviderConstructorMethodTest {
 		ActivityProvider provider= new ActivityProvider("xXtremXx", "Adventure++");
 	}
 	
+	@Test(expected=ActivityException.class)
+	public void smallerCode(){
+		ActivityProvider provider= new ActivityProvider("XtrmX", "Adventure++");
+	}
 	
+	@Test(expected=ActivityException.class)
+	public void whiteSpaceCode(){
+		ActivityProvider provider= new ActivityProvider("    	   ", "Adventure++");
+	}
+	
+	@Test(expected=ActivityException.class)
+	public void whiteSpaceName(){
+		ActivityProvider provider= new ActivityProvider("XtrmX", "  	  ");
+	}
 	
 	@Test(expected=ActivityException.class)
 	public void sameCode(){
