@@ -24,7 +24,7 @@ public class OperationConstructorMethodTest {
 		this.account = new Account(this.bank, client);
 	}
 	
-	/*@Test(expected = BankException.class)
+	@Test(expected = BankException.class)
 	 public void operationTypeCantBeNull() {
 		Operation operation = new Operation(null, this.account, 100);	
 	}
@@ -35,14 +35,14 @@ public class OperationConstructorMethodTest {
 	}
 	
 	@Test(expected = BankException.class)
-	 public void operationValueCantBeNull() {
+	 public void operationValueCantBeZero() {
 		Operation operation = new Operation(Type.DEPOSIT, this.account, 0);	
 	}
 	
 	@Test(expected = BankException.class)
 	 public void operationValueCantBeNegative() {
 		Operation operation = new Operation(Type.DEPOSIT, this.account, -1);	
-	}*/
+	}
 	@Test
 	public void success() {
 		Operation operation = new Operation(Type.DEPOSIT, this.account, 1000);
