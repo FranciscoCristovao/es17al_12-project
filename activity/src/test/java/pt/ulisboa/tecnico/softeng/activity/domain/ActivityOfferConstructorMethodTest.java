@@ -18,6 +18,14 @@ public class ActivityOfferConstructorMethodTest {
 	}
 	
 	@Test(expected=ActivityException.class)
+	public void activityOfferActivityNull(){
+		LocalDate begin = new LocalDate(2016, 12, 19);
+		LocalDate end = new LocalDate(2016, 12, 21);
+		
+		ActivityOffer offer = new ActivityOffer(null, begin, end);		
+	}	
+	
+	@Test(expected=ActivityException.class)
 	public void activityOfferDate1Null(){		
 		LocalDate end = new LocalDate(2016, 12, 19);
 

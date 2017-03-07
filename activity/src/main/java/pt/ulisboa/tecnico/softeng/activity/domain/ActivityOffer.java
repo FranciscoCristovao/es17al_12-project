@@ -15,6 +15,7 @@ public class ActivityOffer {
 
 	public ActivityOffer(Activity activity, LocalDate begin, LocalDate end) {
 		checkDate(begin, end);
+		checkActivity(activity);
 		
 		this.begin = begin;
 		this.end = end;
@@ -49,6 +50,11 @@ public class ActivityOffer {
 		}
 	}	
 	
+	private void checkActivity(Activity activity){
+		if(activity == null){
+			throw new ActivityException();
+		}
+	}
 	boolean available(LocalDate begin, LocalDate end) {
 		return hasVacancy() && matchDate(begin, end);
 	}
