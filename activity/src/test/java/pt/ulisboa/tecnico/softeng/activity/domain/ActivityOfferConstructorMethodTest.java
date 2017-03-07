@@ -29,12 +29,20 @@ public class ActivityOfferConstructorMethodTest {
 		LocalDate begin = new LocalDate(2016, 12, 19);
 
 		ActivityOffer offer = new ActivityOffer(this.activity, begin, null);		
-	}
+	}	
 	
 	@Test(expected=ActivityException.class)
 	public void activityOfferDatesCoherence(){
 		LocalDate begin = new LocalDate(2016, 12, 21);
 		LocalDate end = new LocalDate(2016, 12, 19);
+
+		ActivityOffer offer = new ActivityOffer(this.activity, begin, end);		
+	}
+	
+	@Test
+	public void activityOfferSuccessEqualDates(){
+		LocalDate begin = new LocalDate(2016, 12, 21);
+		LocalDate end = new LocalDate(2016, 12, 21);
 
 		ActivityOffer offer = new ActivityOffer(this.activity, begin, end);		
 	}
