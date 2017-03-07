@@ -42,6 +42,16 @@ public class BookingConstructorTest {
 		
 	}
 	
+	@Test
+	public void SameArrivalAndDeparture(){
+		LocalDate arrival = new LocalDate(2016, 12, 21);
+		LocalDate departure = new LocalDate(2016, 12, 21);
+		
+		new Booking(hotel, arrival, departure);
+		
+	}
+	
+	
 	@After
 	public void tearDown() {
 		Hotel.hotels.clear();
