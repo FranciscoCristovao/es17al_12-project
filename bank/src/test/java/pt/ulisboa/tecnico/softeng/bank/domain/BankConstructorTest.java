@@ -47,6 +47,16 @@ public class BankConstructorTest {
 		
 	}
 	
+	@Test(expected = BankException.class)
+	public void bankNameIsBlank() {
+		Bank bank = new Bank(" 	  ", "BK01");
+	}
+	
+	@Test(expected = BankException.class)
+	public void bankCodeIsBlank() {
+		Bank bank = new Bank("Money", "    	");
+	}
+	
 	@Test
 	public void success() {
 		Bank bank = new Bank("Money", "BK01");

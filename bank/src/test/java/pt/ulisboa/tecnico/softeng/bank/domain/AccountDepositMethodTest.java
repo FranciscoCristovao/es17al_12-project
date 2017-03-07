@@ -20,9 +20,6 @@ public class AccountDepositMethodTest {
 
 	@Test(expected = BankException.class)
 	public void accountDepositCantBeNegative(){
-		this.bank = new Bank("Money", "BK01");
-		Client client = new Client(this.bank, "António");
-		this.account = new Account(this.bank, client);
 		this.account.deposit(-1);
 	}
 	
