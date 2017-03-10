@@ -66,6 +66,11 @@ public class Hotel {
 	}
 
 	void addRoom(Room room) {
+		for(Room r : this.rooms){
+			if(r.getNumber().equals(room.getNumber())){
+				throw new HotelException();
+			}
+		}
 		this.rooms.add(room);
 	}
 

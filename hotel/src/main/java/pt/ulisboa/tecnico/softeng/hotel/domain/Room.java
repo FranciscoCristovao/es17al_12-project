@@ -22,10 +22,11 @@ public class Room {
 	private final Set<Booking> bookings = new HashSet<>();
 
 	public Room(Hotel hotel, String number, Type type) {
+		if (hotel==null) throw new HotelException();
+		if (type==null) throw new HotelException();
+		if(number==null||!number.matches("[0-9]+")) throw new HotelException();
+		
 		this.hotel = hotel;
-		if(!number.matches("[0-9]+")) { //alterado
-			throw new HotelException();
-		}
 		this.number = number;
 		this.type = type;
 
@@ -38,6 +39,9 @@ public class Room {
 
 	String getNumber() {
 		return this.number;
+	}
+	int getBookings() {
+		return bookings.size();
 	}
 
 	Type getType() {

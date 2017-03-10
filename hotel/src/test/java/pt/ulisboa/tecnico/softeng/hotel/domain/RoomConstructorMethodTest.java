@@ -25,18 +25,31 @@ public class RoomConstructorMethodTest {
 		Assert.assertEquals(Type.DOUBLE, room.getType());
 		Assert.assertEquals(1, this.hotel.getNumberOfRooms());
 	}
+	@Test (expected = HotelException.class)
+	public void hotelNull(){
+		new Room(null, "01", Type.DOUBLE);
+	}
 	
 	@Test (expected = HotelException.class)
-	public void roomExists(){
+	public void numberNull(){
+		new Room(this.hotel, null, Type.DOUBLE);
+	}
+	
+	@Test (expected = HotelException.class)
+	public void typeNull(){
+		new Room(this.hotel, "01", null);
+	}
+	
+	@Test (expected = HotelException.class)
+	public void numberExists(){
 		new Room(this.hotel, "01", Type.DOUBLE);
 		new Room(this.hotel,"01",Type.DOUBLE);
 	}
 	
 	@Test (expected = HotelException.class)
-	public void hasLetters(){
-		new Room(this.hotel, "0A3", Type.DOUBLE);
+	public void hasNoNumbers(){
+		new Room(this.hotel, "0A 3", Type.DOUBLE);
 	}
-	
 	
 	@After
 	public void tearDown() {
