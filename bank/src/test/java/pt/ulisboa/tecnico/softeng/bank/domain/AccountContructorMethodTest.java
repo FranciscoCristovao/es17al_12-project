@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+
 public class AccountContructorMethodTest {
 	Bank bank;
 	Client client;
@@ -13,6 +15,22 @@ public class AccountContructorMethodTest {
 	public void setUp() {
 		this.bank = new Bank("Money", "BK01");
 		this.client = new Client(this.bank, "António");
+	}
+	
+	@Test(expected = BankException.class)
+	public void accountBankCantBeNull(){
+		Account account = new Account(null, this.client);
+	}
+	
+	@Test(expected = BankException.class)
+	public void accountClientCantBeNull(){
+		Account account = new Account(this.bank, null);
+	}
+	@Test(expected = BankException.class)
+	public void accountClientNotBelongsBank(){
+		Bank bank = new Bank("Cash", "0000");
+		Client client = new Client(bank, "Jose");
+		Account account = new Account(this.bank, client);		
 	}
 
 	@Test

@@ -12,7 +12,6 @@ public class Client {
 		
 		checkBank(bank);
 		checkName(name);
-		//falta argumentos brancos
 		
 		this.ID = Integer.toString(++Client.counter);
 		this.name = name;
@@ -34,7 +33,7 @@ public class Client {
 	}
 	
 	private void checkName(String name) {
-		if (name == null || name == "")
+		if (name == null || name == "" || name.trim().length() == 0)
 			throw new BankException();		
 	}	
 

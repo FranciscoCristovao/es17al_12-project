@@ -18,9 +18,39 @@ public class ActivityOfferConstructorMethodTest {
 	}
 	
 	@Test(expected=ActivityException.class)
+	public void activityOfferActivityNull(){
+		LocalDate begin = new LocalDate(2016, 12, 19);
+		LocalDate end = new LocalDate(2016, 12, 21);
+		
+		ActivityOffer offer = new ActivityOffer(null, begin, end);		
+	}	
+	
+	@Test(expected=ActivityException.class)
+	public void activityOfferDate1Null(){		
+		LocalDate end = new LocalDate(2016, 12, 19);
+
+		ActivityOffer offer = new ActivityOffer(this.activity, null, end);		
+	}
+	
+	@Test(expected=ActivityException.class)
+	public void activityOfferDate2Null(){		
+		LocalDate begin = new LocalDate(2016, 12, 19);
+
+		ActivityOffer offer = new ActivityOffer(this.activity, begin, null);		
+	}	
+	
+	@Test(expected=ActivityException.class)
 	public void activityOfferDatesCoherence(){
 		LocalDate begin = new LocalDate(2016, 12, 21);
 		LocalDate end = new LocalDate(2016, 12, 19);
+
+		ActivityOffer offer = new ActivityOffer(this.activity, begin, end);		
+	}
+	
+	@Test
+	public void activityOfferSuccessEqualDates(){
+		LocalDate begin = new LocalDate(2016, 12, 21);
+		LocalDate end = new LocalDate(2016, 12, 21);
 
 		ActivityOffer offer = new ActivityOffer(this.activity, begin, end);		
 	}

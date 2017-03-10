@@ -26,18 +26,24 @@ public class Bank {
 		
 		this.name = name;
 		this.code = code;
-
+		
+		for(Bank b : Bank.banks){
+			if((b.getCode()).equals(code)){
+				throw new BankException();
+			}
+		}
 		Bank.banks.add(this);
+		
 	}
 	
 	private void checkName(String name) {
-		if (name == null || name.equals("")) {
+		if (name == null || name.equals("") || name.trim().length() == 0) {
 			throw new BankException();
 		}
 	}
 
 	private void checkCode(String code) {
-		if (code == null || code.length() != Bank.CODE_SIZE || code.equals("")) {
+		if (code == null || code.length() != Bank.CODE_SIZE || code.trim().length() == 0) {
 			throw new BankException();
 		}
 	}

@@ -31,13 +31,30 @@ public class BankConstructorTest {
 	}
 	
 	@Test(expected = BankException.class)
-	public void bankCodeCantBeEmpty() {
-		Bank bank = new Bank("Money", "");
+	public void bankCodeHasLengthLess4() {
+		Bank bank = new Bank("Money", "BK0");
 	}
 	
 	@Test(expected = BankException.class)
-	public void bankCodeHasLength4() {
-		Bank bank = new Bank("Money", "BK0");
+	public void bankCodeHasLengthMore4() {
+		Bank bank = new Bank("Money", "BK012");
+	}
+	
+	@Test(expected = BankException.class)
+	public void bankCodeUnique() {
+		Bank bank1 = new Bank("BES", "BK01");
+		Bank bank2 = new Bank("Money", "BK01");
+		
+	}
+	
+	@Test(expected = BankException.class)
+	public void bankNameIsBlank() {
+		Bank bank = new Bank(" 	  ", "BK01");
+	}
+	
+	@Test(expected = BankException.class)
+	public void bankCodeIsBlank() {
+		Bank bank = new Bank("Money", "    	");
 	}
 	
 	@Test

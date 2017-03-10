@@ -11,17 +11,43 @@ public class Account {
 	private int balance;
 
 	public Account(Bank bank, Client client) {
-
 		
+		checkBank(bank);
+		checkClient(bank,client);
 		this.bank = bank;
 		this.IBAN = bank.getCode() + Integer.toString(++Account.counter);
 		this.client = client;
 		this.balance = 0;
-
+		
 		bank.addAccount(this);
+		
+		
 	}
 	
-
+	private void checkBank(Bank bank){
+		if(bank == null){
+			throw new BankException();
+		}
+	}
+	private void checkClient(Bank bank, Client client){
+		if(!bank.hasClient(client) || client == null ){  /*nao ha nulls que sejam clientes...*/
+			throw new BankException();
+		}
+	}
+	
+	private void checkAmountDeposit(int amount){
+		if(amount <= 0){
+			throw new BankException();
+		}
+	}
+	
+	private void checkAmountWithdraw(int amount){
+		if(amount > this.balance || amount <= 0){
+			throw new BankException();
+		}
+	}
+	
+	
 	Bank getBank() {
 		return this.bank;
 	}
@@ -39,6 +65,7 @@ public class Account {
 	}
 
 	public String deposit(int amount) {
+		checkAmountDeposit(amount);
 		this.balance = this.balance + amount;
 
 		Operation operation = new Operation(Operation.Type.DEPOSIT, this, amount);
@@ -46,9 +73,8 @@ public class Account {
 	}
 
 	public String withdraw(int amount) {
-		if (amount > this.balance) {
-			throw new BankException();
-		}
+		
+		checkAmountWithdraw(amount);
 
 		this.balance = this.balance - amount;
 

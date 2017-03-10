@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 
 public class RoomConstructorMethodTest {
@@ -24,7 +25,19 @@ public class RoomConstructorMethodTest {
 		Assert.assertEquals(Type.DOUBLE, room.getType());
 		Assert.assertEquals(1, this.hotel.getNumberOfRooms());
 	}
-
+	
+	@Test (expected = HotelException.class)
+	public void roomExists(){
+		new Room(this.hotel, "01", Type.DOUBLE);
+		new Room(this.hotel,"01",Type.DOUBLE);
+	}
+	
+	@Test (expected = HotelException.class)
+	public void hasLetters(){
+		new Room(this.hotel, "0A3", Type.DOUBLE);
+	}
+	
+	
 	@After
 	public void tearDown() {
 		Hotel.hotels.clear();
