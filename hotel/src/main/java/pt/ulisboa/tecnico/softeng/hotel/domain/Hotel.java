@@ -1,6 +1,7 @@
 package pt.ulisboa.tecnico.softeng.hotel.domain;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.joda.time.LocalDate;
@@ -17,11 +18,27 @@ public class Hotel {
 	private final Set<Room> rooms = new HashSet<>();
 
 	public Hotel(String code, String name) {
+		
+		Iterator<Hotel> iterator = hotels.iterator();
+		
+		while(iterator.hasNext()){
+			Hotel setElement = iterator.next();
+			if(setElement.getCode() == code ){
+				throw new HotelException();
+			}
+		}
+		
+		if (code == null || name == null || name.trim().length() == 0){
+			throw new HotelException();
+		}
+		
 		checkCode(code);
 
 		this.code = code;
 		this.name = name;
 		Hotel.hotels.add(this);
+
+		
 	}
 	
 
@@ -48,12 +65,7 @@ public class Hotel {
 		return this.name;
 	}
 
-	void addRoom(Room room) { //alterado
-		for(Room r : this.rooms){
-			if(r.getNumber().equals(room.getNumber())){
-				throw new HotelException();
-			}
-		}
+	void addRoom(Room room) {
 		this.rooms.add(room);
 	}
 
@@ -62,6 +74,9 @@ public class Hotel {
 	}
 
 	public static String reserveHotel(Room.Type type, LocalDate arrival, LocalDate departure) {
+		if(type == null || arrival == null || departure == null){
+			throw new HotelException();
+		}
 		for (Hotel hotel : Hotel.hotels) {
 			Room room = hotel.hasVacancy(type, arrival, departure);
 			if (room != null) {
