@@ -28,7 +28,7 @@ public class Client {
 	}
 	
 	private void checkBank(Bank bank) {
-		if (bank == null)
+		if (bank == null || bank.getName().trim().length() == 0 || bank.getCode().trim().length() == 0)
 			throw new BankException();		
 	}
 	
