@@ -35,6 +35,18 @@ public class ClientContructorMethodTest {
 		Client client = new Client(bank, "    ");
 	}
 	
+	@Test(expected = BankException.class)
+	public void bankCodeCantBeBlank() {
+		Bank bank_code_blank = new Bank("Moneyy", " ");
+		Client client = new Client(bank_code_blank, "    ");
+	}
+	
+	@Test(expected = BankException.class)
+	public void bankNameCantBeBlank() {
+		Bank bank_name_blank = new Bank("  ", "Z209");
+		Client client = new Client(bank_name_blank, "    ");
+	}
+	
 	@Test
 	public void success() {
 		Client client = new Client(this.bank, "António");
