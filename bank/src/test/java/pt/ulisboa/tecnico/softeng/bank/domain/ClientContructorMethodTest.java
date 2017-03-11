@@ -38,13 +38,13 @@ public class ClientContructorMethodTest {
 	@Test(expected = BankException.class)
 	public void bankCodeCantBeBlank() {
 		Bank bank_code_blank = new Bank("Moneyy", " ");
-		Client client = new Client(bank_code_blank, "    ");
+		Client client = new Client(bank_code_blank, "Joao");
 	}
 	
 	@Test(expected = BankException.class)
 	public void bankNameCantBeBlank() {
 		Bank bank_name_blank = new Bank("  ", "Z209");
-		Client client = new Client(bank_name_blank, "    ");
+		Client client = new Client(bank_name_blank, "Joao");
 	}
 	
 	@Test
