@@ -81,6 +81,8 @@ public class Bank {
 	}
 
 	public Account getAccount(String IBAN) {
+		if(getNumberOfAccounts() == 0)
+			throw new BankException();
 		for (Account account : this.accounts) {
 			if (account.getIBAN().equals(IBAN)) {
 				return account;
