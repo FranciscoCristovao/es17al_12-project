@@ -25,7 +25,7 @@ public class Bank {
 		//falta argumentos brancos e codigo unico
 		
 		this.name = name;
-		this.code = code;
+		this.code = code.trim();
 		
 		for(Bank b : Bank.banks){
 			if((b.getCode()).equals(code)){
@@ -43,7 +43,7 @@ public class Bank {
 	}
 
 	private void checkCode(String code) {
-		if (code == null || code.length() != Bank.CODE_SIZE || code.trim().length() == 0) {
+		if (code == null || code.trim().length() != Bank.CODE_SIZE || code.trim().length() == 0) {
 			throw new BankException();
 		}
 	}
