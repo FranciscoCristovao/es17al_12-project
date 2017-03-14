@@ -41,7 +41,7 @@ public class Adventure {
 	}
 	
 	private void checkArguments(Broker broker, LocalDate begin, LocalDate end, int age, String IBAN, int amount){
-		if(broker == null || age < 18 || age > 100 || IBAN == null || amount <= 0){
+		if(broker == null || age < 18 || age > 99 || IBAN == null || amount <= 0){
 			throw new BrokerException();
 		}
 		

@@ -41,10 +41,10 @@ public class AdventureConstructorMethodTest {
 		Adventure adventure = new Adventure(this.broker, begin, end, 20, "PT5023", -1);
 	}
 	@Test(expected = BrokerException.class)
-	public void adventureAgeUpper100(){
+	public void adventureAgeUpper99(){
 		LocalDate begin = new LocalDate(2016, 12, 16);
 		LocalDate end = new LocalDate(2017, 12, 16);
-		Adventure adventure = new Adventure(this.broker, begin, end, 101, "PT5023", 100);
+		Adventure adventure = new Adventure(this.broker, begin, end, 100, "PT5023", 100);
 	}
 	@Test(expected = BrokerException.class)
 	public void adventureAgeLower18(){
