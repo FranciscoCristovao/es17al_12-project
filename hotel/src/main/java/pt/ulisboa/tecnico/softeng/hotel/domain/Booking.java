@@ -12,15 +12,19 @@ public class Booking {
 	private final LocalDate departure;
 
 	Booking(Hotel hotel, LocalDate arrival, LocalDate departure) {
+		checkArguments(hotel,arrival,departure);
 		this.reference = hotel.getCode() + Integer.toString(++Booking.counter);
-		if(arrival.isAfter(departure)){
-			throw new HotelException();
-		}
+		
 		this.arrival = arrival;
 		this.departure = departure;
 		
 	}
-
+	private void checkArguments(Hotel hotel, LocalDate arrival, LocalDate departure){
+		
+		if(hotel==null || arrival==null || departure==null||arrival.isAfter(departure)){
+			throw new HotelException();
+		}
+	}
 	public String getReference() {
 		return this.reference;
 	}

@@ -51,6 +51,31 @@ public class BookingConstructorTest {
 		
 	}
 	
+	@Test (expected = HotelException.class)
+	public void NullHotel(){
+		LocalDate arrival = new LocalDate(2016, 12, 21);
+		LocalDate departure = new LocalDate(2016, 12, 21);
+		
+		new Booking(null, arrival, departure);
+		
+	}
+	
+	@Test (expected = HotelException.class)
+	public void NullDeparture(){
+		LocalDate arrival = new LocalDate(2016, 12, 21);
+		
+		new Booking(hotel, arrival, null);
+		
+	}
+	
+	@Test (expected = HotelException.class)
+	public void NullArrival(){
+		LocalDate departure = new LocalDate(2016, 12, 21);
+		
+		new Booking(hotel, null, departure);
+		
+	}
+	
 	
 	@After
 	public void tearDown() {
