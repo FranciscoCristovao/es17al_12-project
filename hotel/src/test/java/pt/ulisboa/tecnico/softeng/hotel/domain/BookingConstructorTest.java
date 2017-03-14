@@ -43,6 +43,34 @@ public class BookingConstructorTest {
 	}
 	
 	@Test
+	(expected = HotelException.class)
+	public void nullHotelTest(){
+		LocalDate arrival = new LocalDate(2016, 12, 21);
+		LocalDate departure = new LocalDate(2016, 12, 19);
+		
+		new Booking(null, arrival, departure);
+		
+	}
+	
+	@Test
+	(expected = HotelException.class)
+	public void nullArrivalTest(){
+		LocalDate departure = new LocalDate(2016, 12, 19);
+		
+		new Booking(hotel, null, departure);
+		
+	}
+	
+	@Test
+	(expected = HotelException.class)
+	public void nullDepartureTest(){
+		LocalDate arrival = new LocalDate(2016, 12, 21);
+		
+		new Booking(hotel, arrival, null);
+		
+	}
+	
+	@Test
 	public void SameArrivalAndDeparture(){
 		LocalDate arrival = new LocalDate(2016, 12, 21);
 		LocalDate departure = new LocalDate(2016, 12, 21);
@@ -50,7 +78,6 @@ public class BookingConstructorTest {
 		new Booking(hotel, arrival, departure);
 		
 	}
-	
 	
 	@After
 	public void tearDown() {

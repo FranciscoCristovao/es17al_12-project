@@ -69,6 +69,9 @@ public class BookingConflictMethodTest {
 
 		Assert.assertTrue(this.booking.conflict(arrival, departure));
 	}
+	
+
+	
 	@After
 	public void tearDown() {
 		Hotel.hotels.clear();
