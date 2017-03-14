@@ -45,7 +45,17 @@ public class ActivityProviderConstructorMethodTest {
 	
 	@Test(expected=ActivityException.class)
 	public void whiteSpaceCode(){
-		ActivityProvider provider= new ActivityProvider("    	   ", "Adventure++");
+		ActivityProvider provider= new ActivityProvider("      ", "Adventure++");
+	}
+	
+	@Test(expected=ActivityException.class)
+	public void whiteSpaceCodeFail(){
+		ActivityProvider provider= new ActivityProvider("   Xtrmx   ", "Adventure++");
+	}
+	
+	@Test
+	public void whiteSpaceCodeSuccess(){
+		ActivityProvider provider= new ActivityProvider("   Xtremx   ", "Adventure++");
 	}
 	
 	@Test(expected=ActivityException.class)
