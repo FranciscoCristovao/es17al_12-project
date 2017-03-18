@@ -52,101 +52,71 @@ public class HotelHasVacancyMethodTest {
 		Assert.assertEquals("01", room.getNumber());
 	}
 	
-	@Test
+	@Test (expected = HotelException.class)
 	public void noVacancySameDate() {
-		try{
+
 			LocalDate arrival = new LocalDate(2016, 12, 19);
 			LocalDate departure = new LocalDate(2016, 12, 21);
 	
 			Hotel.reserveHotel(Type.DOUBLE, arrival, departure);
 
-			Room room1 = this.hotel.hasVacancy(Type.DOUBLE, arrival, departure);
-
-			Assert.assertEquals(null, room1);
-		}
-		catch(HotelException he){
-			Assert.assertEquals(0,Hotel.hotels.size());
-		}
+			this.hotel.hasVacancy(Type.DOUBLE, arrival, departure);		
 	}
 	
-	@Test
+	@Test (expected = HotelException.class)
 	public void noVacancySameDateBefore() {
-		try{
-			LocalDate arrival = new LocalDate(2016, 12, 19);
-			LocalDate departure = new LocalDate(2016, 12, 21);
+		
+		LocalDate arrival = new LocalDate(2016, 12, 19);
+		LocalDate departure = new LocalDate(2016, 12, 21);
 	
-			Hotel.reserveHotel(Type.DOUBLE, arrival, departure);
+		Hotel.reserveHotel(Type.DOUBLE, arrival, departure);
 			
-			LocalDate newarrival = new LocalDate(2016, 12, 17);
-			LocalDate newdeparture = new LocalDate(2016, 12, 20);
+		LocalDate newarrival = new LocalDate(2016, 12, 17);
+		LocalDate newdeparture = new LocalDate(2016, 12, 20);
 			
-			Room room1 = this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
-
-			Assert.assertEquals(null, room1);
-		}
-		catch(HotelException he){
-			Assert.assertEquals(0,Hotel.hotels.size());
-		}
+		this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
 	}
 	
-	@Test
+	@Test (expected = HotelException.class)
 	public void noVacancySameDateAfter() {
-		try{
-			LocalDate arrival = new LocalDate(2016, 12, 19);
-			LocalDate departure = new LocalDate(2016, 12, 21);
-	
-			Hotel.reserveHotel(Type.DOUBLE, arrival, departure);
-			
-			LocalDate newarrival = new LocalDate(2016, 12, 20);
-			LocalDate newdeparture = new LocalDate(2016, 12, 22);
-			
-			Room room1 = this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
 
-			Assert.assertEquals(null, room1);
-		}
-		catch(HotelException he){
-			Assert.assertEquals(0,Hotel.hotels.size());
-		}
+		LocalDate arrival = new LocalDate(2016, 12, 19);
+		LocalDate departure = new LocalDate(2016, 12, 21);
+	
+		Hotel.reserveHotel(Type.DOUBLE, arrival, departure);
+			
+		LocalDate newarrival = new LocalDate(2016, 12, 20);
+		LocalDate newdeparture = new LocalDate(2016, 12, 22);
+			
+		this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
 	}
 	
-	@Test
+	@Test (expected = HotelException.class)
 	public void noVacancySameDateOutside() {
-		try{
-			LocalDate arrival = new LocalDate(2016, 12, 19);
-			LocalDate departure = new LocalDate(2016, 12, 21);
-	
-			Hotel.reserveHotel(Type.DOUBLE, arrival, departure);
-			
-			LocalDate newarrival = new LocalDate(2016, 12, 18);
-			LocalDate newdeparture = new LocalDate(2016, 12, 22);
-			
-			Room room1 = this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
 
-			Assert.assertEquals(null, room1);
-		}
-		catch(HotelException he){
-			Assert.assertEquals(0,Hotel.hotels.size());
-		}
+		LocalDate arrival = new LocalDate(2016, 12, 19);
+		LocalDate departure = new LocalDate(2016, 12, 21);
+	
+		Hotel.reserveHotel(Type.DOUBLE, arrival, departure);
+			
+		LocalDate newarrival = new LocalDate(2016, 12, 18);
+		LocalDate newdeparture = new LocalDate(2016, 12, 22);
+			
+		this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
 	}
 	
-	@Test
+	@Test (expected = HotelException.class)
 	public void noVacancySameDateInside() {
-		try{
-			LocalDate arrival = new LocalDate(2016, 12, 18);
-			LocalDate departure = new LocalDate(2016, 12, 21);
-	
-			Hotel.reserveHotel(Type.DOUBLE, arrival, departure);
-			
-			LocalDate newarrival = new LocalDate(2016, 12, 19);
-			LocalDate newdeparture = new LocalDate(2016, 12, 20);
-			
-			Room room1 = this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
 
-			Assert.assertEquals(null, room1);
-		}
-		catch(HotelException he){
-			Assert.assertEquals(0,Hotel.hotels.size());
-		}
+		LocalDate arrival = new LocalDate(2016, 12, 18);
+		LocalDate departure = new LocalDate(2016, 12, 21);
+	
+		Hotel.reserveHotel(Type.DOUBLE, arrival, departure);
+			
+		LocalDate newarrival = new LocalDate(2016, 12, 19);
+		LocalDate newdeparture = new LocalDate(2016, 12, 20);
+			
+		this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
 	}
 	
 	@After

@@ -52,9 +52,13 @@ public class Hotel {
 		if(type == null || arrival == null || departure == null){
 			throw new HotelException();
 		}
+
 		for (Room room : this.rooms) {
 			if (room.isFree(type, arrival, departure)) {
 				return room;
+			}
+			else{
+				throw new HotelException();
 			}
 		}
 		return null;
