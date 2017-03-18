@@ -40,16 +40,17 @@ public class Room {
 	String getNumber() {
 		return this.number;
 	}
-	int getBookings() {
-		return bookings.size();
-	}
-
+	
 	Type getType() {
 		return this.type;
 	}
+	
+	int getNumBookings(){
+		return this.bookings.size();
+	}
 
 	boolean isFree(Type type, LocalDate arrival, LocalDate departure) {
-		if (!type.equals(this.type)) {
+		if (type == null ||!type.equals(this.type)) {
 			return false;
 		}
 

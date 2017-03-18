@@ -29,21 +29,70 @@ public class RoomReserveMethodTest {
 		Assert.assertEquals(departure, booking.getDeparture());
 	}
 	
-	@Test (expected = HotelException.class)
-	public void inconsistentTypes(){
-		LocalDate arrival = new LocalDate(2016, 12, 19);
+	@Test
+	public void nullArrival(){
 		LocalDate departure = new LocalDate(2016, 12, 24);
-		this.room.reserve(Type.DOUBLE, arrival, departure);
+		try{
+			this.room.reserve(Type.DOUBLE, null, departure);
+			Assert.fail();
+			
+		} catch(HotelException e){
+			Assert.assertEquals(0, this.room.getNumBookings());
+		}
 	}
 	
-	@Test (expected = HotelException.class)
+	@Test 
+	public void nullDeparture(){
+		LocalDate arrival = new LocalDate(2016, 12, 24);
+		try {
+			this.room.reserve(Type.DOUBLE,arrival, null);
+			Assert.fail();
+		} catch(HotelException e){
+			Assert.assertEquals(0, this.room.getNumBookings());
+		}
+	}
+	
+	@Test 
+	public void nullType(){
+		LocalDate arrival = new LocalDate(2016, 12, 19);
+		LocalDate departure = new LocalDate(2016, 12, 24);
+		try{
+			this.room.reserve(null,arrival, departure);
+			Assert.fail();
+		} catch(HotelException e){
+			Assert.assertEquals(0, this.room.getNumBookings());
+		}
+	}
+	
+	
+	@Test 
+	public void unexistingType(){
+		LocalDate arrival = new LocalDate(2016, 12, 19);
+		LocalDate departure = new LocalDate(2016, 12, 24);
+		try{
+			this.room.reserve(Type.DOUBLE, arrival, departure);
+			Assert.fail();
+			
+		}catch (HotelException e){
+			Assert.assertEquals(0, this.room.getNumBookings());
+		}
+		
+	}
+	
+	@Test
 	public void reserveOccupiedRoom(){
 		LocalDate arrival = new LocalDate(2016, 12, 19);
 		LocalDate departure = new LocalDate(2016, 12, 24);
 		this.room.reserve(Type.SINGLE, arrival, departure);
 		
 		LocalDate arrival1 = new LocalDate(2016, 12, 20);
-		this.room.reserve(Type.SINGLE, arrival1, departure);
+		try{
+			this.room.reserve(Type.SINGLE, arrival1, departure);
+			Assert.fail();
+			
+		}catch (HotelException h){
+			Assert.assertEquals(1, this.room.getNumBookings());
+		}
 	}
 
 	@After
