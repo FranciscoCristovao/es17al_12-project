@@ -32,6 +32,22 @@ public class ActivityConstructorMethodTest {
 	}
 	
 	@Test(expected=ActivityException.class)
+	public void testProviderNull(){
+		Activity activity = new Activity(null, "Bush Walking",20,80,25);
+	}
+	
+	@Test(expected=ActivityException.class)
+	public void testNameNull(){
+		Activity activity = new Activity(this.provider, null,20,80,25);
+	}
+	
+	@Test(expected=ActivityException.class)
+	public void testNameEmpty(){
+		Activity activity = new Activity(this.provider, "           ", 20,80,25);
+	}
+	
+	
+	@Test(expected=ActivityException.class)
 	public void testMinAge(){
 		Activity activity = new Activity(this.provider, "Bush Walking", 17,80,25);
 	}
@@ -58,7 +74,7 @@ public class ActivityConstructorMethodTest {
 	}
 	@Test(expected=ActivityException.class)
 	public void testCapacityPositive(){
-		Activity activity = new Activity(this.provider, "Bush Walking", 18,80,-10);
+		Activity activity = new Activity(this.provider, "Bush Walking", 20,80,0);
 	}
 	
 	@Test
