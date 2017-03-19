@@ -60,6 +60,7 @@ public class ActivityOffer {
 	}
 
 	boolean matchDate(LocalDate begin, LocalDate end) {
+		checkDate(begin, end);
 		return begin.equals(getBegin()) && end.equals(getEnd());
 	}
 
