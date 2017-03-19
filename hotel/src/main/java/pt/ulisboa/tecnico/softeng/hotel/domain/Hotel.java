@@ -57,9 +57,6 @@ public class Hotel {
 			if (room.isFree(type, arrival, departure)) {
 				return room;
 			}
-			else{
-				throw new HotelException();
-			}
 		}
 		return null;
 	}

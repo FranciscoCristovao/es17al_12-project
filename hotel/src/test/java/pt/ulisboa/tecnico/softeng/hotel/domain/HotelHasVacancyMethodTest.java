@@ -52,7 +52,7 @@ public class HotelHasVacancyMethodTest {
 		Assert.assertEquals("01", room.getNumber());
 	}
 	
-	@Test (expected = HotelException.class)
+	@Test 
 	public void noVacancySameDate() {
 
 			LocalDate arrival = new LocalDate(2016, 12, 19);
@@ -60,10 +60,12 @@ public class HotelHasVacancyMethodTest {
 	
 			Hotel.reserveHotel(Type.DOUBLE, arrival, departure);
 
-			this.hotel.hasVacancy(Type.DOUBLE, arrival, departure);		
+			Room room = this.hotel.hasVacancy(Type.DOUBLE, arrival, departure);	
+			
+			Assert.assertEquals(null, room);
 	}
 	
-	@Test (expected = HotelException.class)
+	@Test 
 	public void noVacancySameDateBefore() {
 		
 		LocalDate arrival = new LocalDate(2016, 12, 19);
@@ -74,10 +76,13 @@ public class HotelHasVacancyMethodTest {
 		LocalDate newarrival = new LocalDate(2016, 12, 17);
 		LocalDate newdeparture = new LocalDate(2016, 12, 20);
 			
-		this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
+		Room room = this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
+		
+		Assert.assertEquals(null, room);
+
 	}
 	
-	@Test (expected = HotelException.class)
+	@Test 
 	public void noVacancySameDateAfter() {
 
 		LocalDate arrival = new LocalDate(2016, 12, 19);
@@ -88,10 +93,13 @@ public class HotelHasVacancyMethodTest {
 		LocalDate newarrival = new LocalDate(2016, 12, 20);
 		LocalDate newdeparture = new LocalDate(2016, 12, 22);
 			
-		this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
+		Room room = this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
+		
+		Assert.assertEquals(null, room);
+
 	}
 	
-	@Test (expected = HotelException.class)
+	@Test
 	public void noVacancySameDateOutside() {
 
 		LocalDate arrival = new LocalDate(2016, 12, 19);
@@ -102,10 +110,12 @@ public class HotelHasVacancyMethodTest {
 		LocalDate newarrival = new LocalDate(2016, 12, 18);
 		LocalDate newdeparture = new LocalDate(2016, 12, 22);
 			
-		this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
+		Room room = this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
+		Assert.assertEquals(null, room);
+
 	}
 	
-	@Test (expected = HotelException.class)
+	@Test 
 	public void noVacancySameDateInside() {
 
 		LocalDate arrival = new LocalDate(2016, 12, 18);
@@ -116,7 +126,8 @@ public class HotelHasVacancyMethodTest {
 		LocalDate newarrival = new LocalDate(2016, 12, 19);
 		LocalDate newdeparture = new LocalDate(2016, 12, 20);
 			
-		this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
+		Room room = this.hotel.hasVacancy(Type.DOUBLE, newarrival, newdeparture);
+		Assert.assertEquals(null, room);
 	}
 	
 	@After
