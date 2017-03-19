@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
+
 public class ActivityOfferHasVacancyMethodTest {
 	private ActivityOffer offer;
 
@@ -24,6 +26,14 @@ public class ActivityOfferHasVacancyMethodTest {
 	public void successZeroBookinks() {
 		Assert.assertTrue(this.offer.hasVacancy());
 	}
+	
+	@Test(expected=ActivityException.class)
+	public void failFullBookings(){
+		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure");
+		while(this.offer.hasVacancy())
+			new Booking(provider, offer);
+	}
+	
 
 	@After
 	public void tearDown() {
