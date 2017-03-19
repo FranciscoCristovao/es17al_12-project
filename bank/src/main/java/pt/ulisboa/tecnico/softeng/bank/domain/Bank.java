@@ -43,7 +43,7 @@ public class Bank {
 	}
 
 	private void checkCode(String code) {
-		if (code == null || code.trim().length() != Bank.CODE_SIZE || code.trim().length() == 0) {
+		if (code == null || code.trim().length() != Bank.CODE_SIZE) {
 			throw new BankException();
 		}
 	}
