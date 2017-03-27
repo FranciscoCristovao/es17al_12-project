@@ -75,7 +75,15 @@ public class Room {
 		if (!isFree(type, arrival, departure)) {
 			throw new HotelException();
 		}
-
+		
+		if (type == null || arrival == null || departure == null) {
+			throw new HotelException();
+		}
+		
+		if(departure.compareTo(arrival) < 1){
+			throw new HotelException();
+		}
+		
 		Booking booking = new Booking(this.hotel, arrival, departure);
 		this.bookings.add(booking);
 

@@ -52,6 +52,11 @@ public class RoomReserveMethodTest {
 		this.room.reserve(Type.SINGLE, this.arrival, null);
 	}
 
+	@Test(expected = HotelException.class)
+	public void lessThanADay() {
+		this.room.reserve(Type.SINGLE, new LocalDate(2016,9,23), new LocalDate(2016,9,23));
+	}
+	
 	@Test
 	public void allConflict() {
 		this.room.reserve(Type.SINGLE, this.arrival, this.departure);
