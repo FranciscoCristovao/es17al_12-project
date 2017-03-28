@@ -1,3 +1,4 @@
+package pt.ulisboa.tecnico.softeng.broker.domain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +53,7 @@ public class UndoState extends AdventureState {
 		}
 
 		if (!adventure.cancelPayment() && !adventure.cancelActivity() && !adventure.cancelRoom()) {
-			adventure.setState(State.CANCELLED);
+			adventure.setState(State.UNDO);
 		}
 	}
 }
