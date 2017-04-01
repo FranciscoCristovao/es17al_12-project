@@ -6,10 +6,11 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class Booking {
 	private static int counter = 0;
-
 	private final String reference;
+	private String cancellation_reference;
 	private final LocalDate arrival;
 	private final LocalDate departure;
+	private LocalDate cancellation_date;
 
 	Booking(Hotel hotel, LocalDate arrival, LocalDate departure) {
 		checkArguments(hotel, arrival, departure);
@@ -40,6 +41,10 @@ public class Booking {
 	LocalDate getDeparture() {
 		return this.departure;
 	}
+	
+	public void setCancellationReference(String reference){
+		cancellation_reference=reference;
+	}
 
 	boolean conflict(LocalDate arrival, LocalDate departure) {
 		if (departure.isBefore(arrival)) {
@@ -60,6 +65,15 @@ public class Booking {
 		}
 
 		return false;
+	}
+
+	public void setCancellationDate(LocalDate now) {
+		cancellation_date=now;
+		
+	}
+
+	public String getCancellationReference() {
+		return cancellation_reference;
 	}
 
 }

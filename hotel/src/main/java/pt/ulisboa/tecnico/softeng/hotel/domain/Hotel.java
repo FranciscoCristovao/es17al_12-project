@@ -94,7 +94,20 @@ public class Hotel {
 	}
 
 	public static String cancelBooking(String roomConfirmation) {
-		// TODO implement
+		if(roomConfirmation.trim().equals("") || roomConfirmation==null ){
+			throw new HotelException();
+		}
+		for(Hotel h : Hotel.hotels){
+			for(Room r : h.rooms){
+				for(Booking b : r.getBookings()){
+					if(b.getReference().equals(roomConfirmation)){
+						b.setCancellationReference("CANCELLED"+b.getReference());
+						b.setCancellationDate(LocalDate.now());
+						return b.getCancellationReference();
+						}
+					}
+				}
+		}
 		throw new HotelException();
 	}
 
