@@ -47,27 +47,31 @@ public class HotelCancelBookingMethodTest {
 			}
 		catch(HotelException e){
 			Assert.assertFalse(this.room.isFree(Type.DOUBLE,arrival,departure));
+			Assert.assertEquals(this.room.getNumberOfBookings(),1);
 		}
 	}
 	
 	@Test
 	public void duplicateCancelation(){
 		try{
-			Hotel.cancelBooking("XPTO1231");
-			Hotel.cancelBooking("XPTO1231");
+			Hotel.cancelBooking(reference);
+			Hotel.cancelBooking(reference);
 			Assert.fail();
 			}
 		catch(HotelException e){
 			Assert.assertTrue(this.room.isFree(Type.DOUBLE,arrival,departure));
-		}
+			Assert.assertEquals(this.room.getNumberOfBookings(),0);
+			}
 	}
 	
 	
 	
 	@Test
-	public void SuccessfulCancelation(){
-		Hotel.cancelBooking(reference);
+	public void SuccessfulCancellation(){
+		String cancel = Hotel.cancelBooking(reference);
 		Assert.assertTrue(this.room.isFree(Type.DOUBLE,arrival,departure));
+		Assert.assertEquals(this.room.getNumberOfBookings(),0);
+		Assert.assertEquals(cancel,"CANCELLED"+reference);
 	}
 	
 	

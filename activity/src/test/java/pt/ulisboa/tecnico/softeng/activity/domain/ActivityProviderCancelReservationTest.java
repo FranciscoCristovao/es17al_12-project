@@ -13,7 +13,7 @@ import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 public class ActivityProviderCancelReservationTest {
 	private static final int MIN_AGE = 25;
 	private static final int MAX_AGE = 80;
-	private static final int CAPACITY = 25;
+	private static final int CAPACITY = 1;
 	private static final int AGE = 40;
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
@@ -28,7 +28,6 @@ public class ActivityProviderCancelReservationTest {
 		this.activity = new Activity(this.provider, "Bush Walking", MIN_AGE, MAX_AGE, CAPACITY);
 
 		this.offer = new ActivityOffer(this.activity, this.begin, this.end);
-		String reference = ActivityProvider.reserveActivity(begin, end, AGE);
 	}
 
 
@@ -53,28 +52,41 @@ public class ActivityProviderCancelReservationTest {
 	@Test
 	public void NonExistantReservation() {
 		try{
+			ActivityProvider.reserveActivity(begin, end, AGE);
 			ActivityProvider.cancelReservation("ABC2");
 			Assert.fail();
 		} catch(ActivityException e){
 			Assert.assertEquals((provider.findOffer(begin, end, AGE)).size(), 0);
+			Assert.assertEquals(this.offer.getNumberOfBookings(), 1);
 		}
 	}
 	
 	@Test
 	public void DuplicateCancelReservation() {
 		try{
-			ActivityProvider.cancelReservation("XtremX1");
-			ActivityProvider.cancelReservation("XtremX1");
+			String resReference = ActivityProvider.reserveActivity(begin, end, AGE);
+			Assert.assertEquals(this.offer.hasVacancy(), false);
+			ActivityProvider.cancelReservation(resReference);
+			Assert.assertEquals(this.offer.hasVacancy(), true);
+			ActivityProvider.cancelReservation(resReference);
+			Assert.fail();
 		} catch(ActivityException e){
 			Assert.assertEquals((provider.findOffer(begin, end, AGE)).size(), 1);
+			Assert.assertEquals(this.offer.getNumberOfBookings(), 0);
 		}
 	}
 	
 	
 	@Test
 	public void success() {
-		String resCode = ActivityProvider.cancelReservation("XtremX1");
-		Assert.assertEquals(this.offer.getNumberOfBookings(), CAPACITY);
+		String resReference = ActivityProvider.reserveActivity(begin, end, AGE);
+		Assert.assertEquals(this.offer.hasVacancy(), false);
+		Assert.assertEquals((provider.findOffer(begin, end, AGE)).size(), 0);
+		String cancelReference = ActivityProvider.cancelReservation(resReference);
+		Assert.assertEquals(this.offer.getNumberOfBookings(), 0);
+		Assert.assertEquals((provider.findOffer(begin, end, AGE)).size(), 1);
+		Assert.assertEquals(this.offer.hasVacancy(), true);
+		Assert.assertEquals("cancelled" + resReference, cancelReference);
 	}
 
 	

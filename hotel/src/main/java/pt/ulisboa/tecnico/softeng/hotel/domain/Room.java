@@ -50,16 +50,23 @@ public class Room {
 	}
 
 	int getNumberOfBookings() {
-		return this.bookings.size();
+		int cancellations=0;
+		for(Booking b : this.getBookings()){
+			if(b.getCancellationReference()!=null)
+				cancellations++;
+		}
+		return this.getBookings().size()-cancellations;
 	}
+
+	
 
 	boolean isFree(Type type, LocalDate arrival, LocalDate departure) {
 		if (!type.equals(this.type)) {
 			return false;
 		}
 
-		for (Booking booking : this.bookings) {
-			if (booking.conflict(arrival, departure)) {
+		for (Booking booking : this.getBookings()) {
+			if (booking.getCancellationReference()==null && booking.conflict(arrival, departure)) {
 				return false;
 			}
 		}
@@ -85,9 +92,13 @@ public class Room {
 		}
 		
 		Booking booking = new Booking(this.hotel, arrival, departure);
-		this.bookings.add(booking);
+		this.getBookings().add(booking);
 
 		return booking;
+	}
+
+	public Set<Booking> getBookings() {
+		return bookings;
 	}
 
 }
