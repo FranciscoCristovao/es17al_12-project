@@ -101,8 +101,39 @@ public class ActivityProvider {
 	
 
 	public static ActivityReservationData getActivityReservationData(String reference) {
-		// TODO implement
-		throw new ActivityException();
-	}
+
+
+		String cancellation = null;
+		String name = null;
+		String code = null;
+		LocalDate begin = null;
+		LocalDate end = null;
+		LocalDate cancellationDate = null;
+		
+			for (ActivityProvider provider : providers)
+			{
+				for (Activity activity : provider.activities)
+				{
+					 name = activity.getName();
+					 code = activity.getCode();
+					for (ActivityOffer offer : activity.getOffers())
+					{
+						begin = offer.getBegin();
+						end = offer.getEnd();
+						for (Booking booking : offer.getBookings())
+						{
+							if(booking.getReference().equals(reference))
+							{
+								cancellation = booking.getCancellationReference();
+								cancellationDate = booking.getCancellationDate();
+								return new ActivityReservationData(reference,cancellation,name,code, begin, end, cancellationDate);
+							}
+
+						}
+					}
+				}
+			}
+			throw new ActivityException();
+		}
 
 }
