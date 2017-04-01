@@ -20,7 +20,7 @@ import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
 
 @RunWith(JMockit.class)
-public class ProcessPaymentProcessMethodTest {
+public class ProcessPaymentStateProcessMethodTest {
 	private static final String IBAN = "BK01987654321";
 	private static final String PAYMENT_CONFIRMATION = "PaymentConfirmation";
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
