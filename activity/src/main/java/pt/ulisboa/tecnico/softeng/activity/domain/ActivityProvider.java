@@ -80,9 +80,25 @@ public class ActivityProvider {
 	}
 
 	public static String cancelReservation(String activityConfirmation) {
-		// TODO implement
+		if(activityConfirmation == null || activityConfirmation.trim().equals("") ) throw new ActivityException();
+		for (ActivityProvider provider : ActivityProvider.providers) {
+			for(Activity activity : provider.activities){
+				for(ActivityOffer offer : activity.getOffers()){
+					for(Booking b : offer.getBookings()){
+						if((b.getReference()).equals(activityConfirmation)){
+							String cancellationReference = "cancelled" + activityConfirmation;
+							b.setCancellationReference(cancellationReference);
+							LocalDate cancelDate = LocalDate.now();
+							b.setCancellationDate(cancelDate);
+							return cancellationReference;
+						}
+					}
+				}
+			}
+		}
 		throw new ActivityException();
 	}
+	
 
 	public static ActivityReservationData getActivityReservationData(String reference) {
 		// TODO implement

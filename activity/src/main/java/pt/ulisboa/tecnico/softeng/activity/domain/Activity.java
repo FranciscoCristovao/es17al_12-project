@@ -68,11 +68,11 @@ public class Activity {
 	}
 
 	int getNumberOfOffers() {
-		return this.offers.size();
+		return this.getOffers().size();
 	}
 
 	void addOffer(ActivityOffer offer) {
-		this.offers.add(offer);
+		this.getOffers().add(offer);
 	}
 
 	Set<ActivityOffer> getOffers(LocalDate begin, LocalDate end, int age) {
@@ -87,6 +87,10 @@ public class Activity {
 
 	boolean matchAge(int age) {
 		return age >= this.minAge && age <= this.maxAge;
+	}
+	
+	public Set<ActivityOffer> getOffers() {
+		return offers;
 	}
 
 }

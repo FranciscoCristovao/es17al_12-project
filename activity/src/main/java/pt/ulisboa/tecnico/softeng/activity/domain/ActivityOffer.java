@@ -42,15 +42,19 @@ public class ActivityOffer {
 	}
 
 	int getNumberOfBookings() {
-		return this.bookings.size();
+		int cancelCounter = 0;
+		for(Booking b : this.bookings){
+			if (b.getCancellationReference()!=null) cancelCounter++;
+		}
+		return this.getBookings().size() - cancelCounter;
 	}
 
 	void addBooking(Booking booking) {
-		if (this.capacity == this.bookings.size()) {
+		if (this.capacity == this.getBookings().size()) {
 			throw new ActivityException();
 		}
 
-		this.bookings.add(booking);
+		this.getBookings().add(booking);
 
 	}
 
@@ -68,6 +72,10 @@ public class ActivityOffer {
 
 	boolean hasVacancy() {
 		return this.capacity > getNumberOfBookings();
+	}
+
+	public Set<Booking> getBookings() {
+		return bookings;
 	}
 
 }
