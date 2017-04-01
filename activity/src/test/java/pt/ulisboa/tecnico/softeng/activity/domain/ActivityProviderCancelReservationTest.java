@@ -69,6 +69,7 @@ public class ActivityProviderCancelReservationTest {
 			ActivityProvider.cancelReservation(resReference);
 			Assert.assertEquals(this.offer.hasVacancy(), true);
 			ActivityProvider.cancelReservation(resReference);
+			Assert.fail();
 		} catch(ActivityException e){
 			Assert.assertEquals((provider.findOffer(begin, end, AGE)).size(), 1);
 			Assert.assertEquals(this.offer.getNumberOfBookings(), 0);
@@ -80,10 +81,12 @@ public class ActivityProviderCancelReservationTest {
 	public void success() {
 		String resReference = ActivityProvider.reserveActivity(begin, end, AGE);
 		Assert.assertEquals(this.offer.hasVacancy(), false);
-		ActivityProvider.cancelReservation(resReference);
+		Assert.assertEquals((provider.findOffer(begin, end, AGE)).size(), 0);
+		String cancelReference = ActivityProvider.cancelReservation(resReference);
 		Assert.assertEquals(this.offer.getNumberOfBookings(), 0);
 		Assert.assertEquals((provider.findOffer(begin, end, AGE)).size(), 1);
 		Assert.assertEquals(this.offer.hasVacancy(), true);
+		Assert.assertEquals("cancelled" + resReference, cancelReference);
 	}
 
 	

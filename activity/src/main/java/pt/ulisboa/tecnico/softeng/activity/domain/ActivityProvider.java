@@ -85,7 +85,7 @@ public class ActivityProvider {
 			for(Activity activity : provider.activities){
 				for(ActivityOffer offer : activity.getOffers()){
 					for(Booking b : offer.getBookings()){
-						if((b.getReference()).equals(activityConfirmation)){
+						if((b.getReference()).equals(activityConfirmation) && b.getCancellationReference() == null){
 							String cancellationReference = "cancelled" + activityConfirmation;
 							b.setCancellationReference(cancellationReference);
 							LocalDate cancelDate = LocalDate.now();
