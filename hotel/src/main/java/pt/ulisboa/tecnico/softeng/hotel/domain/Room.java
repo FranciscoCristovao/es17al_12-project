@@ -52,7 +52,7 @@ public class Room {
 	int getNumberOfBookings() {
 		int cancellations=0;
 		for(Booking b : this.getBookings()){
-			if(b.getCancellationReference()==null)
+			if(b.getCancellationReference()!=null)
 				cancellations++;
 		}
 		return this.getBookings().size()-cancellations;
@@ -66,7 +66,7 @@ public class Room {
 		}
 
 		for (Booking booking : this.getBookings()) {
-			if (booking.getCancellationReference()!=null && booking.conflict(arrival, departure)) {
+			if (booking.getCancellationReference()==null && booking.conflict(arrival, departure)) {
 				return false;
 			}
 		}

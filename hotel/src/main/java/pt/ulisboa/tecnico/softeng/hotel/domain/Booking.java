@@ -42,9 +42,11 @@ public class Booking {
 		return this.departure;
 	}
 	
+	
 	public void setCancellationReference(String reference){
 		cancellation_reference=reference;
 	}
+	
 
 	boolean conflict(LocalDate arrival, LocalDate departure) {
 		if (departure.isBefore(arrival)) {
@@ -76,4 +78,7 @@ public class Booking {
 		return cancellation_reference;
 	}
 
+	public LocalDate getCancellationDate(){
+		return cancellation_date;
+	}
 }
