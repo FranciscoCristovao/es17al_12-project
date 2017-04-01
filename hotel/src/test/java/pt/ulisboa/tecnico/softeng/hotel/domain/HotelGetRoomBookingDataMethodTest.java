@@ -73,12 +73,15 @@ public class HotelGetRoomBookingDataMethodTest {
 		this.reference=Hotel.reserveRoom(Type.SINGLE, arrival, departure);
 		RoomBookingData BData= Hotel.getRoomBookingData(reference);
 		Assert.assertEquals(BData.getReference(), this.reference);
+		Assert.assertEquals(BData.getCancellation(), null);
 		Assert.assertEquals(BData.getHotelName(), this.hotel.getName());
 		Assert.assertEquals(BData.getHotelCode(), this.hotel.getCode());
 		Assert.assertEquals(BData.getRoomNumber(), "13");
-		Assert.assertEquals(BData.getRoomType(), Type.SINGLE);
+		Assert.assertEquals(BData.getRoomType(), Type.SINGLE.toString());
 		Assert.assertEquals(BData.getArrival(), this.arrival);
 		Assert.assertEquals(BData.getDeparture(), this.departure);
+		Assert.assertEquals(BData.getCancellationDate(), null);
+
 
 
 	}
