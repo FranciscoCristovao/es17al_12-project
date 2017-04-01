@@ -44,6 +44,7 @@ public class ProcessPaymentProcessMethodTest {
 			{
 				BankInterface.processPayment(this.anyString, this.anyInt);
 				this.result=PAYMENT_CONFIRMATION;
+				this.times=1;
 			}
 		};
 		
@@ -88,23 +89,18 @@ public class ProcessPaymentProcessMethodTest {
 	@Test
 	public void RemoteActionFailTwice(@Mocked final BankInterface bankInterface){
 		
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				BankInterface.processPayment(this.anyString, this.anyInt);
 				this.result=new RemoteAccessException();
+				this.times=2;
 			}
 		};
 	
 		
 		this.adventure.process();
 		this.adventure.process();
-		
-		new Verifications() {
-			{
-				BankInterface.processPayment(this.anyString, this.anyInt);
-				this.times=2;
-			}
-		};
+
 		
 		Assert.assertEquals(Adventure.State.PROCESS_PAYMENT, this.adventure.getState());
 	}
@@ -112,10 +108,11 @@ public class ProcessPaymentProcessMethodTest {
 	@Test
 	public void RemoteActionFailThreeTimes(@Mocked final BankInterface bankInterface){
 		
-		new Expectations() {
+		new StrictExpectations() {
 			{
 				BankInterface.processPayment(this.anyString, this.anyInt);
 				this.result=new RemoteAccessException();
+				this.times=3;
 				
 			}
 		};
@@ -125,13 +122,6 @@ public class ProcessPaymentProcessMethodTest {
 		this.adventure.process();
 		this.adventure.process();
 		
-		
-		new Verifications() {
-			{
-				BankInterface.processPayment(this.anyString, this.anyInt);
-				this.times=2;
-			}
-		};
 		
 		Assert.assertEquals(Adventure.State.CANCELLED, this.adventure.getState());
 	}
