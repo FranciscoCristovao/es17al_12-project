@@ -80,13 +80,60 @@ public class ActivityProvider {
 	}
 
 	public static String cancelReservation(String activityConfirmation) {
-		// TODO implement
+		if(activityConfirmation == null || activityConfirmation.trim().equals("") ) throw new ActivityException();
+		for (ActivityProvider provider : ActivityProvider.providers) {
+			for(Activity activity : provider.activities){
+				for(ActivityOffer offer : activity.getOffers()){
+					for(Booking b : offer.getBookings()){
+						if((b.getReference()).equals(activityConfirmation) && b.getCancellationReference() == null){
+							String cancellationReference = "cancelled" + activityConfirmation;
+							b.setCancellationReference(cancellationReference);
+							LocalDate cancelDate = LocalDate.now();
+							b.setCancellationDate(cancelDate);
+							return cancellationReference;
+						}
+					}
+				}
+			}
+		}
 		throw new ActivityException();
 	}
+	
 
 	public static ActivityReservationData getActivityReservationData(String reference) {
-		// TODO implement
-		throw new ActivityException();
-	}
+
+
+		String cancellation = null;
+		String name = null;
+		String code = null;
+		LocalDate begin = null;
+		LocalDate end = null;
+		LocalDate cancellationDate = null;
+		
+			for (ActivityProvider provider : providers)
+			{
+				for (Activity activity : provider.activities)
+				{
+					 name = activity.getName();
+					 code = activity.getCode();
+					for (ActivityOffer offer : activity.getOffers())
+					{
+						begin = offer.getBegin();
+						end = offer.getEnd();
+						for (Booking booking : offer.getBookings())
+						{
+							if(booking.getReference().equals(reference))
+							{
+								cancellation = booking.getCancellationReference();
+								cancellationDate = booking.getCancellationDate();
+								return new ActivityReservationData(reference,cancellation,name,code, begin, end, cancellationDate);
+							}
+
+						}
+					}
+				}
+			}
+			throw new ActivityException();
+		}
 
 }
