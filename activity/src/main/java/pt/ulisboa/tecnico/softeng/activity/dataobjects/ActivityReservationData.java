@@ -11,6 +11,8 @@ public class ActivityReservationData {
 	private LocalDate end;
 	private LocalDate cancellationDate;
 	
+	public ActivityReservationData(){}
+	
 	public ActivityReservationData(String ref, String canc, String name, String code, LocalDate begin, LocalDate end, LocalDate cancDate){
 		this.reference = ref;
 		this.cancellation = canc;
