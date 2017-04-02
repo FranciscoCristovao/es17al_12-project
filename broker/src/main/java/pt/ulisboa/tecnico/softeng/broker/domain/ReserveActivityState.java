@@ -1,16 +1,11 @@
 package pt.ulisboa.tecnico.softeng.broker.domain;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.broker.domain.Adventure.State;
 import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 
 public class ReserveActivityState extends AdventureState{
-
-	private static Logger logger = LoggerFactory.getLogger(ReserveActivityState.class);
 
 	@Override
 	public State getState(){ return State.RESERVE_ACTIVITY;}
