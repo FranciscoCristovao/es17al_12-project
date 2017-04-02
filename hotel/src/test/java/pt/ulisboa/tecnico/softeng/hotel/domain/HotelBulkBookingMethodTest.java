@@ -49,7 +49,7 @@ public class HotelBulkBookingMethodTest {
 	@Test(expected = HotelException.class)
 	public void departureNull(){
 		hotel.bulkBooking(3, arrival, null);
-	}
+	 }
 	
 	@Test(expected = HotelException.class)
 	public void noBulkBooking() {
