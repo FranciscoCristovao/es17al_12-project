@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
+import pt.ulisboa.tecnico.softeng.bank.domain.Operation.Type;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
 public class Bank {
@@ -27,7 +28,7 @@ public class Bank {
 
 		Bank.banks.add(this);
 	}
-
+	
 	private void checkArguments(String name, String code) {
 		if (name == null || code == null || name.trim().equals("") || code.trim().equals("")) {
 			throw new BankException();
@@ -104,12 +105,38 @@ public class Bank {
 	}
 
 	public static String cancelPayment(String reference) {
-		// TODO implement
+		if (reference == null || reference.trim().length() == 0) 
+			throw new BankException();
+		
+		for (Bank bank : Bank.banks){
+			if (bank.getOperation(reference)!=null && 
+				bank.getOperation(reference).getType()==Operation.Type.WITHDRAW){
+				Operation operation=bank.getOperation(reference);
+				Account account = operation.getAccount();
+				int ammount = operation.getValue();
+				return account.deposit(ammount);
+				
+			}
+		}
+		
 		throw new BankException();
 	}
 
 	public static BankOperationData getOperationData(String reference) {
-		// TODO implement
+		if(reference == null||reference.trim().equals(""))throw new BankException();
+		Operation op = null;
+		for (Bank bank : banks) {
+			op = bank.getOperation(reference);
+			if(op != null){
+				BankOperationData opData = new BankOperationData();
+				opData.setReference(op.getReference());
+				opData.setType(op.getType().toString());
+				opData.setIban(op.getAccount().getIBAN());
+				opData.setValue(op.getValue());
+				opData.setTime(op.getTime());
+				return opData;
+			}
+		}
 		throw new BankException();
 	}
 
