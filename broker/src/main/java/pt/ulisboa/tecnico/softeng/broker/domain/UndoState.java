@@ -2,7 +2,6 @@ package pt.ulisboa.tecnico.softeng.broker.domain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import pt.ulisboa.tecnico.softeng.activity.dataobjects.ActivityReservationData;
 import pt.ulisboa.tecnico.softeng.broker.domain.Adventure.State;
 import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
@@ -22,30 +21,27 @@ public class UndoState extends AdventureState {
 	public void process(Adventure adventure) {
 		logger.debug("process");
 		
-		if (adventure.cancelPayment()) {
-			String paymentCancellation;
+		if (adventure.cancelPayment()) {			
 			try {
-				paymentCancellation = BankInterface.cancelPayment(adventure.getPaymentConfirmation());
+				BankInterface.cancelPayment(adventure.getPaymentConfirmation());
 			} catch (HotelException | RemoteAccessException ex) {
 				// does not change state
 				return;
 			}
 		}
 
-		if (adventure.cancelActivity()) {
-			String activityCancellation;
+		if (adventure.cancelActivity()) {			
 			try {
-				activityCancellation = ActivityInterface.cancelReservation(adventure.getActivityConfirmation());
+				ActivityInterface.cancelReservation(adventure.getActivityConfirmation());
 			} catch (HotelException | RemoteAccessException ex) {
 				// does not change state
 				return;
 			}
 		}
 
-		if (adventure.cancelRoom()) {
-			String roomCancellation;
+		if (adventure.cancelRoom()) {			
 			try {
-				roomCancellation = HotelInterface.cancelBooking(adventure.getRoomConfirmation());
+				HotelInterface.cancelBooking(adventure.getRoomConfirmation());
 			} catch (HotelException | RemoteAccessException ex) {
 				// does not change state
 				return;
@@ -53,7 +49,7 @@ public class UndoState extends AdventureState {
 		}
 
 		if (!adventure.cancelPayment() && !adventure.cancelActivity() && !adventure.cancelRoom()) {
-			adventure.setState(State.UNDO);
+			adventure.setState(State.CANCELLED);
 		}
 	}
 }
