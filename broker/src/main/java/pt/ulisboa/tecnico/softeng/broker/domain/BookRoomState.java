@@ -14,17 +14,17 @@ public class BookRoomState extends AdventureState{
 
 	@Override
 	public void process(Adventure adventure) {
-		// TODO
 		try {
 			adventure.setRoomConfirmation(HotelInterface.reserveRoom(Room.Type.SINGLE, adventure.getBegin(), adventure.getEnd())); 
 		} catch (HotelException rae) {
 			adventure.setState(State.UNDO);
+			return;
 		} catch (RemoteAccessException rae) {
-			// increment number of errors
-			// if (this.numOfRemoteErrors == 10) {
-			// adventure.setState(State.UNDO);
-			// }
-			// return;
+			this.incNumOfRemoteErrors();			// increment number of errors
+			if(this.getNumOfRemoteErrors()==10){	// if (this.numOfRemoteErrors == 10) {
+				adventure.setState(State.UNDO);		// adventure.setState(State.UNDO);
+			}										// }
+			return;									// return;
 		}
 
 		adventure.setState(State.CONFIRMED);
