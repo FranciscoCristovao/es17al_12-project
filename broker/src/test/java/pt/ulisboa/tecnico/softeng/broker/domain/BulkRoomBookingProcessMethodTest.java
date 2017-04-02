@@ -70,6 +70,7 @@ public class BulkRoomBookingProcessMethodTest {
 		{
 				HotelInterface.bulkBooking(number, arrival, departure);
 				this.result = new HotelException();
+				this.times = 2;
 			}
 		};
 		for(int i = 0; i < 2; i++) this.bulkRoomBooking.processBooking();
@@ -86,6 +87,7 @@ public class BulkRoomBookingProcessMethodTest {
 		{
 				HotelInterface.bulkBooking(number, arrival, departure);
 				this.result = new HotelException();
+				this.times = 3;
 			}
 		};
 		for(int i = 0; i < 3; i++) this.bulkRoomBooking.processBooking();
@@ -104,6 +106,8 @@ public class BulkRoomBookingProcessMethodTest {
 				this.result = new RemoteAccessException();
 			}
 		};
+		this.bulkRoomBooking.processBooking();
+
 		Assert.assertEquals(this.bulkRoomBooking.getNumberOfHotelExceptions(), 0);
 		Assert.assertEquals(this.bulkRoomBooking.getNumberOfRemoteErrors(), 1);
 		Assert.assertEquals(this.bulkRoomBooking.getCancelled(), false);
@@ -116,6 +120,7 @@ public class BulkRoomBookingProcessMethodTest {
 			{
 				HotelInterface.bulkBooking(number, arrival, departure);
 				this.result = new RemoteAccessException();
+				this.times = 9;
 			}
 		};
 		for(int i = 0; i<9; i++) this.bulkRoomBooking.processBooking();
@@ -132,6 +137,7 @@ public class BulkRoomBookingProcessMethodTest {
 			{
 				HotelInterface.bulkBooking(number, arrival, departure);
 				this.result = new RemoteAccessException();
+				this.times = 10;
 			}
 		};
 		for(int i = 0; i<10; i++) this.bulkRoomBooking.processBooking();
