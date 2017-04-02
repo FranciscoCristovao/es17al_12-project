@@ -27,7 +27,7 @@ public class Bank {
 
 		Bank.banks.add(this);
 	}
-
+	
 	private void checkArguments(String name, String code) {
 		if (name == null || code == null || name.trim().equals("") || code.trim().equals("")) {
 			throw new BankException();
@@ -104,7 +104,20 @@ public class Bank {
 	}
 
 	public static String cancelPayment(String reference) {
-		// TODO implement
+		if (reference == null || reference.trim().length() == 0) 
+			throw new BankException();
+		
+		for (Bank bank : Bank.banks){
+			if (bank.getOperation(reference)!=null && 
+				bank.getOperation(reference).getType()==Operation.Type.WITHDRAW){
+				Operation operation=bank.getOperation(reference);
+				Account account = operation.getAccount();
+				int ammount = operation.getValue();
+				return account.deposit(ammount);
+				
+			}
+		}
+		
 		throw new BankException();
 	}
 
