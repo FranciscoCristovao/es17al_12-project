@@ -731,8 +731,7 @@ public class AdventureSequenceTest{
 		new StrictExpectations() {
 			{
 				BankInterface.processPayment(this.anyString, this.anyInt);
-				this.result=PAYMENT_CONFIRMATION;
-				this.times=1;
+				this.result=this.anyString;
 			}
 		};
 		
@@ -766,8 +765,7 @@ public class AdventureSequenceTest{
 		new StrictExpectations() {
 			{
 				BankInterface.processPayment(this.anyString, this.anyInt);
-				this.result=PAYMENT_CONFIRMATION;
-				this.times=1;
+				this.result=this.anyString;
 			}
 		};
 		
