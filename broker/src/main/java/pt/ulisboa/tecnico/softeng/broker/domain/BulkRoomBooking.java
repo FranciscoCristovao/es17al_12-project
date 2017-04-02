@@ -77,7 +77,7 @@ public class BulkRoomBooking {
 
 		for (String reference : this.references) {
 			RoomBookingData data = null;
-			try {
+			try { 
 				data = HotelInterface.getRoomBookingData(reference);
 				this.numberOfRemoteErrors = 0;
 			} catch (HotelException he) {
