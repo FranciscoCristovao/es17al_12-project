@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.joda.time.LocalDate;
+import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 
 import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
@@ -141,12 +142,58 @@ public class Hotel {
 		throw new HotelException();
 	}
 
-	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure) {
-		// TODO: verify consistency of arguments, return the
-		// references for 'number' new bookings, it does not matter if they are
-		// single of double. If there aren't enough rooms available it throws a
-		// hotel exception
-		throw new HotelException();
+	
+	public int NumberRoomsAvailableByType(Type type, LocalDate arrival, LocalDate departure) {
+		int numRoomsAvailable = 0;
+
+		for (Room room : rooms) {
+			if(room.isFree(type, arrival, departure)){
+				numRoomsAvailable++;
+			}
+		}
+		return numRoomsAvailable;
+
+	}
+	
+	public static int NumberRoomsHotelsAvailableByType(Type type ,LocalDate arrival, LocalDate departure) {
+		int numRoomsAvailable = 0;
+
+		for (Hotel hotel : hotels) {
+			numRoomsAvailable += hotel.NumberRoomsAvailableByType( type,arrival, departure);
+		}
+		return numRoomsAvailable;
+
+	}
+	
+	
+	
+	public Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure) {
+		if(number <= 0 || arrival == null || departure == null|| arrival.isAfter(departure)){
+			throw new HotelException();
+		}
+		
+		int numRoomsAvailableSingle = NumberRoomsHotelsAvailableByType(Type.SINGLE,arrival, departure);
+		int numRoomsAvailableDouble = NumberRoomsHotelsAvailableByType(Type.DOUBLE,arrival, departure);
+
+		if(number > (numRoomsAvailableSingle + numRoomsAvailableDouble)){
+			throw new HotelException();
+		}
+		
+		int i = 0;
+		Set<String> roomsReserved = new HashSet<>();
+		
+		for(;( i < numRoomsAvailableDouble && i <number ); i++){
+			String roomReserved = reserveRoom(Type.DOUBLE, arrival, departure);
+			roomsReserved.add(roomReserved);
+		}
+		if(i < number){
+			for(; i <number; i++){
+				String roomReserved = reserveRoom(Type.SINGLE, arrival, departure);
+				roomsReserved.add(roomReserved);
+			}
+		}
+		
+		return roomsReserved;
 	}
 
 }
