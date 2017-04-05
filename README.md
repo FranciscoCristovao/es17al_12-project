@@ -2,15 +2,15 @@
 
 To run tests execute: mvn clean install
 
-|   Number   |          Name           |            Email        |   Name GitHUb  | Module(s) |
-| ---------- | ----------------------- | ----------------------- | ---------------| --------- |
-|            |                         |                         |                |           |
-|            |                         |                         |                |           |
-|            |                         |                         |                |           |
-|            |                         |                         |                |           |
-|            |                         |                         |                |           |
-|            |                         |                         |                |           |
-|            |                         |                         |                |           |
-|            |                         |                         |                |           |
-|            |                         |                         |                |           |
+|   Number   |          Name           |            Email        |   Name GitHUb      | Module(s) |
+| ---------- | ----------------------- | ----------------------- | ------------------ | --------- |
+|   81505    |   Francisco Cristóvão   | francristovao@gmail.com | FranciscoCristovao | Activity  |
+|            |                         |                         |                    |           |
+|            |                         |                         |                    |           |
+|            |                         |                         |                    |           |
+|            |                         |                         |                    |           |
+|            |                         |                         |                    |           |
+|            |                         |                         |                    |           |
+|            |                         |                         |                    |           |
+|            |                         |                         |                    |           |
  
