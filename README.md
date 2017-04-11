@@ -7,9 +7,9 @@ To run tests execute: mvn clean install
 |   81505    |   Francisco Cristóvão   | francristovao@gmail.com | FranciscoCristovao | Activity  |
 |   81271    |   Rodrigo Mira          | mirarodrigo@hotmail.com | MiraoDaSilva       | Activity  |
 |   81726    |   José Mota             | zemariamota@hotmail.com | zemota1            | Bank      |
-|            |                         |                         |                    |           |
-|            |                         |                         |                    |           |
-|            |                         |                         |                    |           |
+|   81811    |   João Crespo           | jpmcrespo@gmail.com     | jpmcrespo          | Hotel/Broker|
+|   81478    |   Joana Godinho         |                         | joanaGodinho       | Hotel/Broker|
+|   81777    |   João Raposo           |                         |                    | Hotel/Broker|
 |            |                         |                         |                    |           |
 |            |                         |                         |                    |           |
 |            |                         |                         |                    |           |
