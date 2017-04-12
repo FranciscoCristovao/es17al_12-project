@@ -6,6 +6,12 @@ class ActivityProvider{
 
 class Activity{
 
+
+}
+
+class Booking{
+
+
 }
 
 
