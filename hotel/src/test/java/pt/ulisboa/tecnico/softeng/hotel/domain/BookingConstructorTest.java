@@ -13,7 +13,7 @@ public class BookingConstructorTest extends RollbackTestAbstractClass{
 	private final LocalDate departure = new LocalDate(2016, 12, 21);
 	private Hotel hotel;
 
-	@Before
+	@Override
 	public void populate4Test() {
 		this.hotel = new Hotel("XPTO123", "Londres");
 	}
@@ -51,11 +51,6 @@ public class BookingConstructorTest extends RollbackTestAbstractClass{
 	@Test
 	public void arrivalEqualDeparture() {
 		new Booking(this.hotel, this.arrival, this.arrival);
-	}
-
-	@After
-	public void tearDown() {
-		Hotel.hotels.clear();
 	}
 
 }

@@ -13,7 +13,7 @@ public class BookingConflictMethodTest extends RollbackTestAbstractClass{
 	private final LocalDate departure = new LocalDate(2016, 12, 24);
 	private Booking booking;
 
-	@Before
+	@Override
 	public void populate4Test() {
 		Hotel hotel = new Hotel("XPTO123", "Londres");
 
@@ -86,9 +86,5 @@ public class BookingConflictMethodTest extends RollbackTestAbstractClass{
 		Assert.assertTrue(this.booking.conflict(this.arrival.plusDays(3), this.departure.plusDays(6)));
 	}
 
-	@After
-	public void tearDown() {
-		Hotel.hotels.clear();
-	}
 
 }
