@@ -11,13 +11,13 @@ import org.junit.Test;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
-public class RoomReserveMethodTest {
+public class RoomReserveMethodTest extends RollbackTestAbstractClass {
 	private final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private final LocalDate departure = new LocalDate(2016, 12, 24);
 	private Room room;
 
-	@Before
-	public void setUp() {
+	@Override
+	public void populate4Test() {
 		Hotel hotel = new Hotel("XPTO123", "Lisboa");
 		this.room = new Room(hotel, "01", Type.SINGLE);
 	}
@@ -64,8 +64,5 @@ public class RoomReserveMethodTest {
 		}
 	}
 
-	@After
-	public void tearDown() {
-		Hotel.hotels.clear();
-	}
+
 }
