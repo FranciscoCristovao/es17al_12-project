@@ -8,13 +8,13 @@ import org.junit.Test;
 
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
-public class BookingConflictMethodTest {
+public class BookingConflictMethodTest extends RollbackTestAbstractClass{
 	private final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private final LocalDate departure = new LocalDate(2016, 12, 24);
 	private Booking booking;
 
 	@Before
-	public void setUp() {
+	public void populate4Test() {
 		Hotel hotel = new Hotel("XPTO123", "Londres");
 
 		this.booking = new Booking(hotel, this.arrival, this.departure);
