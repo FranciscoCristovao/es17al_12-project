@@ -4,6 +4,10 @@ class ActivityProvider{
 
 }
 
+class Activity{
+
+}
+
 
 
 	

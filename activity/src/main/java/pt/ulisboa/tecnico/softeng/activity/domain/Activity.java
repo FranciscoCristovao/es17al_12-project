@@ -7,7 +7,7 @@ import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
-public class Activity {
+public class Activity extends Activity_Base{
 	private static final int MIN_AGE = 18;
 	private static final int MAX_AGE = 100;
 
@@ -31,7 +31,8 @@ public class Activity {
 
 		provider.addActivity(this);
 	}
-
+	
+	
 	private void checkArguments(ActivityProvider provider, String name, int minAge, int maxAge, int capacity) {
 		if (provider == null || name == null || name.trim().equals("")) {
 			throw new ActivityException();
@@ -102,5 +103,11 @@ public class Activity {
 	public Set<ActivityOffer> getOffers() {
 		return this.offers;
 	}
+	
+	public void delete() {
+		
+		deleteDomainObject();
+	}
+
 
 }
