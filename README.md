@@ -10,7 +10,6 @@ To run tests execute: mvn clean install
 |   81811    |   João Crespo           | jpmcrespo@gmail.com     | jpmcrespo          | Hotel/Broker|
 |   81478    |   Joana Godinho         |                         | joanaGodinho       | Hotel/Broker|
 |   81777    |   João Raposo           |                         |                    | Hotel/Broker|
+|   80996    |   João Silvestre        | joao.p.silvestre@tecnico.ulisboa.pt|JoaoSilvestre95|Bank   |
 |            |                         |                         |                    |           |
 |            |                         |                         |                    |           |
-|            |                         |                         |                    |           |
- 
