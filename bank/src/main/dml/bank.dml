@@ -3,7 +3,8 @@ package pt.ulisboa.tecnico.softeng.bank.domain;
 class Bank {
 }
 
-class Account {
+class Account { 
+
 }
 
 relation DomainRootHasBankApplication {
