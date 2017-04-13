@@ -11,3 +11,6 @@ relation DomainRootHasHotelApplication {
 		multiplicity 0..*;
 	}
 }
+
+class Room{
+}
