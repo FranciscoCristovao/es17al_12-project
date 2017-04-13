@@ -14,3 +14,12 @@ relation DomainRootHasHotelApplication {
 
 class Room{
 }
+
+relation HotelHasRoom{
+	Hotel playsRole hotel{
+		multiplicity 1..1;
+	}
+	Room playsRole room{
+		multiplicity 0..*;
+	}		
+}
