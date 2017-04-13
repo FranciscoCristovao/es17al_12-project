@@ -2,7 +2,7 @@ package pt.ulisboa.tecnico.softeng.bank.domain;
 
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
-public class Account {
+public class Account extends Account_Base {
 	private static int counter = 0;
 
 	private final Bank bank;
@@ -67,6 +67,10 @@ public class Account {
 		this.balance = this.balance - amount;
 
 		return new Operation(Operation.Type.WITHDRAW, this, amount).getReference();
+	}
+	
+	public void delete() {
+		 deleteDomainObject();
 	}
 
 }
