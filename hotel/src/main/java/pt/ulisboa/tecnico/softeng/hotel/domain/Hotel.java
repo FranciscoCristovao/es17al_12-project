@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.joda.time.LocalDate;
 
+import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
@@ -25,6 +26,7 @@ public class Hotel extends Hotel_Base{
 		this.code = code;
 		this.name = name;
 		Hotel.hotels.add(this);
+		FenixFramework.getDomainRoot().addHotel(this);
 	}
 
 	private void checkArguments(String code, String name) {
