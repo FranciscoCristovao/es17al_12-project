@@ -14,6 +14,7 @@ public class Bank extends Bank_Base {
 
 	private final String name;
 	private final String code;
+
 	private final List<Operation> log = new ArrayList<>();
 
 	public Bank(String name, String code) {
@@ -54,6 +55,7 @@ public class Bank extends Bank_Base {
 	String getCode() {
 		return this.code;
 	}
+
 
 	int getNumberOfAccounts() {
 		return this.getAccountSet().size();
