@@ -64,10 +64,11 @@ public class Bank extends Bank_Base {
 	int getNumberOfClients() {
 		return this.clients.size();
 	}
-
-	/*void addAccount(Account account) {
-		this.accounts.add(account);
-	}*/
+	
+	@Override
+	public void addAccount(Account account) {
+		super.addAccount(account);
+	}
 
 	boolean hasClient(Client client) {
 		return this.clients.contains(client);
