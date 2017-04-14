@@ -14,7 +14,6 @@ public class Bank extends Bank_Base {
 
 	private final String name;
 	private final String code;
-	private final Set<Account> accounts = new HashSet<>();
 	private final Set<Client> clients = new HashSet<>();
 	private final List<Operation> log = new ArrayList<>();
 
@@ -57,10 +56,6 @@ public class Bank extends Bank_Base {
 		return this.code;
 	}
 
-	int getNumberOfAccounts() {
-		return this.accounts.size();
-	}
-
 	int getNumberOfClients() {
 		return this.clients.size();
 	}
@@ -87,7 +82,7 @@ public class Bank extends Bank_Base {
 			throw new BankException();
 		}
 
-		for (Account account : this.accounts) {
+		for (Account account : this.getAccountSet()) {
 			if (account.getIBAN().equals(IBAN)) {
 				return account;
 			}
