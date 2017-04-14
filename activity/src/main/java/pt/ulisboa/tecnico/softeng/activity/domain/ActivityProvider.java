@@ -7,12 +7,11 @@ import java.util.Set;
 
 import org.joda.time.LocalDate;
 
+import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.activity.dataobjects.ActivityReservationData;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
 public class ActivityProvider extends ActivityProvider_Base {
-	public static Set<ActivityProvider> providers = new HashSet<>();
-
 	static final int CODE_SIZE = 6;
 
 	private final String name;
@@ -25,11 +24,11 @@ public class ActivityProvider extends ActivityProvider_Base {
 		this.code = code;
 		this.name = name;
 
-		ActivityProvider.providers.add(this);
+		FenixFramework.getDomainRoot().addActivityProvider(this);
 	}
 	
 	public void delete() {
-		/*adicionar add root a null*/
+		setRoot(null);
 		deleteDomainObject();
 	}
 
@@ -42,7 +41,7 @@ public class ActivityProvider extends ActivityProvider_Base {
 			throw new ActivityException();
 		}
 
-		for (ActivityProvider activityProvider : providers) {
+		for (ActivityProvider activityProvider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
 			if (activityProvider.getCode().equals(code) || activityProvider.getName().equals(name)) {
 				throw new ActivityException();
 			}
@@ -84,7 +83,7 @@ public class ActivityProvider extends ActivityProvider_Base {
 	}
 
 	private static Booking getBookingByReference(String reference) {
-		for (ActivityProvider provider : ActivityProvider.providers) {
+		for (ActivityProvider provider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
 			Booking booking = provider.getBooking(reference);
 			if (booking != null) {
 				return booking;
@@ -95,7 +94,7 @@ public class ActivityProvider extends ActivityProvider_Base {
 
 	public static String reserveActivity(LocalDate begin, LocalDate end, int age) {
 		List<ActivityOffer> offers;
-		for (ActivityProvider provider : ActivityProvider.providers) {
+		for (ActivityProvider provider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
 			offers = provider.findOffer(begin, end, age);
 			if (!offers.isEmpty()) {
 				return new Booking(provider, offers.get(0)).getReference();
@@ -113,7 +112,7 @@ public class ActivityProvider extends ActivityProvider_Base {
 	}
 
 	public static ActivityReservationData getActivityReservationData(String reference) {
-		for (ActivityProvider provider : ActivityProvider.providers) {
+		for (ActivityProvider provider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
 			for (Activity activity : provider.activities) {
 				for (ActivityOffer offer : activity.getOffers()) {
 					Booking booking = offer.getBooking(reference);

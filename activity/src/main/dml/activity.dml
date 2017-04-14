@@ -4,6 +4,15 @@ class ActivityProvider{
 
 }
 
+relation DomainRootHasActivityProvider {
+	.pt.ist.fenixframework.DomainRoot playsRole root {
+		multiplicity 1..1;
+	}
+	ActivityProvider playsRole activityProvider {
+		multiplicity 0..*;
+	}
+}
+
 class Activity{
 
 
