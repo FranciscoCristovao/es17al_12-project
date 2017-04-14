@@ -12,17 +12,14 @@ public class Room extends Room_Base{
 		SINGLE, DOUBLE
 	}
 
-	private final String number;
-	private final Type type;
+
 	private final Set<Booking> bookings = new HashSet<>();
 
 	public Room(Hotel hotel, String number, Type type) {
 		checkArguments(hotel, number, type);
-
 		
-		this.number = number;
-		this.type = type;
-		
+		setNumber(number);
+		setType(type);
 		setHotel(hotel);
 
 	}
@@ -42,20 +39,12 @@ public class Room extends Room_Base{
 		h.addRoom(this);
 	}
 
-	public String getNumber() {
-		return this.number;
-	}
-
-	public Type getType() {
-		return this.type;
-	}
-
 	int getNumberOfBookings() {
 		return this.bookings.size();
 	}
 
 	boolean isFree(Type type, LocalDate arrival, LocalDate departure) {
-		if (!type.equals(this.type)) {
+		if (!type.equals(getType())) {
 			return false;
 		}
 
