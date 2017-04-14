@@ -5,13 +5,12 @@ import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 public class Account extends Account_Base {
 	private static int counter = 0;
 
-	private final Bank bank;
 	private final Client client;
 
 	public Account(Bank bank, Client client) {
 		checkArguments(bank, client);
 
-		this.bank = bank;
+		setBank(bank);
 		String IBAN = bank.getCode() + Integer.toString(++Account.counter);
 		setIBAN(IBAN);
 		this.client = client;
