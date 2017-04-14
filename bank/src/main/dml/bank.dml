@@ -7,6 +7,10 @@ class Account {
 
 }
 
+class Client{ 
+
+}
+
 relation DomainRootHasBankApplication {
 	.pt.ist.fenixframework.DomainRoot playsRole root {
 		multiplicity 1..1;
@@ -15,3 +19,4 @@ relation DomainRootHasBankApplication {
 		multiplicity 0..*;
 	}
 }
+
