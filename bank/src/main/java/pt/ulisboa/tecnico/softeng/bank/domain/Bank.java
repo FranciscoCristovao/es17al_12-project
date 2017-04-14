@@ -65,9 +65,9 @@ public class Bank extends Bank_Base {
 		return this.clients.size();
 	}
 
-	void addAccount(Account account) {
+	/*void addAccount(Account account) {
 		this.accounts.add(account);
-	}
+	}*/
 
 	boolean hasClient(Client client) {
 		return this.clients.contains(client);
