@@ -18,6 +18,15 @@ class Activity{
 
 }
 
+relation ActivityProviderHasActivities {
+	ActivityProvider playsRole activityProvider {
+		multiplicity 1..1;
+	}
+	Activity playsRole activity {
+		multiplicity 0..*;
+	}
+}
+
 class Booking{
 
 

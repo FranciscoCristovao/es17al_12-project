@@ -29,7 +29,7 @@ public class Activity extends Activity_Base{
 		this.maxAge = maxAge;
 		this.capacity = capacity;
 
-		provider.addActivity(this);
+		setActivityProvider(provider);
 	}
 	
 	
@@ -105,7 +105,7 @@ public class Activity extends Activity_Base{
 	}
 	
 	public void delete() {
-		
+		setActivityProvider(null);
 		deleteDomainObject();
 	}
 

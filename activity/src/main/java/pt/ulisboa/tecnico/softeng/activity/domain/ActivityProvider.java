@@ -16,7 +16,6 @@ public class ActivityProvider extends ActivityProvider_Base {
 
 	private final String name;
 	private final String code;
-	private final Set<Activity> activities = new HashSet<>();
 
 	public ActivityProvider(String code, String name) {
 		checkArguments(code, name);
@@ -57,23 +56,24 @@ public class ActivityProvider extends ActivityProvider_Base {
 	}
 
 	int getNumberOfActivities() {
-		return this.activities.size();
+		return this.getActivitySet().size();
 	}
 
-	void addActivity(Activity activity) {
-		this.activities.add(activity);
+	@Override
+	public void addActivity(Activity activity) {
+		super.addActivity(activity);
 	}
 
 	public List<ActivityOffer> findOffer(LocalDate begin, LocalDate end, int age) {
 		List<ActivityOffer> result = new ArrayList<>();
-		for (Activity activity : this.activities) {
+		for (Activity activity : this.getActivitySet()) {
 			result.addAll(activity.getOffers(begin, end, age));
 		}
 		return result;
 	}
 
 	private Booking getBooking(String reference) {
-		for (Activity activity : this.activities) {
+		for (Activity activity : this.getActivitySet()) {
 			Booking booking = activity.getBooking(reference);
 			if (booking != null) {
 				return booking;
@@ -113,7 +113,7 @@ public class ActivityProvider extends ActivityProvider_Base {
 
 	public static ActivityReservationData getActivityReservationData(String reference) {
 		for (ActivityProvider provider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
-			for (Activity activity : provider.activities) {
+			for (Activity activity : provider.getActivitySet()) {
 				for (ActivityOffer offer : activity.getOffers()) {
 					Booking booking = offer.getBooking(reference);
 					if (booking != null) {
