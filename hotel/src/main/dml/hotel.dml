@@ -13,7 +13,13 @@ relation DomainRootHasHotelApplication {
 		multiplicity 0..*;
 	}
 }
-
+class Booking{
+	String reference;
+	String cancellation;
+	LocalDate cancellationDate;
+	LocalDate arrival;
+	LocalDate departure;
+}
 class Room{
 	String number;
 	RoomType type;
