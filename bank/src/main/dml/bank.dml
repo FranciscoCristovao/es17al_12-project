@@ -20,3 +20,11 @@ relation DomainRootHasBankApplication {
 	}
 }
 
+relation BankHasClients{
+	Bank playsRole bank{
+	multiplicity 1..1;
+	}
+	Client playsRole client{
+	multiplicity 0..*;
+	}
+}

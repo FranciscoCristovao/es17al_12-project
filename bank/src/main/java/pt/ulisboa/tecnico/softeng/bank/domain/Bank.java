@@ -15,7 +15,6 @@ public class Bank extends Bank_Base {
 	private final String name;
 	private final String code;
 	private final Set<Account> accounts = new HashSet<>();
-	private final Set<Client> clients = new HashSet<>();
 	private final List<Operation> log = new ArrayList<>();
 
 	public Bank(String name, String code) {
@@ -62,7 +61,7 @@ public class Bank extends Bank_Base {
 	}
 
 	int getNumberOfClients() {
-		return this.clients.size();
+		return this.getClientSet().size();
 	}
 
 	void addAccount(Account account) {
@@ -70,13 +69,10 @@ public class Bank extends Bank_Base {
 	}
 
 	boolean hasClient(Client client) {
-		return this.clients.contains(client);
+		return this.getClientSet().contains(client);
 	}
 
-	void addClient(Client client) {
-		this.clients.add(client);
-	}
-
+	
 	void addLog(Operation operation) {
 		this.log.add(operation);
 	}
