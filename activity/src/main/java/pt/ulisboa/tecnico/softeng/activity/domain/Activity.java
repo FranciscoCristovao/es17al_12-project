@@ -13,21 +13,14 @@ public class Activity extends Activity_Base{
 
 	private static int counter = 0;
 
-	private final String name;
-	private final String code;
-	private final int minAge;
-	private final int maxAge;
-	private final int capacity;
-	//private final Set<ActivityOffer> offers = new HashSet<>();
-
 	public Activity(ActivityProvider provider, String name, int minAge, int maxAge, int capacity) {
 		checkArguments(provider, name, minAge, maxAge, capacity);
 
-		this.code = provider.getCode() + Integer.toString(++Activity.counter);
-		this.name = name;
-		this.minAge = minAge;
-		this.maxAge = maxAge;
-		this.capacity = capacity;
+		setCode(provider.getCode() + Integer.toString(++Activity.counter));
+		setName(name);
+		setMinAge(minAge);
+		setMaxAge(maxAge);
+		setCapacity(capacity);
 
 		setActivityProvider(provider);
 	}
@@ -47,32 +40,13 @@ public class Activity extends Activity_Base{
 		}
 
 	}
-
-	String getName() {
-		return this.name;
-	}
-
-	String getCode() {
-		return this.code;
-	}
-
-	int getMinAge() {
-		return this.minAge;
-	}
-
-	int getMaxAge() {
-		return this.maxAge;
-	}
-
-	int getCapacity() {
-		return this.capacity;
-	}
 	
 	/* Can be used if we need to add verifications 
 	@Override
 	public void addActivityOffer(ActivityOffer offer) {
 	   super.addActivityOffer(offer);
 	}*/
+
 
 	int getNumberOfOffers() {
 		return this.getActivityOfferSet().size();
@@ -89,7 +63,7 @@ public class Activity extends Activity_Base{
 	}
 
 	boolean matchAge(int age) {
-		return age >= this.minAge && age <= this.maxAge;
+		return age >= this.getMinAge() && age <= this.getMaxAge();
 	}
 
 	public Booking getBooking(String reference) {
@@ -102,9 +76,6 @@ public class Activity extends Activity_Base{
 		return null;
 	}
 
-	public Set<ActivityOffer> getOffers() {
-		return this.getActivityOfferSet();
-	}
 	
 	public void delete() {
 		setActivityProvider(null);

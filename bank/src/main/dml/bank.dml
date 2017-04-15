@@ -4,10 +4,15 @@ class Bank {
 }
 
 class Account { 
-
+	String IBAN;
+	int balance;
 }
 
 class Client{ 
+
+}
+
+class Operation{
 
 }
 
@@ -16,6 +21,25 @@ relation DomainRootHasBankApplication {
 		multiplicity 1..1;
 	}
 	Bank playsRole bank {
+		multiplicity 0..*;
+	}
+}
+
+
+relation BankHasClients{
+	Bank playsRole bank{
+	multiplicity 1..1;
+	}
+	Client playsRole client{
+	multiplicity 0..*;
+	}
+}
+
+relation BankHasAccount {
+	Bank playsRole bank {
+		multiplicity 1..1;
+	}
+	Account playsRole account {
 		multiplicity 0..*;
 	}
 }

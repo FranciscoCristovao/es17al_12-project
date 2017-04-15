@@ -30,5 +30,11 @@ public class Client extends Client_Base {
 	public String getID() {
 		return this.ID;
 	}
-
+	
+	public void delete() {
+		setBank(null);
+		deleteDomainObject();
+	}
+	
+	
 }

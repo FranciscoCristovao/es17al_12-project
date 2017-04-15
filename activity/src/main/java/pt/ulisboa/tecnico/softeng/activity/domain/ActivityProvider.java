@@ -1,9 +1,7 @@
 package pt.ulisboa.tecnico.softeng.activity.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.joda.time.LocalDate;
 
@@ -114,7 +112,7 @@ public class ActivityProvider extends ActivityProvider_Base {
 	public static ActivityReservationData getActivityReservationData(String reference) {
 		for (ActivityProvider provider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
 			for (Activity activity : provider.getActivitySet()) {
-				for (ActivityOffer offer : activity.getOffers()) {
+				for (ActivityOffer offer : activity.getActivityOfferSet()) {
 					Booking booking = offer.getBooking(reference);
 					if (booking != null) {
 						return new ActivityReservationData(provider, offer, booking);

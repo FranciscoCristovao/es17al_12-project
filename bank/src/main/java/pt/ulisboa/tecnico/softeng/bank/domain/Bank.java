@@ -1,9 +1,7 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
@@ -14,8 +12,7 @@ public class Bank extends Bank_Base {
 
 	private final String name;
 	private final String code;
-	private final Set<Account> accounts = new HashSet<>();
-	private final Set<Client> clients = new HashSet<>();
+
 	private final List<Operation> log = new ArrayList<>();
 
 	public Bank(String name, String code) {
@@ -28,8 +25,11 @@ public class Bank extends Bank_Base {
 	}
 
 	public void delete() {
+		for (Client client: this.getClientSet()){
+			client.delete();
+		}
+		
 		setRoot(null);
-
 		deleteDomainObject();
 	}
 
@@ -57,26 +57,25 @@ public class Bank extends Bank_Base {
 		return this.code;
 	}
 
+
 	int getNumberOfAccounts() {
-		return this.accounts.size();
+		return this.getAccountSet().size();
 	}
 
 	int getNumberOfClients() {
-		return this.clients.size();
+		return this.getClientSet().size();
 	}
-
-	void addAccount(Account account) {
-		this.accounts.add(account);
+	
+	@Override
+	public void addAccount(Account account) {
+		super.addAccount(account);
 	}
 
 	boolean hasClient(Client client) {
-		return this.clients.contains(client);
+		return this.getClientSet().contains(client);
 	}
 
-	void addClient(Client client) {
-		this.clients.add(client);
-	}
-
+	
 	void addLog(Operation operation) {
 		this.log.add(operation);
 	}
@@ -86,7 +85,7 @@ public class Bank extends Bank_Base {
 			throw new BankException();
 		}
 
-		for (Account account : this.accounts) {
+		for (Account account : this.getAccountSet()) {
 			if (account.getIBAN().equals(IBAN)) {
 				return account;
 			}
@@ -108,6 +107,15 @@ public class Bank extends Bank_Base {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getCode().equals(code)) {
 				return bank;
+			}
+		}
+		return null;
+	}
+	
+	public Client getClientByID(String clientID) {
+		for (Client client: this.getClientSet()) {
+			if (client.getID().equals(clientID)) {
+				return client;
 			}
 		}
 		return null;
