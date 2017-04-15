@@ -5,7 +5,8 @@ import java.util.Set;
 
 import org.joda.time.LocalDate;
 
-
+//import pt.ist.fenixframework.FenixFramework;
+//import pt.ulisboa.tecnico.softeng.activity.dataobjects.ActivityReservationData;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
 public class ActivityOffer extends ActivityOffer_Base{
@@ -21,11 +22,11 @@ public class ActivityOffer extends ActivityOffer_Base{
 		this.end = end;
 		this.capacity = activity.getCapacity();
 
-		activity.addOffer(this);
+		setActivity(activity);
 	}
 	
 	public void delete() {
-		/*TODO: set root a null*/
+		setActivity(null);
 		deleteDomainObject();
 	}
 

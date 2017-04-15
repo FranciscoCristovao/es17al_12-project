@@ -18,7 +18,7 @@ public class Activity extends Activity_Base{
 	private final int minAge;
 	private final int maxAge;
 	private final int capacity;
-	private final Set<ActivityOffer> offers = new HashSet<>();
+	//private final Set<ActivityOffer> offers = new HashSet<>();
 
 	public Activity(ActivityProvider provider, String name, int minAge, int maxAge, int capacity) {
 		checkArguments(provider, name, minAge, maxAge, capacity);
@@ -67,18 +67,20 @@ public class Activity extends Activity_Base{
 	int getCapacity() {
 		return this.capacity;
 	}
+	
+	/* Can be used if we need to add verifications 
+	@Override
+	public void addActivityOffer(ActivityOffer offer) {
+	   super.addActivityOffer(offer);
+	}*/
 
 	int getNumberOfOffers() {
-		return this.offers.size();
+		return this.getActivityOfferSet().size();
 	}
-
-	void addOffer(ActivityOffer offer) {
-		this.offers.add(offer);
-	}
-
+	
 	Set<ActivityOffer> getOffers(LocalDate begin, LocalDate end, int age) {
 		Set<ActivityOffer> result = new HashSet<>();
-		for (ActivityOffer offer : this.offers) {
+		for (ActivityOffer offer : this.getActivityOfferSet()) {
 			if (matchAge(age) && offer.available(begin, end)) {
 				result.add(offer);
 			}
@@ -91,7 +93,7 @@ public class Activity extends Activity_Base{
 	}
 
 	public Booking getBooking(String reference) {
-		for (ActivityOffer offer : this.offers) {
+		for (ActivityOffer offer : this.getActivityOfferSet()) {
 			Booking booking = offer.getBooking(reference);
 			if (booking != null) {
 				return booking;
@@ -101,11 +103,15 @@ public class Activity extends Activity_Base{
 	}
 
 	public Set<ActivityOffer> getOffers() {
-		return this.offers;
+		return this.getActivityOfferSet();
 	}
 	
 	public void delete() {
 		setActivityProvider(null);
+		
+		for(ActivityOffer offer : this.getActivityOfferSet()){
+			offer.delete();
+		}
 		deleteDomainObject();
 	}
 
