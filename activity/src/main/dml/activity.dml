@@ -39,6 +39,9 @@ class Booking{
 
 
 class ActivityOffer{
+	LocalDate begin;
+	LocalDate end;
+	int capacity;
 }
 
 relation ActivityHasActivityOffer{
