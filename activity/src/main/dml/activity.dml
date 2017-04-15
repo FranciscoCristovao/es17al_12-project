@@ -14,8 +14,11 @@ relation DomainRootHasActivityProvider {
 }
 
 class Activity{
-
-
+	String name;
+	String code;
+	int minAge;
+	int maxAge;
+	int capacity;
 }
 
 relation ActivityProviderHasActivities {
