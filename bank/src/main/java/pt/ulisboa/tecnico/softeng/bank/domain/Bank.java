@@ -1,9 +1,7 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
@@ -27,8 +25,11 @@ public class Bank extends Bank_Base {
 	}
 
 	public void delete() {
+		for (Client client: this.getClientSet()){
+			client.delete();
+		}
+		
 		setRoot(null);
-
 		deleteDomainObject();
 	}
 
@@ -106,6 +107,15 @@ public class Bank extends Bank_Base {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getCode().equals(code)) {
 				return bank;
+			}
+		}
+		return null;
+	}
+	
+	public Client getClientByID(String clientID) {
+		for (Client client: this.getClientSet()) {
+			if (client.getID().equals(clientID)) {
+				return client;
 			}
 		}
 		return null;
