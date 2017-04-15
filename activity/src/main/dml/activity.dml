@@ -1,7 +1,8 @@
 package pt.ulisboa.tecnico.softeng.activity.domain;
 
 class ActivityProvider{
-
+	String name;
+	String code;
 }
 
 relation DomainRootHasActivityProvider {

@@ -12,14 +12,11 @@ import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 public class ActivityProvider extends ActivityProvider_Base {
 	static final int CODE_SIZE = 6;
 
-	private final String name;
-	private final String code;
-
 	public ActivityProvider(String code, String name) {
 		checkArguments(code, name);
 
-		this.code = code;
-		this.name = name;
+		this.setCode(code);
+		this.setName(name);
 
 		FenixFramework.getDomainRoot().addActivityProvider(this);
 	}
@@ -45,13 +42,6 @@ public class ActivityProvider extends ActivityProvider_Base {
 		}
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
-	public String getCode() {
-		return this.code;
-	}
 
 	int getNumberOfActivities() {
 		return this.getActivitySet().size();
