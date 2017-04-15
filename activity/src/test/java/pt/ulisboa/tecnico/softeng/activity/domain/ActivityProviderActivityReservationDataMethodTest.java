@@ -44,10 +44,10 @@ public class ActivityProviderActivityReservationDataMethodTest extends RollbackT
 	@Test
 	public void successCancelled() {
 		this.booking.cancel();
-		ActivityReservationData data = ActivityProvider.getActivityReservationData(this.booking.getCancellation());
+		ActivityReservationData data = ActivityProvider.getActivityReservationData(this.booking.getCancel());
 
 		assertEquals(this.booking.getReference(), data.getReference());
-		assertEquals(this.booking.getCancellation(), data.getCancellation());
+		assertEquals(this.booking.getCancel(), data.getCancellation());
 		assertEquals(NAME, data.getName());
 		assertEquals(CODE, data.getCode());
 		assertEquals(this.begin, data.getBegin());

@@ -29,7 +29,7 @@ public class ActivityProviderCancelReservationMethodTest extends RollbackTestAbs
 		String cancel = ActivityProvider.cancelReservation(booking.getReference());
 
 		assertTrue(booking.isCancelled());
-		assertEquals(cancel, booking.getCancellation());
+		assertEquals(cancel, booking.getCancel());
 	}
 
 	@Test(expected = ActivityException.class)

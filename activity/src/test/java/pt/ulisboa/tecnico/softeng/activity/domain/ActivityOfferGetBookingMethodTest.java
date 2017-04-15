@@ -33,7 +33,7 @@ public class ActivityOfferGetBookingMethodTest extends RollbackTestAbstractClass
 		Booking booking = new Booking(this.provider, this.offer);
 		booking.cancel();
 
-		assertEquals(booking, this.offer.getBooking(booking.getCancellation()));
+		assertEquals(booking, this.offer.getBooking(booking.getCancel()));
 	}
 
 	@Test

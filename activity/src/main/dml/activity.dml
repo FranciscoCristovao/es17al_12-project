@@ -31,8 +31,9 @@ relation ActivityProviderHasActivities {
 }
 
 class Booking{
-
-
+	String reference;
+	String cancel;
+	LocalDate cancellationDate;
 }
 
 
