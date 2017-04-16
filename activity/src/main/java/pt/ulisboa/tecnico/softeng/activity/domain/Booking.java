@@ -5,6 +5,7 @@ import org.joda.time.LocalDate;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
 public class Booking extends Booking_Base{
+	
 	private static int counter = 0;
 
 
@@ -34,7 +35,7 @@ public class Booking extends Booking_Base{
 	}
 	
 	public void delete() {
-		//meter Offer a null
+		setActivityOffer(null);
 		deleteDomainObject();
 	}
 
