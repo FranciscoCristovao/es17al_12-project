@@ -31,13 +31,6 @@ relation ActivityProviderHasActivities {
 	}
 }
 
-class Booking{
-	String reference;
-	String cancel;
-	LocalDate cancellationDate;
-}
-
-
 class ActivityOffer{
 	LocalDate begin;
 	LocalDate end;
@@ -53,3 +46,19 @@ relation ActivityHasActivityOffer{
 		multiplicity 0..*;
 	}
 }
+
+class Booking{
+	String reference;
+	String cancel;
+	LocalDate cancellationDate;
+}
+
+relation ActivityOfferHasBookings {
+	ActivityOffer playsRole activityOffer {
+		multiplicity 1..1;
+	}
+	Booking playsRole booking {
+		multiplicity 0..*;
+	}
+}
+
