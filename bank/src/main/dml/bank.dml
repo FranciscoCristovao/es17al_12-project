@@ -13,7 +13,9 @@ class Client{
 }
 
 class Operation{
-
+	String reference;
+	int value;
+	DateTime time;
 }
 
 relation DomainRootHasBankApplication {
