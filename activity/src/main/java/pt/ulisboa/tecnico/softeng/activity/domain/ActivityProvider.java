@@ -23,6 +23,10 @@ public class ActivityProvider extends ActivityProvider_Base {
 	
 	public void delete() {
 		setRoot(null);
+		
+		for(Activity activity : this.getActivitySet()){
+			activity.delete();
+		}
 		deleteDomainObject();
 	}
 
@@ -47,10 +51,6 @@ public class ActivityProvider extends ActivityProvider_Base {
 		return this.getActivitySet().size();
 	}
 
-	@Override
-	public void addActivity(Activity activity) {
-		super.addActivity(activity);
-	}
 
 	public List<ActivityOffer> findOffer(LocalDate begin, LocalDate end, int age) {
 		List<ActivityOffer> result = new ArrayList<>();
