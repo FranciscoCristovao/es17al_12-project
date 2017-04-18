@@ -3,6 +3,8 @@ package pt.ulisboa.tecnico.softeng.hotel.domain;
 enum pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type as RoomType;
 
 class Hotel {
+	String code;
+	String name;
 }
 
 relation DomainRootHasHotelApplication {
