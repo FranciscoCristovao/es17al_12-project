@@ -5,7 +5,6 @@ import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 public class Account extends Account_Base {
 	private static int counter = 0;
 
-	private final Client client;
 
 	public Account(Bank bank, Client client) {
 		checkArguments(bank, client);
@@ -13,7 +12,7 @@ public class Account extends Account_Base {
 		setBank(bank);
 		String IBAN = bank.getCode() + Integer.toString(++Account.counter);
 		setIBAN(IBAN);
-		this.client = client;
+		setClient(client);
 		setBalance(0);
 
 		bank.addAccount(this);
@@ -30,11 +29,6 @@ public class Account extends Account_Base {
 
 	}
 
-
-
-	public Client getClient() {
-		return this.client;
-	}
 	
 
 	public String deposit(int amount) {
@@ -59,7 +53,9 @@ public class Account extends Account_Base {
 	}
 	
 	public void delete() {
-		 deleteDomainObject();
+		setBank(null);
+		setClient(null);
+		deleteDomainObject();
 	}
 
 }
