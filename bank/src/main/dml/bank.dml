@@ -1,6 +1,8 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
 
 class Bank {
+	String name;
+	String code;
 }
 
 class Account { 
@@ -54,4 +56,13 @@ relation BankHasOperation{
 		multiplicity 0..*;
 	}
 
+}
+
+relation ClientHasAccount{
+	Client playsRole client{
+	multiplicity 1..1;
+	}
+	Account playsRole account{
+	multiplicity 0..*;
+	}
 }
