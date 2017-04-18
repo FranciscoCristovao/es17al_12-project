@@ -39,6 +39,11 @@ public class Hotel extends Hotel_Base{
 			}
 		}
 	}
+	
+	public void delete() {
+		setRoot(null);
+		deleteDomainObject();
+	}
 
 	public Room hasVacancy(Room.Type type, LocalDate arrival, LocalDate departure) {
 		if (type == null || arrival == null || departure == null) {
@@ -90,6 +95,15 @@ public class Hotel extends Hotel_Base{
 			Booking booking = room.getBooking(reference);
 			if (booking != null) {
 				return booking;
+			}
+		}
+		return null;
+	}
+	
+	public static Hotel getHotelByCode(String code) {
+		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
+			if (hotel.getCode().equals(code)) {
+				return hotel;
 			}
 		}
 		return null;
