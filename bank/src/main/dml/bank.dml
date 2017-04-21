@@ -11,7 +11,8 @@ class Account {
 }
 
 class Client{ 
-
+	String name;
+	String ID;
 }
 
 class Operation{

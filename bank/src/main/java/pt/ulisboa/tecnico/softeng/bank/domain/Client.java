@@ -5,15 +5,11 @@ import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 public class Client extends Client_Base {
 	private static int counter = 0;
 
-	private final String name;
-	private final String ID;
-
+	
 	public Client(Bank bank, String name) {
 		checkArguments(bank, name);
-
-		this.ID = Integer.toString(++Client.counter);
-		this.name = name;
-
+		setID(Integer.toString(++Client.counter));
+		setName(name);
 		bank.addClient(this);
 	}
 
@@ -23,14 +19,6 @@ public class Client extends Client_Base {
 		}
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
-	public String getID() {
-		return this.ID;
-	}
-	
 	public void delete() {
 		setBank(null);
 		deleteDomainObject();
