@@ -14,7 +14,7 @@ public class BankPersistenceTest {
 	private static final String BANK_NAME = "Money";
 	private static final String BANK_CODE = "BK01";
 	private static final String CLIENT_NAME = "Kelson";
-	/*private String clientID*/
+	private String clientID;
 	@Test
 	public void success() {
 		atomicProcess();
@@ -24,7 +24,9 @@ public class BankPersistenceTest {
 	@Atomic(mode = TxMode.WRITE)
 	public void atomicProcess() {
 		Bank bank =new Bank(BANK_NAME, BANK_CODE);
-		/*clientID = */new Client(bank,CLIENT_NAME)/*.getID()*/;
+		Client client = new Client(bank,CLIENT_NAME);
+		clientID = client.getID();
+		new Account(bank, client);
 	}
 
 	@Atomic(mode = TxMode.READ)
@@ -41,9 +43,21 @@ public class BankPersistenceTest {
 		
 		Assert.assertFalse(client==null);
 		assertEquals(bank,client.getBank());
-		/*assertEquals(clientID,client.getID())*/
+		assertEquals(clientID,client.getID());
 		Assert.assertTrue(client.getID().length()>=1);
 		assertEquals(CLIENT_NAME,client.getName());
+		
+		Account account = null;
+		for(Account a: bank.getAccountSet()){
+			account = a;
+		}
+		
+		Assert.assertNotNull(account);
+		assertEquals(bank,account.getBank());
+		assertEquals(client,account.getClient());
+		Assert.assertTrue(account.getIBAN().startsWith(BANK_CODE));
+		Assert.assertTrue(account.getIBAN().substring(3).length()>=1);
+		Assert.assertEquals(0, account.getBalance());
 		
 	}
 
