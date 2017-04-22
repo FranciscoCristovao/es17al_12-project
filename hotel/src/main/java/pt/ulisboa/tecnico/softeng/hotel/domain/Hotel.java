@@ -41,6 +41,10 @@ public class Hotel extends Hotel_Base{
 	}
 	
 	public void delete() {
+		
+		for (Room r: this.getRoomSet()){
+			r.delete();
+		}
 		setRoot(null);
 		deleteDomainObject();
 	}
@@ -71,7 +75,7 @@ public class Hotel extends Hotel_Base{
 	
 	@Override
 	public void addRoom(Room room) {
-		if (hasRoom(room.getNumber())) {
+		if (room != null && hasRoom(room.getNumber())) {
 			throw new HotelException();
 		}
 		super.addRoom(room);

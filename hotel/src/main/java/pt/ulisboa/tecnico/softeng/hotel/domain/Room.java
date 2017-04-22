@@ -36,7 +36,12 @@ public class Room extends Room_Base{
 	
 	@Override
 	public void setHotel(Hotel h){
-		h.addRoom(this);
+		if (h==null){
+			super.setHotel(null);
+		}
+		else{
+			h.addRoom(this);
+		}
 	}
 
 	int getNumberOfBookings() {
@@ -83,6 +88,7 @@ public class Room extends Room_Base{
 	}
 	
 	public void delete(){
+		
 		setHotel(null);
 		deleteDomainObject();
 	}
