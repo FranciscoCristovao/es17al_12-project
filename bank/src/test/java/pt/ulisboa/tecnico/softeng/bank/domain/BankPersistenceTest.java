@@ -9,6 +9,7 @@ import org.junit.Test;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ist.fenixframework.FenixFramework;
+import pt.ulisboa.tecnico.softeng.bank.domain.Operation.Type;
 
 public class BankPersistenceTest {
 	private static final String BANK_NAME = "Money";
@@ -26,7 +27,8 @@ public class BankPersistenceTest {
 		Bank bank =new Bank(BANK_NAME, BANK_CODE);
 		Client client = new Client(bank,CLIENT_NAME);
 		clientID = client.getID();
-		new Account(bank, client);
+		Account account = new Account(bank, client);
+		new Operation(Type.DEPOSIT, account, 100);
 	}
 
 	@Atomic(mode = TxMode.READ)
@@ -59,6 +61,20 @@ public class BankPersistenceTest {
 		Assert.assertTrue(account.getIBAN().substring(3).length()>=1);
 		Assert.assertEquals(0, account.getBalance());
 		
+		Operation operation = null;
+		for(Operation o: bank.getOperationSet()){
+			operation = o;
+		}
+		
+		Assert.assertNotNull(operation);
+		assertEquals(bank, operation.getBank());
+		assertEquals(account, operation.getAccount());
+		assertEquals(Type.DEPOSIT, operation.getType());
+		assertEquals(100, operation.getValue());
+		Assert.assertTrue(operation.getReference().startsWith(BANK_CODE));
+		Assert.assertTrue(operation.getReference().length() > operation.getBank().getCode().length());
+		Assert.assertNotNull(operation.getTime());
+
 	}
 
 	@After
