@@ -20,6 +20,9 @@ public class Bank extends Bank_Base {
 		for (Client client: this.getClientSet()){
 			client.delete();
 		}
+		for (Operation operation : this.getOperationSet()){
+			operation.delete();
+		}
 		
 		setRoot(null);
 		deleteDomainObject();
