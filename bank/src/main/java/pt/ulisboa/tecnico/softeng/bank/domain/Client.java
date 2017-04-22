@@ -21,6 +21,9 @@ public class Client extends Client_Base {
 
 	public void delete() {
 		setBank(null);
+		for(Account account: this.getAccountSet()){
+			account.delete();
+		}
 		deleteDomainObject();
 	}
 	
