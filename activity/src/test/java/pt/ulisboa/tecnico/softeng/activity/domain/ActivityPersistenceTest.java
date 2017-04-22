@@ -29,6 +29,7 @@ public class ActivityPersistenceTest {
 	private ActivityProvider provider;
 	private Activity activity;
 	private ActivityOffer offer;
+	private Booking booking;
 
 
 	
@@ -48,6 +49,8 @@ public class ActivityPersistenceTest {
 		provider = new ActivityProvider(PROVIDER_CODE,PROVIDER_NAME);
 		activity = new Activity(this.provider, PROVIDER_NAME, MIN_AGE, MAX_AGE, CAPACITY);
 		offer = new ActivityOffer(this.activity, this.begin, this.end);
+		booking = new Booking(this.provider,this.offer);
+		booking.cancel();
 	}
 
 	@Atomic(mode = TxMode.READ)
@@ -81,6 +84,17 @@ public class ActivityPersistenceTest {
 		assertEquals(PROVIDER_NAME, offer.getActivity().getName());
 		assertEquals(PROVIDER_CODE, offer.getActivity().getActivityProvider().getCode());
 		assertEquals(activity.getCode(), offer.getActivity().getCode());
+		
+		/*Booking*/
+		
+		assertEquals(PROVIDER_NAME, booking.getActivityOffer().getActivity().getName());
+		assertEquals(PROVIDER_CODE, offer.getActivity().getActivityProvider().getCode());
+		Assert.assertTrue(booking.getReference().startsWith(PROVIDER_CODE));
+		Assert.assertTrue(booking.getReference().length() > ActivityProvider.CODE_SIZE);
+		Assert.assertTrue(booking.getCancel().startsWith("CANCEL"+PROVIDER_CODE));
+		Assert.assertTrue(booking.getCancel().length() > ActivityProvider.CODE_SIZE);
+		Assert.assertEquals(new LocalDate(),booking.getCancellationDate());
+		
 		
 	}
 
