@@ -10,7 +10,7 @@ import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
-public class BulkRoomBooking {
+public class BulkRoomBooking extends BulkRoomBooking_Base {
 	public static final int MAX_HOTEL_EXCEPTIONS = 3;
 	public static final int MAX_REMOTE_ERRORS = 10;
 
