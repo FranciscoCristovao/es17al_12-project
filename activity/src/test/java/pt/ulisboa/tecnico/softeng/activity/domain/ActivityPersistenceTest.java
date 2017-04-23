@@ -26,7 +26,6 @@ public class ActivityPersistenceTest {
 	private static final int CAPACITY = 30;
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
-	private ActivityProvider provider;
 	private Activity activity;
 	private ActivityOffer offer;
 	private Booking booking;
@@ -46,10 +45,10 @@ public class ActivityPersistenceTest {
 
 	@Atomic(mode = TxMode.WRITE)
 	public void atomicProcess() {
-		provider = new ActivityProvider(PROVIDER_CODE,PROVIDER_NAME);
-		activity = new Activity(this.provider, PROVIDER_NAME, MIN_AGE, MAX_AGE, CAPACITY);
+		ActivityProvider activityProvider = new ActivityProvider(PROVIDER_CODE,PROVIDER_NAME);
+		activity = new Activity(activityProvider, PROVIDER_NAME, MIN_AGE, MAX_AGE, CAPACITY);
 		offer = new ActivityOffer(this.activity, this.begin, this.end);
-		booking = new Booking(this.provider,this.offer);
+		booking = new Booking(activityProvider,this.offer);
 		booking.cancel();
 	}
 
@@ -57,7 +56,7 @@ public class ActivityPersistenceTest {
 	public void atomicActivityAssert() {
 
 		Set<ActivityProvider> providers = FenixFramework.getDomainRoot().getActivityProviderSet();
-		provider = providers.iterator().next();
+		ActivityProvider provider = providers.iterator().next();
 		
 		Set<Activity> activities = provider.getActivitySet();
 		activity = activities.iterator().next();
