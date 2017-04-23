@@ -32,7 +32,9 @@ public class BulkRoomBookingGetReferenceMethodTest extends RollbackTestAbstractC
 	@Override
 	public void populate4Test() {
 		this.bulk = new BulkRoomBooking(NUMBER, arrival, departure);
-		this.bulk.getReferences().addAll(Arrays.asList(REF_1, REF_2));
+		//this.bulk.getReferences().addAll(Arrays.asList(REF_1, REF_2));
+		this.bulk.addReference(REF_1);
+		this.bulk.addReference(REF_2);
 	}
 
 	@Test
@@ -52,7 +54,7 @@ public class BulkRoomBookingGetReferenceMethodTest extends RollbackTestAbstractC
 
 		this.bulk.getReference(SINGLE);
 
-		assertEquals(1, this.bulk.getReferences().size());
+		assertEquals(1, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -72,7 +74,7 @@ public class BulkRoomBookingGetReferenceMethodTest extends RollbackTestAbstractC
 
 		this.bulk.getReference(DOUBLE);
 
-		assertEquals(1, this.bulk.getReferences().size());
+		assertEquals(1, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -87,7 +89,7 @@ public class BulkRoomBookingGetReferenceMethodTest extends RollbackTestAbstractC
 
 		assertNull(this.bulk.getReference(DOUBLE));
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -102,7 +104,7 @@ public class BulkRoomBookingGetReferenceMethodTest extends RollbackTestAbstractC
 
 		assertNull(this.bulk.getReference(DOUBLE));
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -120,7 +122,7 @@ public class BulkRoomBookingGetReferenceMethodTest extends RollbackTestAbstractC
 		}
 		assertNull(this.bulk.getReference(DOUBLE));
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -147,7 +149,7 @@ public class BulkRoomBookingGetReferenceMethodTest extends RollbackTestAbstractC
 		}
 		this.bulk.getReference(DOUBLE);
 
-		assertEquals(1, this.bulk.getReferences().size());
+		assertEquals(1, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -183,7 +185,7 @@ public class BulkRoomBookingGetReferenceMethodTest extends RollbackTestAbstractC
 			assertNull(this.bulk.getReference(DOUBLE));
 		}
 
-		assertEquals(1, this.bulk.getReferences().size());
+		assertEquals(1, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -213,7 +215,7 @@ public class BulkRoomBookingGetReferenceMethodTest extends RollbackTestAbstractC
 			assertNull(this.bulk.getReference(DOUBLE));
 		}
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 }
