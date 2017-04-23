@@ -81,12 +81,10 @@ public class ActivityPersistenceTest {
 		
 		/*Activity Offer*/
 		assertEquals(1,offers.size());
+		assertEquals(activity,offer.getActivity());
 		assertEquals(begin, offer.getBegin());
 		assertEquals(end, offer.getEnd());
-		assertEquals(CAPACITY, offer.getActivity().getCapacity());
-		assertEquals(PROVIDER_NAME, offer.getActivity().getName());
-		assertEquals(PROVIDER_CODE, offer.getActivity().getActivityProvider().getCode());
-		assertEquals(activity.getCode(), offer.getActivity().getCode());
+		assertEquals(CAPACITY, offer.getCapacity());
 		
 		/*Booking*/
 		assertEquals(1,bookings.size());
