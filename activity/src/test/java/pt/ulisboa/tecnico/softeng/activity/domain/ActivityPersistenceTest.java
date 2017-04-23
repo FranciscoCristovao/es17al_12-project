@@ -71,8 +71,7 @@ public class ActivityPersistenceTest {
 		
 		/*Activity*/
 		assertEquals(1,activities.size());
-		assertEquals(PROVIDER_NAME, activity.getActivityProvider().getName());
-		assertEquals(PROVIDER_CODE, activity.getActivityProvider().getCode());
+		assertEquals(provider, activity.getActivityProvider());
 		assertEquals(PROVIDER_NAME, activity.getName());
 		Assert.assertTrue(activity.getCode().startsWith(PROVIDER_CODE));
 		Assert.assertTrue(activity.getCode().length() > ActivityProvider.CODE_SIZE);
