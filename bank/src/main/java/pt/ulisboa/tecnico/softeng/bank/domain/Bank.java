@@ -17,6 +17,9 @@ public class Bank extends Bank_Base {
 	}
 
 	public void delete() {
+		for (Account account: this.getAccountSet()){
+			account.delete();
+		}
 		for (Client client: this.getClientSet()){
 			client.delete();
 		}
