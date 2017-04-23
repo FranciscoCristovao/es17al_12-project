@@ -3,6 +3,7 @@ package pt.ulisboa.tecnico.softeng.hotel.domain;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.joda.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,9 @@ import pt.ist.fenixframework.FenixFramework;
 public class HotelPersistenceTest {
 	private static final String HOTEL_CODE = "BK01234";
 	private static final String ROOM_NUMBER = "007";
+	private final LocalDate arrival = new LocalDate(2016, 12, 19);
+	private final LocalDate departure = new LocalDate(2016, 12, 21);
+
 
 	@Test
 	public void success() {
@@ -27,7 +31,9 @@ public class HotelPersistenceTest {
 	public void atomicProcess() {
 		Hotel hotel= new Hotel(HOTEL_CODE, "Money");
 		
-		new Room(hotel, "007", Room.Type.SINGLE);
+		Room room = new Room(hotel, "007", Room.Type.SINGLE);
+
+		room.reserve(Room.Type.SINGLE, arrival, departure);
 	}
 
 	@Atomic(mode = TxMode.READ)
@@ -45,6 +51,17 @@ public class HotelPersistenceTest {
 		assertEquals(ROOM_NUMBER, room.getNumber());
 		assertEquals(hotel, room.getHotel());
 		assertEquals(Room.Type.SINGLE, room.getType());
+		
+		
+		assertEquals(1, room.getBookingSet().size());
+		List<Booking> bookings = new ArrayList<>(room.getBookingSet());
+		Booking booking = bookings.get(0);
+		
+		assertNotNull(booking);
+		assertEquals(arrival, booking.getArrival());
+		assertEquals(departure, booking.getDeparture());
+		assertEquals(HOTEL_CODE + booking.getCounter(), booking.getReference());
+
 	}
 
 	@After

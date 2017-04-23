@@ -13,6 +13,10 @@ public class Booking extends Booking_Base{
 		setArrival(arrival);
 		setDeparture(departure);
 	}
+	
+	public int getCounter(){
+		return counter;
+	}
 
 	private void checkArguments(Hotel hotel, LocalDate arrival, LocalDate departure) {
 		if (hotel == null || arrival == null || departure == null) {
@@ -61,6 +65,11 @@ public class Booking extends Booking_Base{
 
 	public boolean isCancelled() {
 		return this.getCancellation() != null;
+	}
+	
+	public void delete(){
+		setRoom(null);
+		deleteDomainObject();
 	}
 
 }
