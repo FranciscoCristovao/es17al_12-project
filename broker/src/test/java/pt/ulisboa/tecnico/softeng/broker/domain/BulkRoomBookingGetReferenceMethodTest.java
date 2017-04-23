@@ -33,8 +33,10 @@ public class BulkRoomBookingGetReferenceMethodTest extends RollbackTestAbstractC
 	public void populate4Test() {
 		this.bulk = new BulkRoomBooking(NUMBER, arrival, departure);
 		//this.bulk.getReferences().addAll(Arrays.asList(REF_1, REF_2));
-		this.bulk.addReference(REF_1);
-		this.bulk.addReference(REF_2);
+		Reference r= new Reference(REF_1);
+		Reference r2= new Reference(REF_2);
+		this.bulk.addReference(r);
+		this.bulk.addReference(r2);
 	}
 
 	@Test
