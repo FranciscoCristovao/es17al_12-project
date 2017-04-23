@@ -26,7 +26,6 @@ public class ActivityPersistenceTest {
 	private static final int CAPACITY = 30;
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
-	private Activity activity;
 	private ActivityOffer offer;
 	private Booking booking;
 
@@ -46,8 +45,8 @@ public class ActivityPersistenceTest {
 	@Atomic(mode = TxMode.WRITE)
 	public void atomicProcess() {
 		ActivityProvider activityProvider = new ActivityProvider(PROVIDER_CODE,PROVIDER_NAME);
-		activity = new Activity(activityProvider, PROVIDER_NAME, MIN_AGE, MAX_AGE, CAPACITY);
-		offer = new ActivityOffer(this.activity, this.begin, this.end);
+		Activity activity = new Activity(activityProvider, PROVIDER_NAME, MIN_AGE, MAX_AGE, CAPACITY);
+		offer = new ActivityOffer(activity, this.begin, this.end);
 		booking = new Booking(activityProvider,this.offer);
 		booking.cancel();
 	}
@@ -59,7 +58,7 @@ public class ActivityPersistenceTest {
 		ActivityProvider provider = providers.iterator().next();
 		
 		Set<Activity> activities = provider.getActivitySet();
-		activity = activities.iterator().next();
+		Activity activity = activities.iterator().next();
 		
 		/*ActivityProvider */
 		assertEquals(1,providers.size());
