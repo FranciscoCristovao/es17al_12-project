@@ -27,6 +27,10 @@ public class BulkRoomBooking extends BulkRoomBooking_Base {
 		this.arrival = arrival;
 		this.departure = departure;
 	}
+	
+	public void delete() {
+		deleteDomainObject();
+	}
 
 	public Set<String> getReferences() {
 		return this.references;
