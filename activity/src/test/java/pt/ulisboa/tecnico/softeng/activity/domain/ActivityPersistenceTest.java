@@ -91,8 +91,7 @@ public class ActivityPersistenceTest {
 		
 		/*Booking*/
 		assertEquals(1,bookings.size());
-		assertEquals(PROVIDER_NAME, booking.getActivityOffer().getActivity().getName());
-		assertEquals(PROVIDER_CODE, offer.getActivity().getActivityProvider().getCode());
+		assertEquals(offer,booking.getActivityOffer());
 		Assert.assertTrue(booking.getReference().startsWith(PROVIDER_CODE));
 		Assert.assertTrue(booking.getReference().length() > ActivityProvider.CODE_SIZE);
 		Assert.assertTrue(booking.getCancel().startsWith("CANCEL"+PROVIDER_CODE));
