@@ -19,7 +19,7 @@ public class HotelPersistenceTest {
 	private static final String ROOM_NUMBER = "007";
 	private final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private final LocalDate departure = new LocalDate(2016, 12, 21);
-
+	private  String cancelledRef;
 
 	@Test
 	public void success() {
@@ -33,7 +33,8 @@ public class HotelPersistenceTest {
 		
 		Room room = new Room(hotel, "007", Room.Type.SINGLE);
 
-		room.reserve(Room.Type.SINGLE, arrival, departure);
+		Booking book = room.reserve(Room.Type.SINGLE, arrival, departure);
+		cancelledRef = book.cancel();
 	}
 
 	@Atomic(mode = TxMode.READ)
@@ -61,6 +62,9 @@ public class HotelPersistenceTest {
 		assertEquals(arrival, booking.getArrival());
 		assertEquals(departure, booking.getDeparture());
 		assertEquals(HOTEL_CODE + booking.getCounter(), booking.getReference());
+		assertEquals(this.cancelledRef, booking.getCancellation());
+		assertNotNull(booking.getCancellationDate());
+		
 
 	}
 

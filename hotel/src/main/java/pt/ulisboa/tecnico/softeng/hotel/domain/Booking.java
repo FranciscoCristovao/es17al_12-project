@@ -69,6 +69,7 @@ public class Booking extends Booking_Base{
 	
 	public void delete(){
 		setRoom(null);
+		Booking.counter--;
 		deleteDomainObject();
 	}
 
