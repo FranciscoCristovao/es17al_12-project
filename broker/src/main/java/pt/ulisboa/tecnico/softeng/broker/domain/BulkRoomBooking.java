@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.joda.time.LocalDate;
 
+import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
 import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
@@ -23,6 +24,8 @@ public class BulkRoomBooking extends BulkRoomBooking_Base {
 		setCancelled(false);
 	}
 	public void addReference(String reference){
+		if (reference == null)
+			throw new BrokerException();
 		Reference ref = new Reference(reference);
 		super.addReference(ref);
 	}

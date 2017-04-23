@@ -29,6 +29,10 @@ public class Broker extends Broker_Base {
 		for (Adventure adventure : getAdventureSet()) {
 			adventure.delete();
 		}
+		
+		for (BulkRoomBooking b : getBulkRoomBookingSet()) {
+			b.delete();
+		}
 
 		deleteDomainObject();
 	}
