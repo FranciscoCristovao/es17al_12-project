@@ -9,14 +9,13 @@ public class Operation extends Operation_Base{
 		DEPOSIT, WITHDRAW
 	};
 	private static int counter = 0;
-	private final Type type;	
 	private final Account account;
 	
 
 	public Operation(Type type, Account account, int value) {
 		checkArguments(type, account, value);
 		this.setReference(account.getBank().getCode() + Integer.toString(++Operation.counter));
-		this.type = type;
+		this.setType(type);
 		this.account = account;
 		this.setValue(value);
 		this.setTime(DateTime.now());
@@ -29,16 +28,12 @@ public class Operation extends Operation_Base{
 		}
 	}
 
-	public Type getType() {
-		return this.type;
-	}
-
 	public Account getAccount() {
 		return this.account;
 	}
 	
 	public String revert() {
-		switch (this.type) {
+		switch (this.getType()) {
 		case DEPOSIT:
 			return this.account.withdraw(this.getValue());
 		case WITHDRAW:
