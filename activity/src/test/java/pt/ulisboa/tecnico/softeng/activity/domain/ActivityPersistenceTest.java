@@ -26,7 +26,6 @@ public class ActivityPersistenceTest {
 	private static final int CAPACITY = 30;
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
-	private Booking booking;
 
 
 	
@@ -46,7 +45,7 @@ public class ActivityPersistenceTest {
 		ActivityProvider activityProvider = new ActivityProvider(PROVIDER_CODE,PROVIDER_NAME);
 		Activity activity = new Activity(activityProvider, PROVIDER_NAME, MIN_AGE, MAX_AGE, CAPACITY);
 		ActivityOffer activityOffer = new ActivityOffer(activity, this.begin, this.end);
-		booking = new Booking(activityProvider,activityOffer);
+		Booking booking = new Booking(activityProvider,activityOffer);
 		booking.cancel();
 	}
 
@@ -61,6 +60,9 @@ public class ActivityPersistenceTest {
 		
 		Set<ActivityOffer> offers = activity.getActivityOfferSet();
 		ActivityOffer offer = offers.iterator().next();
+		
+		Set<Booking> bookings = offer.getBookingSet();
+		Booking booking = bookings.iterator().next();
 		
 		/*ActivityProvider */
 		assertEquals(1,providers.size());
@@ -88,7 +90,7 @@ public class ActivityPersistenceTest {
 		assertEquals(activity.getCode(), offer.getActivity().getCode());
 		
 		/*Booking*/
-		
+		assertEquals(1,bookings.size());
 		assertEquals(PROVIDER_NAME, booking.getActivityOffer().getActivity().getName());
 		assertEquals(PROVIDER_CODE, offer.getActivity().getActivityProvider().getCode());
 		Assert.assertTrue(booking.getReference().startsWith(PROVIDER_CODE));
