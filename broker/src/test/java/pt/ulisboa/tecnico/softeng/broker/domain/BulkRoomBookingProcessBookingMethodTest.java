@@ -39,7 +39,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 
 		this.bulk.processBooking();
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		this.bulk.processBooking();
 		this.bulk.processBooking();
 
-		assertEquals(4, this.bulk.getReferences().size());
+		assertEquals(4, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		this.bulk.processBooking();
 		this.bulk.processBooking();
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -98,7 +98,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		this.bulk.processBooking();
 		this.bulk.processBooking();
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -116,7 +116,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		this.bulk.processBooking();
 		this.bulk.processBooking();
 
-		assertEquals(0, this.bulk.getReferences().size());
+		assertEquals(0, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -136,7 +136,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		this.bulk.processBooking();
 		this.bulk.processBooking();
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -167,7 +167,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		this.bulk.processBooking();
 		this.bulk.processBooking();
 
-		assertEquals(4, this.bulk.getReferences().size());
+		assertEquals(4, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -198,7 +198,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		this.bulk.processBooking();
 		this.bulk.processBooking();
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -217,7 +217,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		this.bulk.processBooking();
 		this.bulk.processBooking();
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -235,7 +235,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		}
 		this.bulk.processBooking();
 
-		assertEquals(0, this.bulk.getReferences().size());
+		assertEquals(0, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -256,7 +256,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		}
 		this.bulk.processBooking();
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -289,7 +289,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		}
 		this.bulk.processBooking();
 
-		assertEquals(4, this.bulk.getReferences().size());
+		assertEquals(4, this.bulk.getReferenceSet().size());
 	}
 
 	@Test
@@ -322,7 +322,7 @@ public class BulkRoomBookingProcessBookingMethodTest extends RollbackTestAbstrac
 		}
 		this.bulk.processBooking();
 
-		assertEquals(2, this.bulk.getReferences().size());
+		assertEquals(2, this.bulk.getReferenceSet().size());
 	}
 
 }
