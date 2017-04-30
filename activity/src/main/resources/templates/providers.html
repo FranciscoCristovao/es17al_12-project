@@ -14,6 +14,14 @@
 			Welcome to Activity Providers' Manager
 		</h2>
 		<br/>
+		<h3>Create Provider</h3>
+		<p class="text-danger" th:text="${error}">Error</p>
+		<form class="form-inline" th:action="@{/providers}" th:object="${provider}" method="post">
+			<label>Name: </label> <input class="form-control" type="text" th:field="*{name}" /> 
+			<label>Code: </label> <input class="form-control" type="text" th:field="*{code}" /> 
+			<input class="btn btn-primary" type="submit" value="Submit" />
+		</form>
+		<br/>
 		<h3>List of Providers</h3>
 		<table class="table table-striped">
 			<thead>
