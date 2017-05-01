@@ -10,7 +10,7 @@ To run tests execute: mvn clean install
 |      81888 | Pedro Caldeira	         | pedromigcc@gmail.com    |  PedroCaldeira | Activity  |
 |      81478 | Joana Godinho           | joana.mg0@hotmail.com   |  joanaGodinho  | Activity  |
 |      81505 | Francisco Cristóvão     | francristovao@gmail.com |  FranciscoCristovao | Hotel  |
-|            |                         |                         |                |           |
+|      81726 | José Mota               | zemariamota@hotmail.com |  zemota1       | Hotel     |
 |            |                         |                         |                |           |
 |            |                         |                         |                |           |
  
