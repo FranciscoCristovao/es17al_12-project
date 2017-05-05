@@ -1,15 +1,33 @@
 package pt.ulisboa.tecnico.softeng.bank.services.local;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
 import pt.ulisboa.tecnico.softeng.bank.domain.Operation;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
+import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData.CopyDepth;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankOperationData;
 
 public class BankInterface {
+	
+	@Atomic(mode = TxMode.READ)
+	public static List<BankData> getBanks() {
+		List<BankData> brokers = new ArrayList<>();
+		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
+			brokers.add(new BankData(bank, CopyDepth.SHALLOW));
+		}
+		return brokers;
+	}
 
+	
+	
+	
+	//old
 	@Atomic(mode = TxMode.WRITE)
 	public static String processPayment(String IBAN, int amount) {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
