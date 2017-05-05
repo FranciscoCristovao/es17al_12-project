@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.bank.services.local.BankInterface;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
@@ -20,9 +19,26 @@ public class BankController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String bankForm(Model model) {
 		logger.info("bankForm");
+		model.addAttribute("bank", new BankData());
 		model.addAttribute("banks", BankInterface.getBanks());
 		return "banks";
 	}
 	
+	@RequestMapping(method = RequestMethod.POST)
+	public String bankSubmit(Model model, @ModelAttribute BankData bank) {
+		logger.info("bankSubmit name:{}, code:{}", bank.getName(), bank.getCode());
+
+		try {
+			BankInterface.createBank(bank);
+		} catch (BankException be) {
+			be.printStackTrace();
+			model.addAttribute("error", "Error: it was not possible to create the bank");
+			model.addAttribute("bank", bank);
+			model.addAttribute("banks", BankInterface.getBanks());
+			return "banks";
+		}
+
+		return "redirect:/banks";
+	}
 
 }

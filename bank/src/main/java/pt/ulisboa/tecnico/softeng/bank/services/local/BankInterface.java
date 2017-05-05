@@ -24,6 +24,30 @@ public class BankInterface {
 		return brokers;
 	}
 
+	@Atomic(mode = TxMode.WRITE)
+	public static void createBank(BankData bankData) {
+		new Bank(bankData.getName(), bankData.getCode() );
+	}
+	//is this necessary???
+	@Atomic(mode = TxMode.READ)
+	public static BankData getBrokerDataByCode(String brokerCode, CopyDepth depth) {
+		Bank broker = getBankByCode(brokerCode);
+
+		if (broker != null) {
+			return new BankData(broker, depth);
+		} else {
+			return null;
+		}
+	}
+	//is this necessary????
+	private static Bank getBankByCode(String code) {
+		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
+			if (bank.getCode().equals(code)) {
+				return bank;
+			}
+		}
+		return null;
+	}
 	
 	
 	
