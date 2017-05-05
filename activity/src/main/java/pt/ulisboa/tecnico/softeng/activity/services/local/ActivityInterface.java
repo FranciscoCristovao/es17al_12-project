@@ -13,6 +13,7 @@ import pt.ulisboa.tecnico.softeng.activity.domain.ActivityOffer;
 import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 import pt.ulisboa.tecnico.softeng.activity.domain.Booking;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
+import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityReservationData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ProviderData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ProviderData.CopyDepth;
@@ -55,7 +56,7 @@ public class ActivityInterface {
 		throw new ActivityException();
 	}
 	
-	//PROVIDER
+	//PROVIDER-------------------------------------------------------------------------------------
 	@Atomic(mode = TxMode.READ)
 	public static List<ProviderData> getProviders(){
 		ArrayList<ProviderData> providers= new ArrayList<>();
@@ -64,6 +65,7 @@ public class ActivityInterface {
 		}
 		return providers;
 	}
+	
 	@Atomic(mode = TxMode.WRITE)
 	public static void createProvider(String code,String name) {
 		new ActivityProvider(code, name);
@@ -73,6 +75,30 @@ public class ActivityInterface {
 		new ActivityProvider(provider.getCode(),provider.getName());
 	}
 	
+	@Atomic(mode = TxMode.READ)
+	public static ProviderData getProviderDataByCode(String code){
+		ActivityProvider p = getProviderByCode(code);
+		if(p != null)
+			return new ProviderData(p, CopyDepth.ACTIVITIES);
+		else
+			return null;
+	}
+	
+	private static ActivityProvider getProviderByCode(String code) {
+		for (ActivityProvider p : FenixFramework.getDomainRoot().getActivityProviderSet()) {
+			if (p.getCode().equals(code)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	//ACTIVITY---------------------------------------------------------------------------------------------------------
+	@Atomic(mode = TxMode.WRITE)
+	public static void createActivity(String code, ActivityData activity) {
+		new Activity(getProviderByCode(code),activity.getName(),activity.getMinAge(),
+				activity.getMaxAge(), activity.getCapacity());
+	}
 	
 	
 	
