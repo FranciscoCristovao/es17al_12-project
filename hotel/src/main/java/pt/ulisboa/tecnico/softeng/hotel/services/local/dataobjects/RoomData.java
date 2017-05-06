@@ -76,8 +76,14 @@ public class RoomData {
 		this.type = type;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public List<RoomBookingData> getBookings(){
 		return bookings;
+=======
+	
+	public List<RoomBookingData> getRoomBookingData() {
+		return this.bookings;
+>>>>>>> 4592dd720aea2326d79269eed93a8fae51c94360
 =======
 	
 	public List<RoomBookingData> getRoomBookingData() {
