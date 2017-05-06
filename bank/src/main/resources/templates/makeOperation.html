@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Banks' Manager Welcome</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>
+			Welcome to operation manager of: Account <span th:text="${account.iban}">iban</span> and Client 
+			<span th:text="${client.name}">Name</span>
+		</h2>
+		<a class="btn btn-default pull-right" th:href="@{/banks/{code}/clients/{id}/accounts(code=${bank.code}, id=${client.name}) }">Accounts</a>
+		<br/>
+			<h3>Deposit Currency</h3>
+			<form class="form-inline" th:action="@{/banks/{code}/clients/{id}/accounts/{iban}/makeOperation(code=${bank.code},id=${client.ID}, iban=${account.iban})}" th:object="${operation}"
+				method="post">
+				<div class="form-group">
+					<label>Type: </label> <input class="form-control" type="text"
+						th:field="*{type}" />
+				</div>
+				<div class="form-group">
+					<label>Value: </label> <input class="form-control" type="text"
+						th:field="*{value}" />
+				</div>
+				<div class="form-group">
+					<input class="btn btn-primary" type="submit" value="Submit" />
+				</div>
+			</form>
+		<br/>
+		
+	</div>
+</body>
+</html>
