@@ -16,6 +16,7 @@
 			Welcome to account manager of: Hotel <span th:text="${hotel.name}">Name</span> and Room 
 			<span th:text="${room.name}">Name</span>
 		</h2>
+		<a class="btn btn-default pull-right" th:href="@{/hotels/{code}/rooms(code=${hotel.code})}">Rooms</a>
 		<br/>
 		
 		<br/>

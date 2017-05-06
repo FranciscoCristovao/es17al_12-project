@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import pt.ulisboa.tecnico.softeng.hotel.services.local.HotelInterface;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData;
-import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData.CopyDepth;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomBookingData;
 
 @Controller
 @RequestMapping(value = "/hotels/{code}/rooms/{number}")
@@ -23,14 +25,14 @@ public class BookingController {
 		logger.info("show booking from room number:{}", number);
 		
 		HotelData hotelData = HotelInterface.getHotelDataByCode(code, CopyDepth.ROOMS);
-		RoomData roomData = HotelInterface.getRoomDataByNumber(code, number, CopyDepth.BOOKINGS);
+		RoomData roomData = HotelInterface.getRoomDataByNumber(code, number, RoomData.CopyDepth.BOOKINGS);
 	
 	 
 	 	if(hotelData == null) {
 	 		
 	 		model.addAttribute("error", "Error: it does not exist a hotel with the code: " + code);			
 			model.addAttribute("hotel", new HotelData());
-			model.addAttribute("hotels", HotelInterface.getHotel());
+			model.addAttribute("hotels", HotelInterface.getHotels());
 
 			return "hotels";
 		}
@@ -39,24 +41,16 @@ public class BookingController {
 			
 			model.addAttribute("error", "Error: it does not exist a room with the number: " + number);			
 			model.addAttribute("room", new RoomData());
-			model.addAttribute("rooms", HotelInterface.getRooms());
+			model.addAttribute("hotel", hotelData);
 
 			return "rooms";
 		}
 		
 		else{
 			
-			model.addAttribute("booking", new roomBookingData());
+			model.addAttribute("booking", new RoomBookingData());
 			model.addAttribute("bookings", roomData.getBookings());
 			return "bookings";
 		}
-		
-		
-		
-		
-		
-		
-		return null;
 	}
-	
 }

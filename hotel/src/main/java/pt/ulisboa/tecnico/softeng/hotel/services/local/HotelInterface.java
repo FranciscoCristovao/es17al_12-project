@@ -111,14 +111,6 @@ public class HotelInterface {
 		return null;
 	}
 	
-	private static Hotel getHotelByCode(String code) {
-		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
-			if (hotel.getCode().equals(code)) {
-				return hotel;
-			}
-		}
-		return null;
-	}
 	
 	@Atomic(mode = TxMode.READ)
 	public static RoomData getRoomDataByNumber(String code, String number, RoomData.CopyDepth depth) {
