@@ -37,7 +37,7 @@
 					<tr th:each="client: ${bank.clients}">
 						<td th:text="${client.ID}">ID</td>
 	 					<td th:text="${client.name}">name</td>
-	 					<td><a th:href="@{/banks/{code}/clients/{id}/accounts(code=${bank.code}); id = ${client.id}}">Accounts</a></td>
+	 					<td><a th:href="@{/banks/{code}/clients/{id}/accounts(code=${bank.code},id=${client.ID})}">Accounts</a></td>
 					</tr>
 				</tbody>
 			</table>

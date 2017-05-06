@@ -13,7 +13,7 @@ public class ClientData {
 
 	private String name;
 	private String ID;
-	//private List<AccountData> accounts = new ArrayList<>();
+	private List<AccountData> accounts = new ArrayList<>();
 
 	public ClientData() {
 	}
@@ -23,7 +23,10 @@ public class ClientData {
 		this.ID=client.getID();
 		switch (depth) {
 		case ACCOUNTS:
-			//TODO
+			for(Account account : client.getAccountSet()){
+				this.accounts.add(0,new AccountData(account, AccountData.CopyDepth.SHALLOW));
+			}
+			break;
 		case SHALLOW:
 			break;
 		default:
@@ -46,6 +49,10 @@ public class ClientData {
 
 	public void setID(String id) {
 		this.ID = id;
+	}
+	
+	public List<AccountData> getAccounts(){
+		return this.accounts;
 	}
 
 

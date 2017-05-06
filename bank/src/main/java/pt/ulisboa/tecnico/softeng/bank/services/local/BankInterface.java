@@ -40,6 +40,20 @@ public class BankInterface {
 		return null;
 	}
 	
+	private static Client getClientById(String id, String code) {
+		for (Client client : getBankByCode(code).getClientSet()) {
+			if (client.getID().equals(id)) {
+				return client;
+			}
+		}
+		return null;
+	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static ClientData getClientDataById(String id, String code, ClientData.CopyDepth cd){
+		Client c = getClientById(id,code);
+		return new ClientData(c, cd);
+	}
 	
 	@Atomic(mode = TxMode.READ)
 	public static BankData getBankDataByCode(String code, BankData.CopyDepth cd) {
