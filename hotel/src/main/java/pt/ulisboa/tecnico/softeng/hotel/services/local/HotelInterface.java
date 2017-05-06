@@ -20,6 +20,12 @@ import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomBookingDa
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData;
 
 public class HotelInterface {
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void createHotel(HotelData hotelData) {
+		new Hotel(hotelData.getCode(), hotelData.getName() );
+	}
+	
 	@Atomic(mode = TxMode.WRITE)
 	public static void createRoom(String hotelCode, RoomData roomData) {
 		//new Room(getHotelByCode(hotelCode),roomData.getNumber(), roomData.getType());
