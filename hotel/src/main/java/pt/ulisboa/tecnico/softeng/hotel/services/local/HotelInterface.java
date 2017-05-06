@@ -14,9 +14,10 @@ import pt.ulisboa.tecnico.softeng.hotel.domain.Booking;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomBookingData;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData;
-import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData.CopyDepth;
 
 public class HotelInterface {
 
@@ -43,7 +44,7 @@ public class HotelInterface {
 	}
 	
 	@Atomic(mode = TxMode.READ)
-	public static List<RoomData> getRooms(Hotel hotel, CopyDepth depth) {	
+	public static List<RoomData> getRooms(Hotel hotel, RoomData.CopyDepth depth) {	
 		List<RoomData> listRooms = new ArrayList<>();
 		for (Room room : hotel.getRoomSet()) {
 			listRooms.add(new RoomData(room, hotel, depth));
@@ -92,6 +93,33 @@ public class HotelInterface {
 			}
 		}
 		return availableRooms;
+	}
+
+	@Atomic(mode = TxMode.READ)
+	public static List<HotelData> getHotels() {
+		List<HotelData> hotels = new ArrayList<>();
+		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
+			hotels.add(new HotelData(hotel, CopyDepth.SHALLOW));
+		}
+		return hotels;
+	}
+	
+	private static Hotel getHotelByCode(String code) {
+		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
+			if (hotel.getCode().equals(code)) {
+				return hotel;
+			}
+		}
+		return null;
+	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static HotelData getHotelDataByCode(String code, HotelData.CopyDepth copyDepth) {
+		Hotel hotel = getHotelByCode(code);
+		if (hotel == null) {
+			return null;
+		}
+		return new HotelData(hotel, copyDepth);
 	}
 
 }
