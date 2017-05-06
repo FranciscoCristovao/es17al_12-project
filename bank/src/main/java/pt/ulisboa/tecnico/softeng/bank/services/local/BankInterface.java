@@ -6,10 +6,12 @@ import java.util.List;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ist.fenixframework.FenixFramework;
+import pt.ulisboa.tecnico.softeng.bank.domain.Account;
 import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
 import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 import pt.ulisboa.tecnico.softeng.bank.domain.Operation;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.AccountData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData.CopyDepth;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankOperationData;
@@ -52,12 +54,18 @@ public class BankInterface {
 	@Atomic(mode = TxMode.READ)
 	public static ClientData getClientDataById(String id, String code, ClientData.CopyDepth cd){
 		Client c = getClientById(id,code);
+		if (c == null) {
+			return null;
+		}
 		return new ClientData(c, cd);
 	}
 	
 	@Atomic(mode = TxMode.READ)
 	public static BankData getBankDataByCode(String code, BankData.CopyDepth cd) {
 		Bank b = getBankByCode(code);
+		if (b == null) {
+			return null;
+		}
 		return new BankData(b, cd);
 	}
 	
@@ -107,4 +115,10 @@ public class BankInterface {
 		
 	}
 
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void createAccount(String bankCode, String clientId, AccountData accountData) {
+		new Account(getBankByCode(bankCode), getClientById(clientId, bankCode));
+	}
+	
 }
