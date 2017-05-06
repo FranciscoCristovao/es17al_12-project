@@ -6,17 +6,20 @@ import java.util.List;
 
 import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
 import pt.ulisboa.tecnico.softeng.bank.domain.Client;
+import pt.ulisboa.tecnico.softeng.bank.domain.Operation;
 
 
 public class BankData {
 	public static enum CopyDepth {
-		SHALLOW, CLIENTS
+		SHALLOW, CLIENTS, OPERATIONS
 	};
 	
 	private String name;
 	private String code;
 	private List<ClientData> clients = new ArrayList<>();
+	private List<BankOperationData> operations = new ArrayList<>();
 	
+
 	public BankData() {
 	}
 	
@@ -30,6 +33,10 @@ public class BankData {
 				this.clients.add(0, new ClientData(cli, ClientData.CopyDepth.SHALLOW));
 			}
 			break;
+		case OPERATIONS:
+			for (Operation op: bank.getOperationSet()){
+				this.operations.add(0, new BankOperationData(op));
+			}
 		case SHALLOW:
 			break;
 		default:
@@ -61,6 +68,16 @@ public class BankData {
 	public void setClients(List<ClientData> clients){
 		this.clients=clients;
 	}
+	
+	
+	public List<BankOperationData> getOperations() {
+		return operations;
+	}
+
+	public void setOperations(List<BankOperationData> operations) {
+		this.operations = operations;
+	}
+
 	
 
 
