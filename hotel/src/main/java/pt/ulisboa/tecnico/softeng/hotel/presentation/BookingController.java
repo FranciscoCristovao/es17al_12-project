@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData;
@@ -52,5 +54,27 @@ public class BookingController {
 			model.addAttribute("bookings", roomData.getBookings());
 			return "bookings";
 		}
+	}
+	//TIRARRRR
+	@RequestMapping(value="/bookings", method = RequestMethod.POST)
+	public String accountSubmit(Model model, @ModelAttribute RoomBookingData booking, @PathVariable String code,  @PathVariable String number) {
+		logger.info("bookingSubmit");
+
+		try {
+			HotelInterface.createBooking(code, number);
+		} catch (HotelException be) {
+			be.printStackTrace();
+			model.addAttribute("error", "Error: it was not possible to create the booking");
+			
+			HotelData hotelData = HotelInterface.getHotelDataByCode(code, CopyDepth.ROOMS);
+			RoomData roomData = HotelInterface.getRoomDataByNumber(code, number, RoomData.CopyDepth.BOOKINGS);
+			model.addAttribute("hotel", hotelData);
+			model.addAttribute("room", roomData);
+			model.addAttribute("booking", booking);
+			model.addAttribute("accounts", roomData.getBookings());
+			return "accounts";
+		}
+
+		return "redirect:/hotels/"+code+"/rooms/"+number+"/bookings";
 	}
 }
