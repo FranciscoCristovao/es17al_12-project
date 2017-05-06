@@ -161,6 +161,7 @@ public class HotelInterface {
 		return new HotelData(hotel, copyDepth);
 	}
 	//APAGAR PARA O COMMIT
+	@Atomic(mode = TxMode.WRITE)
 	public static void createBooking(String code, String number) {
 		Room room = getRoomByNumber(code, number);
 		LocalDate arrival = room.getBooking(number).getArrival();

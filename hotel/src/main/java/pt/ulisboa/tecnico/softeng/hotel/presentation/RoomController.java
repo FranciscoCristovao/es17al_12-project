@@ -21,7 +21,7 @@ public class RoomController {
 	private static Logger logger = LoggerFactory.getLogger(RoomController.class);
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String RoomForm(Model model, @PathVariable String code) {
+	public String roomForm(Model model, @PathVariable String code) {
 		logger.info("roomForm code:{}", code);		
 		HotelData hotelData = HotelInterface.getHotelDataByCode(code, CopyDepth.ROOMS); 
 		if (hotelData == null) {
@@ -37,7 +37,7 @@ public class RoomController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String RoomSubmit(Model model, @PathVariable String code, @ModelAttribute RoomData room) {
+	public String submitRoom(Model model, @PathVariable String code, @ModelAttribute RoomData room) {
 		logger.info("roomSubmit number:{}, type:{}", room.getNumber(), room.getType());
 		try {
 			HotelInterface.createRoom(code, room);

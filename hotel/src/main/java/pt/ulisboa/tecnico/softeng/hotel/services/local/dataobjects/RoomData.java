@@ -6,7 +6,7 @@ import java.util.List;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Booking;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
-import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
+
 
 public class RoomData {
 	public static enum CopyDepth{
@@ -16,7 +16,7 @@ public class RoomData {
 	private String code;
 	private String name;
 	private String number;
-	private Type type;
+	private Room.Type type;
 	private List<RoomBookingData> bookings = new ArrayList<>();
 	
 	public RoomData() {} 
@@ -26,7 +26,6 @@ public class RoomData {
 		this.name = hotel.getName();
 		this.number = room.getNumber();
 		this.type = room.getType();
-		
 		switch (depth) {
 		case ROOMBOOKING:
 			for(Booking booking : room.getBookingSet()){
@@ -65,14 +64,24 @@ public class RoomData {
 		this.number = number;
 	}
 	
-	public Type getType(){
+	public Room.Type getType(){
 		return this.type;
 	}
 	
-	public void setCode(Type type){
+	public void setType(Room.Type type){
 		this.type = type;
 	}
+	
+	public void setCode(Room.Type type){
+		this.type = type;
+	}
+<<<<<<< HEAD
 	public List<RoomBookingData> getBookings(){
 		return bookings;
+=======
+	
+	public List<RoomBookingData> getRoomBookingData() {
+		return this.bookings;
+>>>>>>> 4592dd720aea2326d79269eed93a8fae51c94360
 	}
 }

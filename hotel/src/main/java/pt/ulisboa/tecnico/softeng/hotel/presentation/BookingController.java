@@ -50,6 +50,8 @@ public class BookingController {
 		
 		else{
 			
+			model.addAttribute("hotel", hotelData);
+			model.addAttribute("room", roomData);
 			model.addAttribute("booking", new RoomBookingData());
 			model.addAttribute("bookings", roomData.getBookings());
 			return "bookings";
