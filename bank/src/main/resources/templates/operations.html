@@ -22,18 +22,18 @@
 				<tr>
 					<th>Reference</th>
 					<th>Type</th>
-					<th>Account</th>
+					<th>IBAN</th>
 					<th>Value</th>
 					<th>Time</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="operation: ${bank.operations}">
-					<td th:text="${operation.Reference}">Reference</td>
-					<td th:text="${operation.Type}">Type</td>
-					<td th:text="${operation.Account}">Account</td>
-					<td th:text="${operation.Value}">Value</td>
- 					<td th:text="${operation.Time}">Time</td>
+					<td th:text="${operation.reference}">Reference</td>
+					<td th:text="${operation.type}">Type</td>
+					<td th:text="${operation.iban}">iban</td>
+					<td th:text="${operation.value}">Value</td>
+ 					<td th:text="${operation.time}">Time</td>
 				</tr>
 			</tbody>
 		</table>

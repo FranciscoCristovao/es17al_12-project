@@ -12,5 +12,5 @@ To run tests execute: mvn clean install
 |      81505 | Francisco Cristóvão     | francristovao@gmail.com |  FranciscoCristovao | Hotel  |
 |      81726 | José Mota               | zemariamota@hotmail.com |  zemota1       | Hotel     |
 |      80996 | João Silvestre          | joao.p.silvestre@tecnico.ulisboa.pt | JoaoSilvestre95 | Hotel |
-|            |                         |                         |                |           |
+|      80777 | João Raposo             | raposo.7777777@hotmail.com  |  joaoafonsoraposo | Activity          |
  

@@ -16,19 +16,16 @@ import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth;
 
 @Controller
-@RequestMapping(value = "/hotels/{code}/rooms") /*path maybe incorrect*/
+@RequestMapping(value = "/hotels/{code}/rooms") 
 public class RoomController {
 	private static Logger logger = LoggerFactory.getLogger(RoomController.class);
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String showRooms(Model model, @PathVariable String hotelCode) {
-		logger.info("showRooms code:{}", hotelCode);
-		
-		//HotelData to be implemented
-		HotelData hotelData = HotelInterface.getHotelDataByCode(hotelCode, CopyDepth.ROOMS); 
-
+	public String RoomForm(Model model, @PathVariable String code) {
+		logger.info("roomForm code:{}", code);		
+		HotelData hotelData = HotelInterface.getHotelDataByCode(code, CopyDepth.ROOMS); 
 		if (hotelData == null) {
-			model.addAttribute("error", "Error: it does not exist a hotel with the code " + hotelCode);
+			model.addAttribute("error", "Error: it does not exist a hotel with the code " + code);
 			model.addAttribute("hotel", new HotelData());
 			model.addAttribute("hotels", HotelInterface.getHotels());
 			return "hotels";
@@ -39,18 +36,18 @@ public class RoomController {
 		}
 	}
 	
-	/*@RequestMapping(method = RequestMethod.POST)
-	public String RoomSubmit(Model model, @ModelAttribute RoomData room, @PathVariable String code) {
+	@RequestMapping(method = RequestMethod.POST)
+	public String RoomSubmit(Model model, @PathVariable String code, @ModelAttribute RoomData room) {
 		logger.info("roomSubmit number:{}, type:{}", room.getNumber(), room.getType());
 		try {
 			HotelInterface.createRoom(code, room);
-		} catch (HotelException ae) {
-			model.addAttribute("error", "Error: it was not possible to create the activity");
+		} catch (HotelException he) {
+			model.addAttribute("error", "Error: it was not possible to create the room");
 			model.addAttribute("room", room);
-			//model.addAttribute("hotel", HotelInterface.getHotelDataByCode(code));
+			model.addAttribute("hotel", HotelInterface.getHotelDataByCode(code, CopyDepth.ROOMS));
 			return "rooms";
 		}
 
 		return "redirect:/hotels/"+ code + "/rooms";
-	}*/
+	}
 }

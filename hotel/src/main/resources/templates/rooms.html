@@ -12,25 +12,43 @@
 </head>
 <body>
 	<div class="container">
-	
-	<h3>Rooms</h3>
- 		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Number</th>
- 					<th>Type</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="room: ${hotel.rooms}">
-					<td th:text="${room.number}">Number</td>
- 					<td th:text="${room.type}">Type</td>
-					<td>
-						<a th:href="@{/hotel/{code}/rooms/{codeB}/bookings(code=${hotel.code}, codeB=${room.number})}">Link</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<h2>
+			Welcome to Hotel <span th:text="${hotel.name}">Name</span> Hotel Rooms
+		</h2>
+		<a class="btn btn-default pull-right" th:href="@{/hotels}">hotels</a>
+		<br/>
+		<h3>Create Hotel Room</h3>
+		<p class="text-danger" th:text="${error}">Error</p>		
+		<div class="row">
+			<form class="form-inline" th:action="@{/hotels/{code}/rooms(code=${hotel.code})}" th:object="${room}" method="post">
+				<label>Number: </label> <input class="form-control" type="text" th:field="*{number}" />
+				<label>Type: </label>
+				<select class="form-control" th:field="*{type}" >
+			       	<option th:each="type : ${T(pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type).values()}" th:value="${type}" th:text="${type}"></option>
+				</select>				
+				<input class="btn btn-primary" type="submit" value="Submit" />			
+			</form>
+		</div>
+		<br/>
+		<h3>Rooms</h3>
+		<div class="row col-md-6">
+	 		<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Number</th>
+	 					<th>Type</th>
+	 					<th>Bookings</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="room: ${hotel.rooms}">
+						<td th:text="${room.number}">Number</td>
+	 					<td th:text="${room.type}">Type</td>						
+						<td><a th:href="@{/hotels/{code}/rooms/{codeB}(code=${hotel.code},codeB=${room.number})}">Bookings</a></td>						
+					</tr>
+				</tbody>
+			</table>	
+		</div>
 	</div>
 </body>
 </html>

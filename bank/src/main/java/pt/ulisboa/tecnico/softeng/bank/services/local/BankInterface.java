@@ -51,6 +51,15 @@ public class BankInterface {
 		return null;
 	}
 	
+	private static Account getAccountByIban(String iban,String id, String code) {
+		for (Account account : getClientById(id,code).getAccountSet()) {
+			if (account.getIBAN().equals(iban)) {
+				return account;
+			}
+		}
+		return null;
+	}
+	
 	@Atomic(mode = TxMode.READ)
 	public static ClientData getClientDataById(String id, String code, ClientData.CopyDepth cd){
 		Client c = getClientById(id,code);
@@ -67,6 +76,15 @@ public class BankInterface {
 			return null;
 		}
 		return new BankData(b, cd);
+	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static AccountData getAccountDataByIban(String code, String id,String iban, AccountData.CopyDepth cd) {
+		Account c = getAccountByIban(iban,id,code);
+		if (c == null) {
+			return null;
+		}
+		return new AccountData(c, cd);
 	}
 	
 	
@@ -119,6 +137,21 @@ public class BankInterface {
 	@Atomic(mode = TxMode.WRITE)
 	public static void createAccount(String bankCode, String clientId, AccountData accountData) {
 		new Account(getBankByCode(bankCode), getClientById(clientId, bankCode));
+	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void makeOperation(String bankCode, String clientId,String accountIban, BankOperationData operationData) {
+		Operation.Type type;
+		if(operationData.getType().equals("deposit")){
+			type=Operation.Type.DEPOSIT;
+		}
+		else if(operationData.getType().equals("withdraw")){
+			type=Operation.Type.WITHDRAW;
+		}
+		else{
+			throw new BankException();
+		}
+		new Operation(type,getAccountByIban(accountIban,clientId,bankCode),operationData.getValue());
 	}
 	
 }

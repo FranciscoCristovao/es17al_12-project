@@ -31,14 +31,14 @@
 					<tr>
 						<th>IBAN</th>
 						<th>Balance</th>
-						<!--<th>Operations</th>-->
+						<th>Operations</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="account: ${accounts}">
 						<td th:text="${account.iban}">IBAN</td>
 	 					<td th:text="${account.balance}">Balance</td>
-	 					<!--<td><a th:href="@{/banks/{code}/clients/{id}/accounts(code=${bank.code}); id = ${client.id}}">Operations</a></td>-->
+	 					<td><a th:href="@{/banks/{code}/clients/{id}/accounts/{iban}/makeOperation(code=${bank.code}, id = ${client.ID}, iban = ${account.iban} ) }">Operations</a></td>
 					</tr>
 				</tbody>
 			</table>
