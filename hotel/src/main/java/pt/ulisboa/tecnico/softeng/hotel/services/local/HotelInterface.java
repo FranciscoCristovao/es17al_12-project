@@ -15,6 +15,8 @@ import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomBookingData;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData.CopyDepth;
 
 public class HotelInterface {
 
@@ -38,6 +40,15 @@ public class HotelInterface {
 			}
 		}
 		throw new HotelException();
+	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static List<RoomData> getRooms(Hotel hotel, CopyDepth depth) {	
+		List<RoomData> listRooms = new ArrayList<>();
+		for (Room room : hotel.getRoomSet()) {
+			listRooms.add(new RoomData(room, hotel, depth));
+		}
+		return listRooms;		
 	}
 
 	@Atomic(mode = TxMode.READ)
