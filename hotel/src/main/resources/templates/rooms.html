@@ -12,6 +12,7 @@
 </head>
 <body>
 	<div class="container">
+	
 	<h3>Rooms</h3>
  		<table class="table table-striped">
 			<thead>
@@ -25,7 +26,7 @@
 					<td th:text="${room.number}">Number</td>
  					<td th:text="${room.type}">Type</td>
 					<td>
-						<a th:href="@{/hotel/{code}/rooms(code=${hotel.code})}">Link</a>
+						<a th:href="@{/hotel/{code}/rooms/{codeB}/bookings(code=${hotel.code}, codeB=${room.number})}">Link</a>
 					</td>
 				</tr>
 			</tbody>

@@ -20,6 +20,7 @@ public class RoomData {
 	private List<RoomBookingData> bookings = new ArrayList<>();
 	
 	public RoomData() {} 
+
 	public RoomData(Room room, Hotel hotel, CopyDepth depth){
 		this.code = hotel.getCode();
 		this.name = hotel.getName();
