@@ -1,7 +1,11 @@
 package pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
+import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 
 
 public class BankData {
@@ -11,7 +15,7 @@ public class BankData {
 	
 	private String name;
 	private String code;
-	//private List<ClientData> clients = new ArrayList<>();
+	private List<ClientData> clients = new ArrayList<>();
 	
 	public BankData() {
 	}
@@ -22,7 +26,9 @@ public class BankData {
 
 		switch (depth) {
 		case CLIENTS:
-			//TODO
+			for (Client cli: bank.getClientSet()) {
+				this.clients.add(new ClientData(cli, ClientData.CopyDepth.SHALLOW));
+			}
 			break;
 		case SHALLOW:
 			break;
@@ -47,7 +53,7 @@ public class BankData {
 	public void setCode(String code){
 		this.code=code;
 	}
-	/*
+	
 	public List<ClientData> getClients(){
 		return this.clients;
 	}
@@ -55,7 +61,7 @@ public class BankData {
 	public void setClients(List<ClientData> clients){
 		this.clients=clients;
 	}
-	*/
+	
 
 
 	

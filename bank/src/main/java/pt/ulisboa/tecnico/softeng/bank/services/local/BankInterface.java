@@ -17,29 +17,18 @@ public class BankInterface {
 	
 	@Atomic(mode = TxMode.READ)
 	public static List<BankData> getBanks() {
-		List<BankData> brokers = new ArrayList<>();
+		List<BankData> banks = new ArrayList<>();
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
-			brokers.add(new BankData(bank, CopyDepth.SHALLOW));
+			banks.add(new BankData(bank, CopyDepth.SHALLOW));
 		}
-		return brokers;
+		return banks;
 	}
 
 	@Atomic(mode = TxMode.WRITE)
 	public static void createBank(BankData bankData) {
 		new Bank(bankData.getName(), bankData.getCode() );
 	}
-	//is this necessary???
-	@Atomic(mode = TxMode.READ)
-	public static BankData getBrokerDataByCode(String brokerCode, CopyDepth depth) {
-		Bank broker = getBankByCode(brokerCode);
-
-		if (broker != null) {
-			return new BankData(broker, depth);
-		} else {
-			return null;
-		}
-	}
-	//is this necessary????
+	
 	private static Bank getBankByCode(String code) {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getCode().equals(code)) {
@@ -49,6 +38,12 @@ public class BankInterface {
 		return null;
 	}
 	
+	
+	@Atomic(mode = TxMode.READ)
+	public static BankData getBankDataByCode(String code, BankData.CopyDepth cd) {
+		Bank b = getBankByCode(code);
+		return new BankData(b, cd);
+	}
 	
 	
 	//old
