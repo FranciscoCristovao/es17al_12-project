@@ -12,7 +12,8 @@ import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData;
-import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData.CopyDepth;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth;
 
 @Controller
 @RequestMapping(value = "/hotels/{code}/rooms") /*path maybe incorrect*/
@@ -24,19 +25,18 @@ public class RoomController {
 		logger.info("showRooms code:{}", hotelCode);
 		
 		//HotelData to be implemented
-		//HotelData hotelData = HotelInterface.getHotelDataByCode(hotelCode, CopyDepth.ROOMS); 
+		HotelData hotelData = HotelInterface.getHotelDataByCode(hotelCode, CopyDepth.ROOMS); 
 
-		/*if (hotelData == null) {
+		if (hotelData == null) {
 			model.addAttribute("error", "Error: it does not exist a hotel with the code " + hotelCode);
-			model.addAttribute("bank", new HotelData());
-			model.addAttribute("banks", HotelInterface.getBanks;
-			return "banks";
+			model.addAttribute("hotel", new HotelData());
+			model.addAttribute("hotels", HotelInterface.getHotels());
+			return "hotels";
 		} else {
 			model.addAttribute("room", new RoomData());
 			model.addAttribute("hotel", hotelData);
 			return "rooms";
-		}*/
-		return null; //delete after implementations
+		}
 	}
 	
 	/*@RequestMapping(method = RequestMethod.POST)
