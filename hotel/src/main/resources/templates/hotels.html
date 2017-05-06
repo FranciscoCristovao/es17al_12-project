@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Bank Application</title>
+<title>Hotel Application</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet"
@@ -14,15 +14,15 @@
 
 	<div class="container">
 		<a class="btn btn-default pull-right" th:href="@{/}">Index</a> 
-		<h2>Welcome to Banks' Manager</h2>
+		<h2>Welcome to Hotels' Manager</h2>
 		<div class="row">
-			<h3>Create Bank</h3>
+			<h3>Create Hotel</h3>
 		</div>
 		<div class="row">
 			<p class="text-danger col-md-6" th:text="${error}">Error</p>
 		</div>
 		<div class="row">
-			<form class="form-inline" th:action="@{/banks}" th:object="${bank}"
+			<form class="form-inline" th:action="@{/hotels}" th:object="${hotel}"
 				method="post">
 				<div class="form-group">
 					<label>Name: </label> <input class="form-control" type="text"
@@ -38,7 +38,7 @@
 			</form>
 		</div>
 		<div class="row">
-			<h3>Banks</h3>
+			<h3>hotels</h3>
 		</div>
 		<div class="row col-md-6">
 			<table class="table table-striped">
@@ -46,16 +46,14 @@
 					<tr>
 						<th>Name</th>
 						<th>Code</th>
-						<th>Clients</th>
-						<th>Operations</th>
+						<th>Rooms</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="bank: ${banks}">
-						<td th:text="${bank.name}">Name</td>
-						<td th:text="${bank.code}">Code</td>
-						<td><a th:href="@{/banks/{code}/clients(code=${bank.code})}">Clients</a></td>
-						<td><a th:href="@{/banks/{code}/operations(code=${bank.code})}">Operations</a></td>
+					<tr th:each="hotel: ${hotels}">
+						<td th:text="${hotel.name}">Name</td>
+						<td th:text="${hotel.code}">Code</td>
+						<td><a th:href="@{/hotels/{code}/rooms(code=${hotel.code})}">Rooms</a></td>
 					</tr>
 				</tbody>
 			</table>
