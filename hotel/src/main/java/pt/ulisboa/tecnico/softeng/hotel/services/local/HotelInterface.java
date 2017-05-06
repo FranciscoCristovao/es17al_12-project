@@ -19,7 +19,10 @@ import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomData.CopyDepth;
 
 public class HotelInterface {
-
+	@Atomic(mode = TxMode.WRITE)
+	public static void createRoom(String hotelCode, RoomData roomData) {
+		//new Room(getHotelByCode(hotelCode),roomData.getNumber(), roomData.getType());
+	}
 	@Atomic(mode = TxMode.WRITE)
 	public static String reserveRoom(Room.Type type, LocalDate arrival, LocalDate departure) {
 		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
