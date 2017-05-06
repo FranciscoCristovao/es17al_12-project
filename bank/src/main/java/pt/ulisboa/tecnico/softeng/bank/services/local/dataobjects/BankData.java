@@ -27,7 +27,7 @@ public class BankData {
 		switch (depth) {
 		case CLIENTS:
 			for (Client cli: bank.getClientSet()) {
-				this.clients.add(new ClientData(cli, ClientData.CopyDepth.SHALLOW));
+				this.clients.add(0, new ClientData(cli, ClientData.CopyDepth.SHALLOW));
 			}
 			break;
 		case SHALLOW:

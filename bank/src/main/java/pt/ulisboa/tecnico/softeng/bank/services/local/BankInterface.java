@@ -7,11 +7,13 @@ import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
+import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 import pt.ulisboa.tecnico.softeng.bank.domain.Operation;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData.CopyDepth;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankOperationData;
+import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData;
 
 public class BankInterface {
 	
@@ -83,6 +85,12 @@ public class BankInterface {
 			}
 		}
 		return null;
+	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void createClient(String bankCode, ClientData client) {
+		new Client(getBankByCode(bankCode), client.getName());
+		
 	}
 
 }

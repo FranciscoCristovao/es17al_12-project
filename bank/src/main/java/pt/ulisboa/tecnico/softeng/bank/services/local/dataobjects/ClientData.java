@@ -12,7 +12,7 @@ public class ClientData {
 	};
 
 	private String name;
-	private String id;
+	private String ID;
 	//private List<AccountData> accounts = new ArrayList<>();
 
 	public ClientData() {
@@ -20,7 +20,7 @@ public class ClientData {
 
 	public ClientData(Client client, CopyDepth depth) {
 		this.name = client.getName();
-		this.id=client.getID();
+		this.ID=client.getID();
 		switch (depth) {
 		case ACCOUNTS:
 			//TODO
@@ -41,11 +41,11 @@ public class ClientData {
 	}
 
 	public String getID() {
-		return this.id;
+		return this.ID;
 	}
 
 	public void setID(String id) {
-		this.id = id;
+		this.ID = id;
 	}
 
 
