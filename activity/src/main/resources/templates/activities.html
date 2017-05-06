@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<h2>
-			Activities
+			<span th:text="${provider.name}">Name</span> activities
 		</h2>
 		<br/>
 		<h3>Create Activity</h3>
@@ -41,9 +41,9 @@
 				<tr th:each="activity: ${provider.activities}">
 					<td th:text="${activity.name}">Name</td>
 					<td th:text="${activity.code}">Code</td>
-					<td th:text="${activity.code}">MinAge</td>
-					<td th:text="${activity.code}">MaxAge</td>
-					<td th:text="${activity.code}">Capacity</td>
+					<td th:text="${activity.minAge}">MinAge</td>
+					<td th:text="${activity.maxAge}">MaxAge</td>
+					<td th:text="${activity.capacity}">Capacity</td>
 					<td>
 					<a th:href="@{/providers/{code}/activities/{code2}/activityOffers(code=${provider.code},code2=${activity.code})}">Link</a>
 					</td>
