@@ -93,5 +93,43 @@ public class HotelInterface {
 		}
 		return availableRooms;
 	}
+	
+	
+	
+	private static Room getRoomByNumber(String code, String number) {
+		
+		for (Hotel hotel: FenixFramework.getDomainRoot().getHotelSet()) {
+  			if (hotel.getCode().equals(code)) {
+  				for(Room room: hotel.getRoomSet()){
+  					if(room.getNumber().equals(number)){
+  						return room;
+  					}
+  				}
+  			}
+  		}
+		return null;
+	}
+	
+	private static Hotel getHotelByCode(String code) {
+		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
+			if (hotel.getCode().equals(code)) {
+				return hotel;
+			}
+		}
+		return null;
+	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static RoomData getRoomDataByNumber(String code, String number, RoomData.CopyDepth depth) {
+		
+		Hotel hotel = getHotelByCode(code);
+		Room room = getRoomByNumber(code, number);
+
+		if (room != null) {
+			return new RoomData(room, hotel, depth);
+		} else {
+			return null;
+		}
+	}
 
 }

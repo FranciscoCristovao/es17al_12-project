@@ -70,4 +70,7 @@ public class RoomData {
 	public void setCode(Type type){
 		this.type = type;
 	}
+	public List<RoomBookingData> getBookings(){
+		return bookings;
+	}
 }
