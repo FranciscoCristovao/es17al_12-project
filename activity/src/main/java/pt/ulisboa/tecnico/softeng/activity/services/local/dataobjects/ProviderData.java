@@ -52,7 +52,7 @@ public class ProviderData {
 		this.code = code;
 	}
 
-	public List<ActivityData> getAdventures() {
+	public List<ActivityData> getActivities() {
 		return this.activities;
 	}
 
