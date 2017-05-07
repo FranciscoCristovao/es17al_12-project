@@ -17,7 +17,7 @@ import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.Cop
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomBookingData;
 
 @Controller
-@RequestMapping(value = "/hotels/{code}/rooms/{number}")
+@RequestMapping(value = "/hotels/{code}/rooms/{number}/bookings")
 
 public class BookingController {
 	private static Logger logger = LoggerFactory.getLogger(BookingController.class);
@@ -27,8 +27,6 @@ public class BookingController {
 		logger.info("show booking from room number:{}", number);
 		
 		HotelData hotelData = HotelInterface.getHotelDataByCode(code, CopyDepth.ROOMS);
-		RoomData roomData = HotelInterface.getRoomDataByNumber(code, number, RoomData.CopyDepth.BOOKINGS);
-	
 	 
 	 	if(hotelData == null) {
 	 		
@@ -38,6 +36,8 @@ public class BookingController {
 
 			return "hotels";
 		}
+	 	
+	 	RoomData roomData = HotelInterface.getRoomDataByNumber(code, number, RoomData.CopyDepth.ROOMBOOKING);
 		
 		if(roomData == null) {
 			
@@ -56,6 +56,30 @@ public class BookingController {
 			model.addAttribute("bookings", roomData.getRoomBookingData());
 			return "bookings";
 		}
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String bookingSubmit(Model model, @PathVariable String code,  @PathVariable String number, @ModelAttribute RoomBookingData booking) {
+		logger.info("bookingSubmit arrival={}, departure={}", booking.getArrival(), booking.getDeparture());
+
+		try {
+			System.out.println("ANTES CRIAR BOOKING");
+			HotelInterface.createBooking(code, number, booking);
+			System.out.println("DEPOIS CRIAR BOOKING");
+		} catch (HotelException be) {
+			be.printStackTrace();
+			model.addAttribute("error", "Error: it was not possible to create the booking");
+			
+			HotelData hotelData = HotelInterface.getHotelDataByCode(code, CopyDepth.ROOMS);
+			RoomData roomData = HotelInterface.getRoomDataByNumber(code, number, RoomData.CopyDepth.BOOKINGS);
+			model.addAttribute("hotel", hotelData);
+			model.addAttribute("room", roomData);
+			model.addAttribute("booking", booking);
+			model.addAttribute("bookings", roomData.getRoomBookingData());
+			return "bookings";
+		}
+
+		return "redirect:/hotels/"+code+"/rooms/"+number+"/bookings";
 	}
 	
 }

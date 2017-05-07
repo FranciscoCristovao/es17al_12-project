@@ -18,9 +18,18 @@
 		</h2>
 		<a class="btn btn-default pull-right" th:href="@{/hotels/{code}/rooms(code=${hotel.code})}">Rooms</a>
 		<br/>
+			<h3>Create Booking</h3>
+			<p class="text-danger" th:text="${error}">Error</p>
+			<form class="form-inline" th:action="@{/hotels/{code}/rooms/{number}/bookings(code=${hotel.code},number=${room.number})}" th:object="${booking}" method="post">
+		 		
+		 		<legend>Date</legend>
+		 		<label>Arrival: </label> <input class="form-control" type="date" th:field="*{arrival}" />
+				<label>Departure: </label> <input class="form-control" type="date" th:field="*{departure}" /> 
 		
+				<input class="btn btn-primary" type="submit" value="Submit" />			
+			</form>
 		<br/>
-		<h3>Accounts</h3>
+		<h3>Booking</h3>
 		<div class ="row col-md-6">
 	 		<table class="table table-striped ">
 				<thead>

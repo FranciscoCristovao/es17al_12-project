@@ -42,7 +42,7 @@
 					<tr th:each="room: ${hotel.rooms}">
 						<td th:text="${room.number}">Number</td>
 	 					<td th:text="${room.type}">Type</td>						
-						<td><a th:href="@{/hotels/{code}/rooms/{codeB}(code=${hotel.code},codeB=${room.number})}">Bookings</a></td>						
+						<td><a th:href="@{/hotels/{code}/rooms/{codeB}/bookings(code=${hotel.code},codeB=${room.number})}">Bookings</a></td>						
 					</tr>
 				</tbody>
 			</table>	
