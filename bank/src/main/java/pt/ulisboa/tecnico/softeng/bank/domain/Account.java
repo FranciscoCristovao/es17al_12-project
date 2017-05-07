@@ -26,9 +26,6 @@ public class Account extends Account_Base {
 	}
 
 	private void checkArguments(Bank bank, Client client) {
-		System.out.println(bank);
-		System.out.println(client);
-
 		if (bank == null || client == null) {
 			throw new BankException();
 		}
