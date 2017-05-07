@@ -63,9 +63,7 @@ public class BookingController {
 		logger.info("bookingSubmit arrival={}, departure={}", booking.getArrival(), booking.getDeparture());
 
 		try {
-			System.out.println("ANTES CRIAR BOOKING");
 			HotelInterface.createBooking(code, number, booking);
-			System.out.println("DEPOIS CRIAR BOOKING");
 		} catch (HotelException be) {
 			be.printStackTrace();
 			model.addAttribute("error", "Error: it was not possible to create the booking");

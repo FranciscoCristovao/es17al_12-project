@@ -163,13 +163,7 @@ public class HotelInterface {
 	
 	@Atomic(mode = TxMode.WRITE)
 	public static void createBooking(String code, String number, RoomBookingData booking) {
-		System.out.println("DENTRO CRIAR BOOKING");
 		Room room = getRoomByNumber(code, number);
-		System.out.println("depois do getRoom");
-		/*LocalDate arrival = room.getBooking(number).getArrival();
-		System.out.println("ola");
-		LocalDate departure = room.getBooking(number).getDeparture();*/
-		System.out.println("mesmo antes do new booking");
 		new Booking(room, booking.getArrival(), booking.getDeparture());
 		
 	}
