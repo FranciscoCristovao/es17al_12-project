@@ -34,12 +34,14 @@
 	 		<table class="table table-striped ">
 				<thead>
 					<tr>
+						<th>Reference</th>
 						<th>Arrival</th>
 						<th>Departure</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="booking: ${bookings}">
+						<td th:text="${booking.reference}">Reference</td>
 						<td th:text="${booking.arrival}">Arrival</td>
 	 					<td th:text="${booking.departure}">Departure</td>
 					</tr>
