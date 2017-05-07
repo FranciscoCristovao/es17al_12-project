@@ -2,6 +2,7 @@ package pt.ulisboa.tecnico.softeng.activity.services.local;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.joda.time.LocalDate;
 
@@ -14,9 +15,12 @@ import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 import pt.ulisboa.tecnico.softeng.activity.domain.Booking;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityData;
+import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityOfferData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityReservationData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ProviderData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ProviderData.CopyDepth;
+
+
 
 public class ActivityInterface {
 
@@ -111,5 +115,50 @@ public class ActivityInterface {
 		}
 		return null;
 	}
-
-}
+	
+	private static Activity getActivityByCode(String codeP, String codeA) {
+		ActivityProvider p = getProviderByCode(codeP);
+		for (Activity activity: p.getActivitySet()) {
+				if(activity.getCode().equals(codeA))
+					return activity;
+		}
+		return null;
+	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static ActivityData getActivityDataByCode(String codeP, String codeA){
+		Activity a = getActivityByCode(codeP, codeA);
+		if(a != null)
+			return new ActivityData(a, ActivityData.CopyDepth.OFFERS);
+		else
+			return null;
+	}
+	
+	//ACTIVITYOFFER---------------------------------------------------------------------------------------------------------
+	@Atomic(mode = TxMode.WRITE)
+	public static void createActivityOffer(String codeP, String codeA, ActivityOfferData activityOffer) {
+		new ActivityOffer(getActivityByCode(codeP, codeA), activityOffer.getBegin(), activityOffer.getEnd());
+	}
+	
+	private static Set<ActivityOffer> getOffersByCodes(String codeP, String codeA) {
+		Activity a = getActivityByCode(codeP, codeA);
+		return a.getActivityOfferSet();
+	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static ActivityData getOffersDataByCodes(String codeP, String codeA){
+		Set<ActivityOffer> offers = getOffersByCodes(codeP, codeA);
+		if(offers == null)
+			return null;
+		List<ActivityOfferData> offersData = new ArrayList<ActivityOfferData>();
+		for(ActivityOffer offer: offers){
+		  	ActivityOfferData oData = new ActivityOfferData(offer, ActivityOfferData.CopyDepth.RESERVATIONS);
+			oData.setBookings(offer.getBookingSet());
+			offersData.add(oData);
+		}
+		ActivityData aData =  getActivityDataByCode(codeP, codeA);
+		aData.setOffers(offersData);
+		return aData;
+	}
+	
+}	
