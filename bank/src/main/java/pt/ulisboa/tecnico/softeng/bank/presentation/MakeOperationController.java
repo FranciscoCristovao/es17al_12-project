@@ -57,14 +57,28 @@ public class MakeOperationController {
 		}
 	}
 	
-	@RequestMapping( method = RequestMethod.POST)
-	public String submitOperation(Model model, @PathVariable String code, @PathVariable String id, @PathVariable String iban, @ModelAttribute BankOperationData operationData) {
-		logger.info("deposit type:{} account:{} value:{}",operationData.getType(),operationData.getIban(), operationData.getValue() );
-		
+	@RequestMapping(value="/deposit", method = RequestMethod.POST)
+	public String submitDeposit(Model model, @PathVariable String code, @PathVariable String id, @PathVariable String iban, @ModelAttribute BankOperationData operationData) {
+		logger.info("deposit account:{} value:{}",iban, operationData.getValue() );
+		operationData.setType("deposit");
 		try {
 			BankInterface.makeOperation(code,id,iban, operationData);
 		} catch (BankException be) {
-			model.addAttribute("error", "Error: it was not possible to create the Operation");
+			model.addAttribute("error", "Error: it was not possible to make this deposit");
+			model.addAttribute("operation", new BankOperationData());	
+			return "makeOperation";
+		}
+		return "redirect:/banks/"+code+"/clients/"+id+"/accounts/"+iban+"/makeOperation";
+	}
+	
+	@RequestMapping(value="/withdraw", method = RequestMethod.POST)
+	public String submitWithdrawal(Model model, @PathVariable String code, @PathVariable String id, @PathVariable String iban, @ModelAttribute BankOperationData operationData) {
+		logger.info("deposit account:{} value:{}",iban, operationData.getValue() );
+		operationData.setType("withdraw");
+		try {
+			BankInterface.makeOperation(code,id,iban, operationData);
+		} catch (BankException be) {
+			model.addAttribute("error", "Error: it was not possible to make this withdrawal");
 			model.addAttribute("operation", new BankOperationData());	
 			return "makeOperation";
 		}

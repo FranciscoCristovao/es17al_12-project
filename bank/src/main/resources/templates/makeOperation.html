@@ -16,15 +16,23 @@
 			Welcome to operation manager of: Account <span th:text="${account.iban}">iban</span> and Client 
 			<span th:text="${client.name}">Name</span>
 		</h2>
-		<a class="btn btn-default pull-right" th:href="@{/banks/{code}/clients/{id}/accounts(code=${bank.code}, id=${client.name}) }">Accounts</a>
+		<a class="btn btn-default pull-right" th:href="@{/banks/{code}/clients/{id}/accounts(code=${bank.code}, id=${client.ID}) }">Accounts</a>
 		<br/>
 			<h3>Deposit Currency</h3>
-			<form class="form-inline" th:action="@{/banks/{code}/clients/{id}/accounts/{iban}/makeOperation(code=${bank.code},id=${client.ID}, iban=${account.iban})}" th:object="${operation}"
+			<form class="form-inline" th:action="@{/banks/{code}/clients/{id}/accounts/{iban}/makeOperation/deposit(code=${bank.code},id=${client.ID}, iban=${account.iban})}" th:object="${operation}"
 				method="post">
 				<div class="form-group">
-					<label>Type: </label> <input class="form-control" type="text"
-						th:field="*{type}" />
+					<label>Value: </label> <input class="form-control" type="text"
+						th:field="*{value}" />
 				</div>
+				<div class="form-group">
+					<input class="btn btn-primary" type="submit" value="Submit" />
+				</div>
+			</form>
+		<br/>
+		<h4>Withdraw Currency</h4>
+			<form class="form-inline" th:action="@{/banks/{code}/clients/{id}/accounts/{iban}/makeOperation/withdraw(code=${bank.code},id=${client.ID}, iban=${account.iban})}" th:object="${operation}"
+				method="post">
 				<div class="form-group">
 					<label>Value: </label> <input class="form-control" type="text"
 						th:field="*{value}" />
