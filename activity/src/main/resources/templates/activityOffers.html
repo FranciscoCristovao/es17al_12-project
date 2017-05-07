@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Activities</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>
+			<span th:text="${activity.code}">Name</span> offers
+		</h2>
+		<br/>
+		<h3>Create Offer</h3>
+		<p class="text-danger" th:text="${error}">Error</p>
+		<form class="form-inline" th:action="@{/providers/{code}/activities/{code2}/activityOffers(code=${providerCode}, code2=${activity.code})}" th:object="${offer}" method="post">
+			<label>BeginDate: </label> <input class="form-control" type="text" th:field="*{begin}" /> 
+			<label>EndDate: </label> <input class="form-control" type="text" th:field="*{end}" /> 
+			<label>Capacity: </label> <input class="form-control" type="text" th:field="*{capacity}" />
+			<input class="btn btn-primary" type="submit" value="Submit" />
+		</form>
+		<br/>
+		<h3>List of Offers</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>BeginDate</th>
+					<th>EndDate</th>
+					<th>Capacity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="offer: ${activity.offers}">
+					<td th:text="${offer.begin}">BeginDate</td>
+					<td th:text="${offer.end}">EndDate</td>
+					<td th:text="${offer.capacity}">Capacity</td>
+					<td th:each="booking: ${offer.bookings}">
+							<span th:text="${booking.reference}">Reference</span>
+					</td>		
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
