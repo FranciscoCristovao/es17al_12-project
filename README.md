@@ -15,7 +15,7 @@ To run jmeter (nogui) execute in project's top directory: mvn -Pjmeter verify. R
 | ---------- | ----------------------- | ----------------------- | ---------------| --------- |
 |      81811 | João Crespo             | jpmcrespo@gmail.com     |  jpmcrespo     |  30Writes |
 |   81505    |   Francisco Cristóvão   | francristovao@gmail.com |FranciscoCristovao| 100Reads  |
-|            |                         |                         |                |           |
+|   81105    | Sofia Aparicio          |sofia.aparicio@tecnico.ulisboa.pt|SofiaAparicio|100Reads|
 |            |                         |                         |                |           |
 |            |                         |                         |                |           |
 |            |                         |                         |                |           |
