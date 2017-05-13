@@ -20,6 +20,6 @@ To run jmeter (nogui) execute in project's top directory: mvn -Pjmeter verify. R
 |   81726    |       José Mota         | zemariamota@hotmail.com |    zemota1     | 100Reads  |
 |   81888    |Pedro Caldeira           | pedromigcc@gmail.com    |PedroCaldeira   | 100Writes |
 |   80996    |João Silvestre           | joao.p.silvestre@tecnico.ulisboa.pt|JoaoSilvestre95|30Writes|
-|            |                         |                         |                |           |
+|   80777    |João Raposo              | raposo.7777777@hotmail.com | joaoafonsoraposo | 30Writes          |
 |            |                         |                         |                |           |
 |            |                         |                         |                |           |
