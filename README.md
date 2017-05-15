@@ -1,4 +1,4 @@
-# Adventure Builder
+﻿# Adventure Builder
 
 To run tests execute: mvn clean install
 
@@ -21,5 +21,5 @@ To run jmeter (nogui) execute in project's top directory: mvn -Pjmeter verify. R
 |   81888    |Pedro Caldeira           | pedromigcc@gmail.com    |PedroCaldeira   | 100Writes |
 |   80996    |João Silvestre           | joao.p.silvestre@tecnico.ulisboa.pt|JoaoSilvestre95|30Writes|
 |   80777    |João Raposo              | raposo.7777777@hotmail.com | joaoafonsoraposo | 30Writes          |
-|            |                         |                         |                |           |
+|   81478    |   Joana Godinho         | joana.mg0@hotmail.com   | joanaGodinho   | 100Reads  |
 |            |                         |                         |                |           |
