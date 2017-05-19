@@ -1,0 +1,24 @@
+bros,Ricardo Salgado
+bros,Jose Socrates
+bros,Joseph Stalin
+bros,Vladimir Lenin
+bros,Pinto da Costa
+bros,Vladimir Putin
+bros,Jeronimo de Sousa
+bros,Donald Trump
+bros,Crooked Hillary
+mira,MiraoDaSilva
+mira,Cristiano Ronaldo
+mira,Marcelo Rebelo de Sousa
+mira,Jose Bigorna
+mira,Jose Costa
+mira,Bruno Camioneta
+mira,Martim Zanaldo
+mira,Bruno Leitao
+best,Joao Crespo
+best,Pedro Caldeira
+best,Joana Godinho
+best,Afonso Raposo
+best,Joao Silvestre
+best,Sofia Aparicio
+best,Francisco Cristovao
